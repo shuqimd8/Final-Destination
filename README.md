@@ -1,4 +1,8 @@
 ## Contributors
-- Existing Member 1
-- Existing Member 2
+_bella
+_Kyle
+_jy
+_shuqi
+_olivia
+_astyn
 
