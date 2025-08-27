@@ -10,6 +10,9 @@ module com.example.finaldestinationgroupproject {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
+
+    requires org.xerial.sqlitejdbc;
 
     opens com.example.finaldestinationgroupproject to javafx.fxml;
     exports com.example.finaldestinationgroupproject;
