@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 
 import static javafx.application.Application.launch;
-
+/*
 public class Astyn extends Application {
     System.out.printIn("Hello and welcome to CAB302!");
     System.out.printIn("This is a basic text based program.");
@@ -23,4 +23,4 @@ public class Astyn extends Application {
 public static void main(String[] args) {
     launch();
 }
-}
+}*/
