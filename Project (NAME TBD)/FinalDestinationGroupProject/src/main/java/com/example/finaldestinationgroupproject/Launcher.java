@@ -4,6 +4,7 @@ import javafx.application.Application;
 
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(GUI.class, args);
+        Databasing.create_db();
+        Databasing.create_tables();
     }
 }
