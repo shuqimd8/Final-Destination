@@ -10,9 +10,9 @@ public class MySQL {
         Connection c = null;
         Statement stmt = null;
         try {
-//            Class.forName("com.mysql.JDBC");
+            Class.forName("Final-Destination/MySQL/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar!/com/mysql/jdbc");
             c = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/finalDestinationTables",
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
                     "root",
                     "CompSci2004%"
             );
