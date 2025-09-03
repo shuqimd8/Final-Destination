@@ -1,4 +1,4 @@
-module com.example.finaldestinationgroupproject {
+module learneria {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -9,11 +9,8 @@ module com.example.finaldestinationgroupproject {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-    requires com.almasb.fxgl.all;
-    requires java.sql;
+    requires javafx.graphics;
 
-    requires org.xerial.sqlitejdbc;
-
-    opens com.example.finaldestinationgroupproject to javafx.fxml;
-    exports com.example.finaldestinationgroupproject;
+    opens learneria to javafx.fxml;
+    exports learneria;
 }
