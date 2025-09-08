@@ -1,6 +1,7 @@
 package com.example.finaldestinationgroupproject;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class User {
     private String Username;
@@ -11,47 +12,164 @@ public class User {
         Password = password;
     }
 
-    public void login(String username, String password) {
+    public static void login() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your username: ");
+        String usernameInput = scanner.nextLine();
+        System.out.print("Enter your password: ");
+        String passwordInput = scanner.nextLine();
+        scanner.close();
 
+        Student.studentLogin(usernameInput, passwordInput);
     }
 
-    public boolean checkUsername (String username) {
-        //check through student and teacher tables that the username doesn't already exist
-        //if it doesn't:
-        return true;
-        // else:
-        //return false
+    public static void CreateNewUser() {
+        Scanner scanner = new Scanner(System.in);
 
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        Boolean taken = false;
-//
-//        try {
-//            Class.forName("org.sqlite.JDBC");
-//            conn = DriverManager.getConnection("jdbc:sqlite:test.db");
-//            System.out.println("Opened database successfully");
-//
-//            String sql = "SELECT * FROM students WHERE username = ?";
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setString(1, username); // Assuming user_id 101 is the specific entry to find
-//
-//            rs = pstmt.executeQuery();
-//
-//            if (rs.next()) {
-//                taken = true;
-//            }
-//            else {
-//                taken = false;
-//            }
-//
-//        }
-//        catch ( Exception e ) {
-//            System.out.println("Exception: " + e + "has occurred.");
-//        }
-//        finally {
-//            return taken;
-//        }
+        System.out.print("Enter your name: ");
+        String nameInput = scanner.nextLine();
+
+        String firstLetter = nameInput.substring(0, 1).toUpperCase();
+        String restOfString = nameInput.substring(1);
+        String name = firstLetter + restOfString;
+
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
+        if (checkUsername(username)) {
+            System.out.print("Enter your password: ");
+        }
+        else {
+            System.out.print("Username taken");
+        }
+        String password = scanner.nextLine();
+
+        System.out.print("Re-enter your password: ");
+        String pass2 = scanner.nextLine();
+
+        if (password.equals(pass2)) {
+            System.out.print("Enter your teachers name: ");
+        }
+        else {
+            System.out.print("Passwords do not match, please try again.");
+        }
+        String teach = scanner.nextLine();
+
+        int teacher = Integer.parseInt(teach);
+
+        scanner.close();
+
+        Student.addStudent(username, password, teacher, name);
+    }
+
+    public static void getStudents() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
+                    "root",
+                    "CompSci2004%"
+            );
+
+            String getAllStudents = "SELECT * FROM `final_destination`.`Students`";
+            stmt = conn.prepareStatement(getAllStudents);
+
+            rs = stmt.executeQuery(getAllStudents);
+
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            int columnCount = rsmd.getColumnCount();
+
+            // Print column headers
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.print(rsmd.getColumnName(i) + "\t");
+            }
+            System.out.println();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    System.out.print(rs.getString(i) + "\t");
+                }
+                System.out.println();
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
+        }
+    }
+
+    public static void getTeachers() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
+                    "root",
+                    "CompSci2004%"
+            );
+
+            String getAllTeachers = "SELECT * FROM `final_destination`.`teachers`";
+            stmt = conn.prepareStatement(getAllTeachers);
+
+            rs = stmt.executeQuery(getAllTeachers);
+
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            int columnCount = rsmd.getColumnCount();
+
+            // Print column headers
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.print(rsmd.getColumnName(i) + "\t");
+            }
+            System.out.println();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    System.out.print(rs.getString(i) + "\t");
+                }
+                System.out.println();
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
+        }
+    }
+
+    public static boolean checkUsername(String username) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
+                    "root",
+                    "CompSci2004%"
+            );
+
+            String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
+            pstmt = conn.prepareStatement(checkForUsername);
+            pstmt.setString(1, username);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
+            return false;
+        }
     }
     public boolean checkPassword (String password) {
         int uppercase = 0;
@@ -71,9 +189,6 @@ public class User {
 
                 if (uppercase > 0 && lowercase > 0 && numbers >0) {
                     return true;
-                }
-                else {
-                    continue;
                 }
 
             }

@@ -3,6 +3,7 @@ package com.example.finaldestinationgroupproject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Student {
     private String StudentUsername;
@@ -18,26 +19,65 @@ public class Student {
         Teacher = teacher;
     }
 
-    public void createStudent (String username, String password, String name, String teacher) {
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//
-//        try {
-//            Class.forName("org.sqlite.JDBC");
-//            conn = DriverManager.getConnection("jdbc:sqlite:test.db");
-//
-//            String addStudentToDB = "INSERT INTO students VALUES (?, ?, ?, 'Book-Worm', ?, 0, 0, 0, 0, 0, 0)";
-//            pstmt = conn.prepareStatement(addStudentToDB);
-//            pstmt.setString(1, user);
-//            pstmt.setString(2, pass);
-//            pstmt.setString(3, name);
-//            pstmt.setString(4, teach);
-//
-//            pstmt.executeUpdate();
-//            System.out.println("Created account");
-//        }
-//        catch ( Exception e ) {
-//            System.out.println("Exception: " + e + "has occurred.");
-//        }
+    public static void addStudent(String username, String password, int teacher, String name) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
+                    "root",
+                    "CompSci2004%"
+            );
+
+            String addStudentToDB = "INSERT INTO `final_destination`.`Students` VALUES (?, ?, ?, ?)";
+
+            pstmt = conn.prepareStatement(addStudentToDB);
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setInt(3, teacher);
+            pstmt.setString(4, name);
+
+            pstmt.executeUpdate();
+
+            System.out.println("Created account");
+        } catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
+        }
+    }
+    public static void studentLogin(String username, String password) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
+                    "root",
+                    "CompSci2004%"
+            );
+
+            String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
+            pstmt = conn.prepareStatement(checkForUsername);
+            pstmt.setString(1, username);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String pWord = rs.getString("password");
+
+                if (password.equals(pWord)) {
+                    System.out.println("Logged In");
+                } else {
+                    System.out.println("Incorrect username or password.");
+                }
+            } else {
+                System.out.println("Username not found.");
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
+        }
     }
 }

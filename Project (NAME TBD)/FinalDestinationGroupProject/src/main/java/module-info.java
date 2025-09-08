@@ -11,6 +11,7 @@ module com.example.finaldestinationgroupproject {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires mysql.connector.j;
 
     requires org.xerial.sqlitejdbc;
 
