@@ -12,7 +12,7 @@ public class User {
         Password = password;
     }
 
-    public static void login() {
+    public static void getLogin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your username: ");
         String usernameInput = scanner.nextLine();
@@ -23,7 +23,22 @@ public class User {
         Student.studentLogin(usernameInput, passwordInput);
     }
 
-    public static void CreateNewUser() {
+    public static String getUserType() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Are you a 1. student or a 2. teacher");
+        String userTypeInput = scanner.nextLine();
+        int userType = Integer.parseInt(userTypeInput);
+        scanner.close();
+
+        if (userType == 1) {
+            return "student";
+        }
+        else {
+            return "teacher";
+        }
+    }
+
+    public static void CreateNewStudent() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your name: ");
@@ -47,7 +62,7 @@ public class User {
         String pass2 = scanner.nextLine();
 
         if (password.equals(pass2)) {
-            System.out.print("Enter your teachers name: ");
+            System.out.print("Enter your teachers user number: ");
         }
         else {
             System.out.print("Passwords do not match, please try again.");
@@ -59,6 +74,38 @@ public class User {
         scanner.close();
 
         Student.addStudent(username, password, teacher, name);
+    }
+
+    public static void CreateNewTeacher() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your name: ");
+        String nameInput = scanner.nextLine();
+
+        String firstLetter = nameInput.substring(0, 1).toUpperCase();
+        String restOfString = nameInput.substring(1);
+        String name = firstLetter + restOfString;
+
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
+        if (checkUsername(username)) {
+            System.out.print("Enter your password: ");
+        }
+        else {
+            System.out.print("Username taken");
+        }
+        String password = scanner.nextLine();
+
+        System.out.print("Re-enter your password: ");
+        String pass2 = scanner.nextLine();
+
+        if (!password.equals(pass2)) {
+            System.out.print("Passwords do not match, please try again.");
+        }
+
+        scanner.close();
+
+//        Teacher.addTeacher(username, password, name);
     }
 
     public static void getStudents() {
@@ -201,6 +248,59 @@ public class User {
         }
         else {
             return false;
+        }
+    }
+    public static void userLogin(String username, String password) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int userID = 0;
+
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
+                    "root",
+                    "CompSci2004%"
+            );
+
+            String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
+            pstmt = conn.prepareStatement(checkForUsername);
+            pstmt.setString(1, username);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String pWord = rs.getString("password");
+
+                if (password.equals(pWord)) {
+                    System.out.println("Logged In");
+                } else {
+                    System.out.println("Incorrect username or password.");
+                }
+            } else {
+                userID = Integer.parseInt(username);
+                checkForUsername = "SELECT * FROM `final_destination`.`teachers` WHERE username = ?";
+                pstmt = conn.prepareStatement(checkForUsername);
+                pstmt.setInt(1, userID);
+
+                rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    String pWord = rs.getString("password");
+
+                    if (password.equals(pWord)) {
+                        System.out.println("Logged In");
+                    } else {
+                        System.out.println("Incorrect username or password.");
+                    }
+                }
+                else {
+                    System.out.println("Username not found.");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
         }
     }
 }
