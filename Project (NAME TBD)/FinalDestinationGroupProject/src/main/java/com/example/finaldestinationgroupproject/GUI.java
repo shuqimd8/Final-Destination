@@ -60,7 +60,7 @@ public class GUI extends Application {
         stage.setTitle("JavaFX Example Scene");
         stage.show();
 
-        String stylesheet = GUI.class.getResource("stylesheet.css").toExternalForm();
+        String stylesheet = this.getClass().getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
     }
 

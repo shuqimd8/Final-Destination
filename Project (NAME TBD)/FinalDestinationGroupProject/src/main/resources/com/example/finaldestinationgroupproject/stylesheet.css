@@ -1,6 +1,126 @@
-.button {
+/* Root settings */
+/* Init variables */
+
+:root {
+    --papas-blue: #40FFE2;
+    --papas-pink: #FF5BC3;
+    --papas-yellow: #FFDF3D;
+    --papas-green: #ADFFA3;
+    --bucket-grey: #D9D9D9;
+}
+
+/* All Screen Styles */
+
+.screen {
     -fx-background-color: #B0E0E6;
-    -fx-text-fill: white;
-    -fx-border-color: white;
+}
+
+/* All Buttons */
+
+.button {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
     -fx-border-radius: 5;
+}
+
+.sign-in {
+    -fx-background-color: var(--papas-blue);
+}
+
+.create-user {
+    -fx-background-color: var(--papas-pink);
+}
+
+/* Select User Type Buttons */
+
+.select-student {
+    -fx-background-color: var(--papas-green);
+}
+
+.select-teacher {
+    -fx-background-color: var(--papas-yellow);
+}
+
+/* Play Game Button */
+
+.play {
+    -fx-background-color: var(--papas-green);
+}
+
+/* Return to Previous Page Button */
+
+.back {
+    -fx-background-color: var(--papas-blue);
+    -fx-border-radius: 25%;
+}
+
+.sign-out {
+    -fx-background-color: var(--papas-yellow);
+}
+
+.open-stats {
+    -fx-background-color: var(--papas-pink);
+}
+
+.open-settings {
+    -fx-background-color: var(--papas-blue);
+}
+
+.continue {
+    -fx-background-color: var(--papas-yellow);
+}
+
+/* Category Buttons */
+
+.category {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-radius: 25%;
+}
+
+.grammar {
+    -fx-background-color: var(--papas-yellow);
+}
+
+.nature {
+    -fx-background-color: var(--papas-green);
+}
+
+.food {
+    -fx-background-color: var(--papas-pink);
+}
+
+/* Page Banners */
+
+.banner {
+    -fx-background-color: #B0E0E6;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+}
+
+.settings {
+    -fx-background-color: var(--papas-blue);
+}
+
+.stats {
+    -fx-background-color: var(--papas-pink);
+}
+
+.levels {
+    -fx-background-color: var(--papas-yellow);
+}
+
+.game-over {
+    -fx-background-color: var(--papas-green);
+}
+
+.teacher {
+    -fx-background-color: var(--papas-yellow);
+}
+
+.bucket {
+    -fx-background-color: var(--bucket-grey);
 }
