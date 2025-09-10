@@ -17,6 +17,6 @@ public class GrammarPage implements SceneProvider {
         VBox layout = new VBox(10, title, backBtn);
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
 
-        return new Scene(layout, 400, 300);
+        return new Scene(layout, 1600, 900);
     }
 }

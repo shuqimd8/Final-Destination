@@ -8,7 +8,9 @@ import javafx.scene.layout.VBox;
 public class MainMenu implements SceneProvider {
 
     @Override
-    public Scene getScene() {
+    public Scene getScene()
+    {
+
         Label title = new Label("Welcome to Learneria!");
         Button loginBtn = new Button("Login / Register");
         Button grmrBtn = new Button("Grammar");
@@ -25,6 +27,5 @@ public class MainMenu implements SceneProvider {
         VBox layout = new VBox(10, title, loginBtn, grmrBtn, foodBtn, natureBtn, exitBtn);
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
 
-        return new Scene(layout, 400, 400);
-    }
+        return new Scene(layout, 1600, 900);    }
 }
