@@ -1,74 +1,73 @@
 /* Root settings */
 /* Init variables */
 
-:root {
-    --papas-blue: #40FFE2;
+/* --papas-blue: #40FFE2;
     --papas-pink: #FF5BC3;
     --papas-yellow: #FFDF3D;
-    --papas-green: #ADFFA3;
-    --bucket-grey: #D9D9D9;
-}
+    --papas-green: #ADFFA3; */
 
 /* All Screen Styles */
 
 .screen {
-    -fx-background-color: #B0E0E6;
+    -fx-background-image: url();
 }
 
 /* All Buttons */
 
 .button {
+    -fx-display: flex;
     -fx-border-color: black;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-radius: 5;
+    -fx-border-radius: 10;
 }
 
 .sign-in {
-    -fx-background-color: var(--papas-blue);
+    -fx-border-radius: 10;
+    -fx-background-color: #40FFE2;
 }
 
 .create-user {
-    -fx-background-color: var(--papas-pink);
+    -fx-background-color: #FF5BC3;
 }
 
 /* Select User Type Buttons */
 
 .select-student {
-    -fx-background-color: var(--papas-green);
+    -fx-background-color: #ADFFA3;
 }
 
 .select-teacher {
-    -fx-background-color: var(--papas-yellow);
+    -fx-background-color: #FFDF3D;
 }
 
 /* Play Game Button */
 
 .play {
-    -fx-background-color: var(--papas-green);
+    -fx-background-color: #ADFFA3;
 }
 
 /* Return to Previous Page Button */
 
 .back {
-    -fx-background-color: var(--papas-blue);
+    -fx-background-color: #40FFE2;
     -fx-border-radius: 25%;
 }
 
 .sign-out {
-    -fx-background-color: var(--papas-yellow);
+    -fx-background-color: #FFDF3D;
 }
 
 .open-stats {
-    -fx-background-color: var(--papas-pink);
+    -fx-background-color: #FF5BC3;
 }
 
 .open-settings {
-    -fx-background-color: var(--papas-blue);
+    -fx-background-color: #40FFE2;
 }
 
 .continue {
-    -fx-background-color: var(--papas-yellow);
+    -fx-background-color: #FFDF3D;
 }
 
 /* Category Buttons */
@@ -81,15 +80,15 @@
 }
 
 .grammar {
-    -fx-background-color: var(--papas-yellow);
+    -fx-background-color: #FFDF3D;
 }
 
 .nature {
-    -fx-background-color: var(--papas-green);
+    -fx-background-color: #ADFFA3;
 }
 
 .food {
-    -fx-background-color: var(--papas-pink);
+    -fx-background-color: #FF5BC3;
 }
 
 /* Page Banners */
@@ -102,25 +101,21 @@
 }
 
 .settings {
-    -fx-background-color: var(--papas-blue);
+    -fx-background-color: #40FFE2;
 }
 
 .stats {
-    -fx-background-color: var(--papas-pink);
+    -fx-background-color: #FF5BC3;
 }
 
 .levels {
-    -fx-background-color: var(--papas-yellow);
+    -fx-background-color: #FFDF3D;
 }
 
 .game-over {
-    -fx-background-color: var(--papas-green);
+    -fx-background-color: #ADFFA3;
 }
 
 .teacher {
-    -fx-background-color: var(--papas-yellow);
-}
-
-.bucket {
-    -fx-background-color: var(--bucket-grey);
+    -fx-background-color: #FFDF3D;
 }
