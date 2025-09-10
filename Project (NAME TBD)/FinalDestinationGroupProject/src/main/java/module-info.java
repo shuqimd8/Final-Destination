@@ -14,6 +14,7 @@ module com.example.finaldestinationgroupproject {
     requires mysql.connector.j;
 
     requires org.xerial.sqlitejdbc;
+    requires annotations;
 
     opens com.example.finaldestinationgroupproject to javafx.fxml;
     exports com.example.finaldestinationgroupproject;
