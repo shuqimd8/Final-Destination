@@ -1,33 +1,23 @@
-/* Root settings */
-/* Init variables */
-
-/* --papas-blue: #40FFE2;
-    --papas-pink: #FF5BC3;
-    --papas-yellow: #FFDF3D;
-    --papas-green: #ADFFA3; */
-
 /* All Screen Styles */
 
-.screen {
-    -fx-background-image: url();
+#background {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: stretch; /* or no-repeat, repeat, round, space */
+    -fx-background-size: cover; /* or contain, 100% 100%, specific dimensions */
+    -fx-background-position: center center;
 }
 
 /* All Buttons */
 
-.button {
-    -fx-display: flex;
-    -fx-border-color: black;
-    -fx-border-style: solid;
-    -fx-border-width: 2px;
-    -fx-border-radius: 10;
-}
-
 .sign-in {
-    -fx-border-radius: 10;
+    -fx-display: flex;
+    -fx-background-radius: 10;
     -fx-background-color: #40FFE2;
 }
 
 .create-user {
+    -fx-display: flex;
+    -fx-background-radius: 10;
     -fx-background-color: #FF5BC3;
 }
 

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -20,15 +21,21 @@
                                 <Font size="36.0" />
                             </font>
                         </Label>
-                        <VBox alignment="CENTER" prefHeight="481.0" prefWidth="438.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1px; -fx-padding: 20px; -fx-background-color: transparent;">
+                        <VBox alignment="CENTER" prefHeight="609.0" prefWidth="438.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1px; -fx-padding: 20px; -fx-background-color: transparent;">
                             <children>
-                                <Label text="Login">
+                                <Label text="Sign Up">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <VBox alignment="CENTER_LEFT" prefHeight="244.0" prefWidth="346.0" style="-fx-max-width: 380px;">
+                                <VBox alignment="CENTER_LEFT" prefHeight="244.0" prefWidth="346.0" style="-fx-max-width: 380px; -fx-padding: 20px;">
                                     <children>
+                                        <Label style="-fx-padding: 20px;" text="Name:">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField style="-fx-min-height: 40px; -fx-max-width: 350px;" />
                                         <Label style="-fx-padding: 20px;" text="Username:">
                                             <font>
                                                 <Font size="18.0" />
@@ -41,16 +48,27 @@
                                             </font>
                                         </Label>
                                         <PasswordField style="-fx-min-height: 40px; -fx-max-width: 350px;" />
+                                        <Label style="-fx-padding: 20px;" text="Confirm Password:">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <PasswordField style="-fx-min-height: 40px; -fx-max-width: 350px;" />
+                                        <HBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="340.0" style="-fx-min-height: 70px;">
+                                            <children>
+                                                <Label style="-fx-padding: 20px;" text="Teacher:">
+                                                    <font>
+                                                        <Font size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <TextField prefHeight="40.0" prefWidth="232.0" style="-fx-min-height: 40px; -fx-max-width: 350px;" />
+                                            </children>
+                                        </HBox>
                                     </children>
                                 </VBox>
-                                <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="108.0" styleClass="sign-in" text="Log-In">
+                                <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="166.0" styleClass="create-user" text="Create User">
                                     <font>
                                         <Font size="24.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="233.0" style="-fx-background-color: transparent; -fx-padding: 20px;" text="Or create a new account.">
-                                    <font>
-                                        <Font size="18.0" />
                                     </font>
                                 </Button>
                             </children>
@@ -61,4 +79,3 @@
         </Pane>
     </children>
 </AnchorPane>
-

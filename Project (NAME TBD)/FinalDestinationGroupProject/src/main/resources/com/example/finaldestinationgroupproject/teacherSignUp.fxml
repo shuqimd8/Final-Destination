@@ -20,15 +20,21 @@
                                 <Font size="36.0" />
                             </font>
                         </Label>
-                        <VBox alignment="CENTER" prefHeight="481.0" prefWidth="438.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1px; -fx-padding: 20px; -fx-background-color: transparent;">
+                        <VBox alignment="CENTER" prefHeight="602.0" prefWidth="438.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1px; -fx-padding: 20px; -fx-background-color: transparent;">
                             <children>
-                                <Label text="Login">
+                                <Label text="Sign Up">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <VBox alignment="CENTER_LEFT" prefHeight="244.0" prefWidth="346.0" style="-fx-max-width: 380px;">
+                                <VBox alignment="CENTER_LEFT" prefHeight="244.0" prefWidth="346.0" style="-fx-max-width: 380px; -fx-padding: 20px;">
                                     <children>
+                                        <Label style="-fx-padding: 20px;" text="Name:">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField style="-fx-min-height: 40px; -fx-max-width: 350px;" />
                                         <Label style="-fx-padding: 20px;" text="Username:">
                                             <font>
                                                 <Font size="18.0" />
@@ -41,16 +47,17 @@
                                             </font>
                                         </Label>
                                         <PasswordField style="-fx-min-height: 40px; -fx-max-width: 350px;" />
+                                        <Label style="-fx-padding: 20px;" text="Confirm Password:">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <PasswordField style="-fx-min-height: 40px; -fx-max-width: 350px;" />
                                     </children>
                                 </VBox>
-                                <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="108.0" styleClass="sign-in" text="Log-In">
+                                <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="166.0" styleClass="create-user" text="Create User">
                                     <font>
                                         <Font size="24.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="233.0" style="-fx-background-color: transparent; -fx-padding: 20px;" text="Or create a new account.">
-                                    <font>
-                                        <Font size="18.0" />
                                     </font>
                                 </Button>
                             </children>
@@ -61,4 +68,3 @@
         </Pane>
     </children>
 </AnchorPane>
-
