@@ -1,0 +1,68 @@
+/* ===========================
+   Fonts
+   =========================== */
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("/fonts/JosefinSans.ttf");
+}
+
+@font-face {
+    font-family: "Jost";
+    src: url("/fonts/Jost.ttf");
+}
+
+/* ===========================
+   Root Background
+   =========================== */
+.root {
+    -fx-background-image: url("/Images/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-font-family: "Josefin Sans";
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+.button {
+    -fx-background-color: #ADFFA3;   /* Green */
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Jost";
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #FF5BC3;   /* Pink hover */
+    -fx-text-fill: #ffffff;
+}
+
+/* ===========================
+   Labels
+   =========================== */
+.label {
+    -fx-text-fill: #40FFE2;          /* Blue */
+    -fx-font-family: "Josefin Sans";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.highlight {
+    -fx-text-fill: #48A3FF;          /* Accent Blue */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* ===========================
+   Text Fields
+   =========================== */
+.text-field {
+    -fx-background-color: #FFDF3D;   /* Yellow */
+    -fx-text-fill: #000000;
+    -fx-font-family: "Jost";
+    -fx-font-size: 14px;
+    -fx-background-radius: 6;
+}

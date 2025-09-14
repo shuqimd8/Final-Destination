@@ -1,0 +1,23 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+    -fx-font-family: "Comic Sans MS", "Arial Rounded MT Bold", sans-serif;
+}
+
+.title-label {
+    -fx-font-size: 28px;
+    -fx-text-fill: #2a2a2a;
+    -fx-font-weight: bold;
+}
+
+.menu-button {
+    -fx-background-color: linear-gradient(to right, #f6d365, #fda085);
+    -fx-background-radius: 20;
+    -fx-padding: 10 20;
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.menu-button:hover {
+    -fx-background-color: linear-gradient(to right, #fda085, #f6d365);
+}
