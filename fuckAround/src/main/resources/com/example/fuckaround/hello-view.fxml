@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.TilePane?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.ImageView?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.fuckaround.HelloController">
+    <children>
+        <VBox alignment="TOP_RIGHT">
+            <Button text="PlayerView" onAction="#onHelloButtonClick"/>
+            <Button text="SignOut" onAction="#onHelloButtonClick"/>
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="Papa's Learnaria"/>
+            <Button text="Play" onAction="#onHelloButtonClick" alignment="CENTER"/>
+            <Group>
+                <Circle fx:id="myCircle" centerX="100.0" centerY="100.0" radius="50.0" fill="BLUE" stroke="BLACK" strokeWidth="2.0"/>
+            </Group>
+        </VBox>
+
+        <TilePane alignment="CENTER">
+            <children>
+                <Label text="papa" alignment="BOTTOM_RIGHT"/>
+                <VBox alignment="CENTER">
+                    <Label text="High Score:"/>
+                    <Label text="30000"/>
+                </VBox>
+                <HBox alignment="BOTTOM_RIGHT">
+                    <Button text="setting" onAction="#onHelloButtonClick"/>
+                    <Button text="stats" onAction="#onHelloButtonClick"/>
+                </HBox>
+
+            </children>
+
+        </TilePane>
+    </children>
+</VBox>
+
+
+
+
+
