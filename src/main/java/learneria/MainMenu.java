@@ -1,68 +1,93 @@
+
 package learneria;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainMenu implements SceneProvider {
 
     private final Scene scene;
-    private final Stage stage;
 
     public MainMenu(Stage stage) {
-        this.stage = stage;
-
         BorderPane root = new BorderPane();
+        root.setPadding(new Insets(20));
 
-        // === Menu Buttons ===
-        VBox menuBox = new VBox(15);
-        menuBox.setAlignment(Pos.CENTER);
+        Label title = new Label("Papa’s Learnaria");
+        title.setFont(new Font("Comic Sans MS", 36));
+        title.setTextFill(Color.DARKBLUE);
+        BorderPane.setAlignment(title, Pos.CENTER);
+        root.setTop(title);
 
-        Button grammarBtn = new Button("Grammar Page");
-        Button foodBtn = new Button("Food Page");
-        Button natureBtn = new Button("Nature Page");
-        Button settingsBtn = new Button("Settings");
-        Button exitBtn = new Button("Exit");
+       /* ImageView papaImg = new ImageView(new Image("/Images/papa.png"));
+        papaImg.setFitHeight(300);
+        papaImg.setPreserveRatio(true);
+        root.setLeft(papaImg); */
 
-        // === Actions ===
-        grammarBtn.setOnAction(e -> {
-            GrammarPage grammarPage = new GrammarPage(stage);
-            stage.setScene(grammarPage.getScene());
-        });
+        HBox categoryBox = new HBox(30);
+        categoryBox.setAlignment(Pos.CENTER);
 
-        foodBtn.setOnAction(e -> {
-            FoodPage foodPage = new FoodPage(stage);
-            stage.setScene(foodPage.getScene());
-        });
+        Button grammarBtn = createCircleButton("Grammar", "#FFD966"); // Yellow
+        Button natureBtn = createCircleButton("Nature", "#93C47D");  // Green
+        Button foodBtn = createCircleButton("Food", "#B4A7D6");      // Purple
 
-        natureBtn.setOnAction(e -> {
-            NaturePage naturePage = new NaturePage(stage);
-            stage.setScene(naturePage.getScene());
-        });
+        categoryBox.getChildren().addAll(grammarBtn, natureBtn, foodBtn);
+        root.setCenter(categoryBox);
 
-        settingsBtn.setOnAction(e -> {
-            SettingsPage settingsPage = new SettingsPage(stage);
-            stage.setScene(settingsPage.getScene());
-        });
+        VBox userBox = new VBox(10);
+        userBox.setAlignment(Pos.TOP_RIGHT);
 
-        exitBtn.setOnAction(e -> {
-            stage.close(); // exits the app
-        });
+        Label name = new Label("{USERNAME}");
+        name.setFont(new Font(18));
 
-        // === Add buttons ===
-        menuBox.getChildren().addAll(grammarBtn, foodBtn, natureBtn, settingsBtn, exitBtn);
+        Label role = new Label("Busy Bee");
+        role.setFont(new Font(14));
 
-        root.setCenter(menuBox);
+       /* ImageView beeIcon = new ImageView(new Image("bee.png"));
+        beeIcon.setFitHeight(40);
+        beeIcon.setPreserveRatio(true); */
 
-        scene = new Scene(root, 800, 600);
+        Button signOutBtn = new Button("Sign Out");
+        signOutBtn.setStyle("-fx-background-color: #66CCFF; -fx-font-size: 14px;");
+
+        VBox.setMargin(signOutBtn, new Insets(10, 0, 0, 0));
+
+        userBox.getChildren().addAll(name, role, signOutBtn);
+        root.setRight(userBox);
+
+        Button statsBtn = new Button("STATS");
+        statsBtn.setStyle("-fx-background-color: #66CCFF; -fx-font-size: 16px;");
+        BorderPane.setAlignment(statsBtn, Pos.BOTTOM_RIGHT);
+        root.setBottom(statsBtn);
+
+        scene = new Scene(root, 900, 650);
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
     }
 
     @Override
     public Scene getScene() {
         return scene;
     }
-}
 
+    // Helper to make colored circle buttons
+    private Button createCircleButton(String text, String color) {
+        Button btn = new Button(text);
+        btn.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
+        btn.setStyle(
+                "-fx-background-radius: 100; " +
+                        "-fx-min-width: 150px; -fx-min-height: 150px; " +
+                        "-fx-max-width: 150px; -fx-max-height: 150px; " +
+                        "-fx-background-color: " + color + "; " +
+                        "-fx-font-size: 16px;"
+        );
+        return btn;
+    }
+}
