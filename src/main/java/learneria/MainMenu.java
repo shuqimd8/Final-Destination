@@ -3,34 +3,61 @@ package learneria;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainMenu implements SceneProvider {
 
     private final Scene scene;
+    private final Stage stage;
 
     public MainMenu(Stage stage) {
-        VBox root = new VBox(20);
-        root.setAlignment(Pos.CENTER);
+        this.stage = stage;
 
-        // Title
+        BorderPane root = new BorderPane();
+
+        // === Menu Buttons ===
+        VBox menuBox = new VBox(15);
+        menuBox.setAlignment(Pos.CENTER);
+
         Button grammarBtn = new Button("Grammar Page");
         Button foodBtn = new Button("Food Page");
         Button natureBtn = new Button("Nature Page");
-        Button hubBtn = new Button("Hub");
-        Button loginBtn = new Button("Login");
+        Button settingsBtn = new Button("Settings");
+        Button exitBtn = new Button("Exit");
 
-        // Navigation
-        grammarBtn.setOnAction(e -> stage.setScene(new GrammarPage(stage).getScene()));
-        foodBtn.setOnAction(e -> stage.setScene(new FoodPage(stage).getScene()));
-        natureBtn.setOnAction(e -> stage.setScene(new NaturePage(stage).getScene()));
-        hubBtn.setOnAction(e -> stage.setScene(new Hub(stage).getScene()));
-        loginBtn.setOnAction(e -> stage.setScene(new Login(stage).getScene()));
+        // === Actions ===
+        grammarBtn.setOnAction(e -> {
+            GrammarPage grammarPage = new GrammarPage(stage);
+            stage.setScene(grammarPage.getScene());
+        });
 
-        root.getChildren().addAll(grammarBtn, foodBtn, natureBtn, hubBtn, loginBtn);
+        foodBtn.setOnAction(e -> {
+            FoodPage foodPage = new FoodPage(stage);
+            stage.setScene(foodPage.getScene());
+        });
 
-        scene = new Scene(root, 1024, 768);
+        natureBtn.setOnAction(e -> {
+            NaturePage naturePage = new NaturePage(stage);
+            stage.setScene(naturePage.getScene());
+        });
+
+        settingsBtn.setOnAction(e -> {
+            SettingsPage settingsPage = new SettingsPage(stage);
+            stage.setScene(settingsPage.getScene());
+        });
+
+        exitBtn.setOnAction(e -> {
+            stage.close(); // exits the app
+        });
+
+        // === Add buttons ===
+        menuBox.getChildren().addAll(grammarBtn, foodBtn, natureBtn, settingsBtn, exitBtn);
+
+        root.setCenter(menuBox);
+
+        scene = new Scene(root, 800, 600);
     }
 
     @Override
@@ -38,3 +65,4 @@ public class MainMenu implements SceneProvider {
         return scene;
     }
 }
+
