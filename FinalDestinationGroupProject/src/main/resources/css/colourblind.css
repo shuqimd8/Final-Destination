@@ -1,0 +1,92 @@
+/* === Fonts === */
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("/fonts/JosefinSans.ttf");
+}
+
+@font-face {
+    font-family: "Jost";
+    src: url("/fonts/Jost.ttf");
+}
+
+/* === Base === */
+.root {
+    -fx-font-family: "Josefin Sans";
+}
+
+/* === Light Theme === */
+.root.light {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+/* Buttons (Light) */
+.root.light .button {
+    -fx-background-color: #ADFFA3;   /* Green */
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Jost";
+}
+
+.root.light .button:hover {
+    -fx-background-color: #FF5BC3;   /* Pink hover */
+    -fx-text-fill: #ffffff;
+}
+
+/* Labels (Light) */
+.root.light .label {
+    -fx-text-fill: #40FFE2;   /* Blue */
+    -fx-font-family: "Josefin Sans";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Text Fields (Light) */
+.root.light .text-field {
+    -fx-background-color: #FFDF3D;   /* Yellow */
+    -fx-text-fill: #000000;
+    -fx-font-family: "Jost";
+}
+
+/* === Dark Theme === */
+.root.dark {
+    -fx-background-color: #2C2C2C;
+}
+
+/* Buttons (Dark) */
+.root.dark .button {
+    -fx-background-color: #444;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Jost";
+}
+
+.root.dark .button:hover {
+    -fx-background-color: #666;
+    -fx-text-fill: #ADFFA3;
+}
+
+/* Labels (Dark) */
+.root.dark .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Josefin Sans";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Text Fields (Dark) */
+.root.dark .text-field {
+    -fx-background-color: #555;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Jost";
+}
+
+/* Highlight (works in both) */
+.highlight {
+    -fx-text-fill: #48A3FF;
+    -fx-font-size: 20px;
+}
