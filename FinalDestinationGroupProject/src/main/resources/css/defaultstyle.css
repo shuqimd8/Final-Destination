@@ -1,4 +1,6 @@
-/* font */
+/* =============================== */
+/*           FONTS                 */
+/* =============================== */
 @font-face {
     font-family: "Josefin Sans";
     src: url("/fonts/JosefinSans.ttf");
@@ -9,17 +11,25 @@
     src: url("/fonts/Jost.ttf");
 }
 
-/* background */
+/* =============================== */
+/*             BASE                */
+/* =============================== */
 .root {
-    -fx-background-image: url("/images/background.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
     -fx-font-family: "Josefin Sans";
 }
 
-/* button style */
-.button {
+/* =============================== */
+/*          LIGHT THEME            */
+/* =============================== */
+.root.light {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: centre centre; /* Australian spelling in comment */
+}
+
+/* Buttons (Light) */
+.root.light .button {
     -fx-background-color: #ADFFA3;   /* Green */
     -fx-text-fill: #000000;
     -fx-font-weight: bold;
@@ -27,28 +37,108 @@
     -fx-font-family: "Jost";
 }
 
-.button:hover {
+.root.light .button:hover {
     -fx-background-color: #FF5BC3;   /* Pink hover */
     -fx-text-fill: #ffffff;
 }
 
-/* label style */
-.label {
+/* Labels (Light) */
+.root.light .label {
     -fx-text-fill: #40FFE2;   /* Blue */
     -fx-font-family: "Josefin Sans";
     -fx-font-size: 18px;
     -fx-font-weight: bold;
 }
 
-/* bc */
-.text-field {
+/* Radio Buttons & Check Boxes (Light) */
+.root.light .radio-button .label,
+.root.light .check-box .label {
+    -fx-text-fill: #000000;
+}
+
+/* Text Fields (Light) */
+.root.light .text-field {
     -fx-background-color: #FFDF3D;   /* Yellow */
     -fx-text-fill: #000000;
     -fx-font-family: "Jost";
 }
 
-/* others */
+/* =============================== */
+/*           DARK THEME            */
+/* =============================== */
+.root.dark {
+    -fx-background-color: #2C2C2C;
+}
+
+/* Buttons (Dark) */
+.root.dark .button {
+    -fx-background-color: #444;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Jost";
+}
+
+.root.dark .button:hover {
+    -fx-background-color: #666;
+    -fx-text-fill: #ADFFA3;
+}
+
+/* Labels (Dark) */
+.root.dark .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Josefin Sans";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Radio Buttons & Check Boxes (Dark) */
+.root.dark .radio-button .label,
+.root.dark .check-box .label {
+    -fx-text-fill: #ffffff;
+}
+
+/* Text Fields (Dark) */
+.root.dark .text-field {
+    -fx-background-color: #555;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Jost";
+}
+
+/* =============================== */
+/*        SHARED STYLES            */
+/* =============================== */
+
+/* Highlight (works in both themes) */
 .highlight {
     -fx-text-fill: #48A3FF;
     -fx-font-size: 20px;
+}
+
+/* Sidebar buttons */
+.side-button {
+    -fx-background-color: #ADFFA3;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Jost";
+}
+
+.side-button:hover {
+    -fx-background-color: #FF5BC3;
+    -fx-text-fill: #ffffff;
+}
+
+/* Reset button styled same as sidebar */
+.reset-button {
+    -fx-background-color: #ADFFA3;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Jost";
+}
+
+.reset-button:hover {
+    -fx-background-color: #FF5BC3;
+    -fx-text-fill: #ffffff;
 }

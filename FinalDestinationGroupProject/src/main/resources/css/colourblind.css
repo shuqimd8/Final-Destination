@@ -1,92 +1,57 @@
-/* === Fonts === */
-@font-face {
-    font-family: "Josefin Sans";
-    src: url("/fonts/JosefinSans.ttf");
+/* =============================== */
+/*  COLOUR-BLIND SUPPORT STYLES    */
+/* =============================== */
+
+/* === R/G Colour-blind Mode === */
+/* Use strong Blue + Orange contrasts */
+.root.colourblind-rg {
+    -fx-background-colour: #F5F5F5; /* light neutral */
 }
 
-@font-face {
-    font-family: "Jost";
-    src: url("/fonts/Jost.ttf");
-}
-
-/* === Base === */
-.root {
-    -fx-font-family: "Josefin Sans";
-}
-
-/* === Light Theme === */
-.root.light {
-    -fx-background-image: url("/images/background.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
-
-/* Buttons (Light) */
-.root.light .button {
-    -fx-background-color: #ADFFA3;   /* Green */
-    -fx-text-fill: #000000;
-    -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-font-family: "Jost";
-}
-
-.root.light .button:hover {
-    -fx-background-color: #FF5BC3;   /* Pink hover */
-    -fx-text-fill: #ffffff;
-}
-
-/* Labels (Light) */
-.root.light .label {
-    -fx-text-fill: #40FFE2;   /* Blue */
-    -fx-font-family: "Josefin Sans";
-    -fx-font-size: 18px;
+.root.colourblind-rg .label {
+    -fx-text-fill: #1E90FF;   /* Bright Blue */
     -fx-font-weight: bold;
 }
 
-/* Text Fields (Light) */
-.root.light .text-field {
-    -fx-background-color: #FFDF3D;   /* Yellow */
+.root.colourblind-rg .button {
+    -fx-background-colour: #FFA500;   /* Orange */
     -fx-text-fill: #000000;
     -fx-font-family: "Jost";
-}
-
-/* === Dark Theme === */
-.root.dark {
-    -fx-background-color: #2C2C2C;
-}
-
-/* Buttons (Dark) */
-.root.dark .button {
-    -fx-background-color: #444;
-    -fx-text-fill: #ffffff;
-    -fx-font-weight: bold;
     -fx-font-size: 16px;
-    -fx-font-family: "Jost";
 }
-
-.root.dark .button:hover {
-    -fx-background-color: #666;
-    -fx-text-fill: #ADFFA3;
-}
-
-/* Labels (Dark) */
-.root.dark .label {
+.root.colourblind-rg .button:hover {
+    -fx-background-colour: #FF6347;   /* Tomato */
     -fx-text-fill: #ffffff;
-    -fx-font-family: "Josefin Sans";
-    -fx-font-size: 18px;
+}
+
+.root.colourblind-rg .text-field {
+    -fx-background-colour: #FFD580;   /* Soft Orange */
+    -fx-text-fill: #000000;
+}
+
+/* === B/Y Colour-blind Mode === */
+/* Use Dark Grey vs Gold for clear separation */
+.root.colourblind-by {
+    -fx-background-colour: #222222; /* dark neutral */
+}
+
+.root.colourblind-by .label {
+    -fx-text-fill: #FFD700;   /* Gold */
     -fx-font-weight: bold;
 }
 
-/* Text Fields (Dark) */
-.root.dark .text-field {
-    -fx-background-color: #555;
-    -fx-text-fill: #ffffff;
+.root.colourblind-by .button {
+    -fx-background-colour: #333333;   /* Dark Grey */
+    -fx-text-fill: #FFD700;
     -fx-font-family: "Jost";
+    -fx-font-size: 16px;
+}
+.root.colourblind-by .button:hover {
+    -fx-background-colour: #555555;   /* Slightly lighter */
+    -fx-text-fill: #ffffff;
 }
 
-/* Highlight (works in both) */
-.highlight {
-    -fx-text-fill: #48A3FF;
-    -fx-font-size: 20px;
+.root.colourblind-by .text-field {
+    -fx-background-colour: #444444;   /* Grey */
+    -fx-text-fill: #FFD700;
 }
