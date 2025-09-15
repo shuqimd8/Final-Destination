@@ -1,57 +1,35 @@
-/* =============================== */
-/*  COLOUR-BLIND SUPPORT STYLES    */
-/* =============================== */
-
-/* === R/G Colour-blind Mode === */
-/* Use strong Blue + Orange contrasts */
-.root.colourblind-rg {
-    -fx-background-colour: #F5F5F5; /* light neutral */
+/* Colourblind Theme */
+.root {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Josefin Sans", "Jost", sans-serif;
 }
 
-.root.colourblind-rg .label {
-    -fx-text-fill: #1E90FF;   /* Bright Blue */
-    -fx-font-weight: bold;
-}
-
-.root.colourblind-rg .button {
-    -fx-background-colour: #FFA500;   /* Orange */
-    -fx-text-fill: #000000;
-    -fx-font-family: "Jost";
-    -fx-font-size: 16px;
-}
-.root.colourblind-rg .button:hover {
-    -fx-background-colour: #FF6347;   /* Tomato */
+/* Buttons */
+.button {
+    -fx-background-color: #0066cc;   /* blue (safe for most types) */
     -fx-text-fill: #ffffff;
-}
-
-.root.colourblind-rg .text-field {
-    -fx-background-colour: #FFD580;   /* Soft Orange */
-    -fx-text-fill: #000000;
-}
-
-/* === B/Y Colour-blind Mode === */
-/* Use Dark Grey vs Gold for clear separation */
-.root.colourblind-by {
-    -fx-background-colour: #222222; /* dark neutral */
-}
-
-.root.colourblind-by .label {
-    -fx-text-fill: #FFD700;   /* Gold */
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.button:hover {
+    -fx-background-color: #004c99;   /* darker blue */
 }
 
-.root.colourblind-by .button {
-    -fx-background-colour: #333333;   /* Dark Grey */
-    -fx-text-fill: #FFD700;
-    -fx-font-family: "Jost";
-    -fx-font-size: 16px;
-}
-.root.colourblind-by .button:hover {
-    -fx-background-colour: #555555;   /* Slightly lighter */
-    -fx-text-fill: #ffffff;
+/* Labels */
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
 }
 
-.root.colourblind-by .text-field {
-    -fx-background-colour: #444444;   /* Grey */
-    -fx-text-fill: #FFD700;
+/* Sidebar buttons */
+.side-button {
+    -fx-background-color: #ffcc00;   /* yellow for contrast */
+    -fx-text-fill: #000;
+    -fx-font-size: 14px;
+    -fx-padding: 8 12;
+    -fx-background-radius: 6;
+}
+.side-button:hover {
+    -fx-background-color: #ffaa00;   /* darker yellow */
 }
