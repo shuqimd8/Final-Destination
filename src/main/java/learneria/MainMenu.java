@@ -39,6 +39,7 @@ public class MainMenu implements SceneProvider {
         Button natureBtn = createCircleButton("Nature", "#93C47D");  // Green
         Button foodBtn = createCircleButton("Food", "#B4A7D6");      // Purple
 
+
         categoryBox.getChildren().addAll(grammarBtn, natureBtn, foodBtn);
         root.setCenter(categoryBox);
 
@@ -70,6 +71,29 @@ public class MainMenu implements SceneProvider {
 
         scene = new Scene(root, 900, 650);
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+        // Inside MainMenu constructor, after button creation
+
+        grammarBtn.setOnAction(e -> {
+            SceneProvider grammarPage = new GrammarPage(stage);
+            stage.setScene(grammarPage.getScene());
+        });
+
+        natureBtn.setOnAction(e -> {
+            SceneProvider naturePage = new NaturePage(stage);
+            stage.setScene(naturePage.getScene());
+        });
+
+        foodBtn.setOnAction(e -> {
+            SceneProvider foodPage = new FoodPage(stage);
+            stage.setScene(foodPage.getScene());
+        });
+        statsBtn.setOnAction(e -> {
+            SceneProvider settingsPage = new SettingsPage(stage);
+            stage.setScene(settingsPage.getScene());
+        });
+
+
     }
 
     @Override
