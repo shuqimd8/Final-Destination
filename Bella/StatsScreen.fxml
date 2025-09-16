@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo.StatsScreenController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      style="-fx-background-color: white; -fx-padding: 20;">
+
+    <!-- Top title -->
+    <Label text="Papa's Learnaria"
+           style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2C6CF4;" />
+
+    <!-- Main box container -->
+    <VBox spacing="0"
+          style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);"
+          maxWidth="500">
+
+        <!-- Yellow header bar -->
+        <HBox spacing="10"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: #FFD93B; -fx-padding: 10; -fx-background-radius: 12 12 0 0;">
+            <Button text="←" style="-fx-font-size: 18; -fx-background-color: #87CEEB; -fx-background-radius: 50%; -fx-min-width: 40; -fx-min-height: 40;" onAction="#onBackButtonClick" fx:id="backButton"/>
+            <Label text="Stats" style="-fx-font-size: 22; -fx-font-weight: bold;" />
+        </HBox>
+
+        <!-- Stats content -->
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
+            <GridPane hgap="40" vgap="15">
+                <Label text="Total Correct Answers" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+                <Label text="300" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <Label text="Average Correct Answers" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+                <Label text="15" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <Label text="Total Incorrect Answers" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+                <Label text="152" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                <Label text="Average Incorrect Answers" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+                <Label text="5" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+                <Label text="Games Played" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+                <Label text="20" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+
+                <Label text="Total Words" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+                <Label text="452" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+
+                <Label text="Average Answer Speed" GridPane.rowIndex="6" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+                <Label text="2 words per second" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+            </GridPane>
+        </VBox>
+    </VBox>
+</VBox>
+
