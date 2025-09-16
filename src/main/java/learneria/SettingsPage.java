@@ -54,8 +54,8 @@ public class SettingsPage implements SceneProvider {
         scene = new Scene(root, 700, 450);
 
         // CSS (safe load)
-        loadCss("/css/defaultstyle.css");
-        loadCss("/css/colourblind.css");
+        loadCss("/css/style.css");        // ✅ fixed from defaultstyle.css
+        loadCss("/css/colourblind.css");  // still here
     }
 
     private void loadCss(String path) {
