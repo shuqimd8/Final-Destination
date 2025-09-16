@@ -11,6 +11,8 @@ module learneria {
     requires eu.hansolo.tilesfx;
     requires javafx.graphics;
     requires java.sql;
+    requires annotations;
+    requires mysql.connector.j;
 
     opens learneria to javafx.fxml;
     exports learneria;

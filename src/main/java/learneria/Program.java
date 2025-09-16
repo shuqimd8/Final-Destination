@@ -1,7 +1,7 @@
 package learneria;
 
-import com.example.finaldestinationgroupproject.Level;
-import com.example.finaldestinationgroupproject.User;
+import learneria.Level;
+import learneria.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
