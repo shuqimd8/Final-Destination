@@ -10,6 +10,7 @@ module learneria {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires javafx.graphics;
+    requires java.sql;
 
     opens learneria to javafx.fxml;
     exports learneria;

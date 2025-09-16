@@ -1,6 +1,6 @@
 package learneria;
 
-import com.example.finaldestinationgroupproject.Student;
+import learneria.Student ;
 
 import java.sql.*;
 import java.util.Scanner;
