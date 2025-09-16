@@ -1,4 +1,4 @@
-package com.example.fuckaround;
+package learneria;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
