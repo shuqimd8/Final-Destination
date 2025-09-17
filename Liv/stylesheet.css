@@ -1,0 +1,111 @@
+/* All Screen Styles */
+
+#background {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: stretch; /* or no-repeat, repeat, round, space */
+    -fx-background-size: cover; /* or contain, 100% 100%, specific dimensions */
+    -fx-background-position: center center;
+}
+
+/* All Buttons */
+
+.sign-in {
+    -fx-display: flex;
+    -fx-background-radius: 10;
+    -fx-background-color: #40FFE2;
+}
+
+.create-user {
+    -fx-display: flex;
+    -fx-background-radius: 10;
+    -fx-background-color: #FF5BC3;
+}
+
+/* Select User Type Buttons */
+
+.select-student {
+    -fx-background-color: #ADFFA3;
+}
+
+.select-teacher {
+    -fx-background-color: #FFDF3D;
+}
+
+/* Play Game Button */
+
+.play {
+    -fx-background-color: #ADFFA3;
+}
+
+/* Return to Previous Page Button */
+
+.back {
+    -fx-background-color: #40FFE2;
+    -fx-border-radius: 25%;
+}
+
+.sign-out {
+    -fx-background-color: #FFDF3D;
+}
+
+.open-stats {
+    -fx-background-color: #FF5BC3;
+}
+
+.open-settings {
+    -fx-background-color: #40FFE2;
+}
+
+.continue {
+    -fx-background-color: #FFDF3D;
+}
+
+/* Category Buttons */
+
+.category {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-radius: 25%;
+}
+
+.grammar {
+    -fx-background-color: #FFDF3D;
+}
+
+.nature {
+    -fx-background-color: #ADFFA3;
+}
+
+.food {
+    -fx-background-color: #FF5BC3;
+}
+
+/* Page Banners */
+
+.banner {
+    -fx-background-color: #B0E0E6;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+}
+
+.settings {
+    -fx-background-color: #40FFE2;
+}
+
+.stats {
+    -fx-background-color: #FF5BC3;
+}
+
+.levels {
+    -fx-background-color: #FFDF3D;
+}
+
+.game-over {
+    -fx-background-color: #ADFFA3;
+}
+
+.teacher {
+    -fx-background-color: #FFDF3D;
+}
