@@ -58,4 +58,13 @@ public class StudentTest {
         assertEquals(TEACHER_TWO, student.getTeacher());
     }
 
+    @Test
+    public void testDoPasswordsMatch_True(){
+        assertTrue(student.doPasswordsMatch(PASSWORD,PASSWORD));
+    }
+
+    @Test
+    public void testDoPasswordsMatch_False(){
+        assertFalse(student.doPasswordsMatch(PASSWORD,PASSWORD_TWO));
+    }
 }
