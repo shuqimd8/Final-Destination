@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.learneria.controller.StudentMainController"
+      alignment="CENTER"
+      spacing="15"
+      style="-fx-padding: 30; -fx-background-color: #f9f9f9;"
+      prefWidth="400"
+      prefHeight="300">
+
+    <!-- Title -->
+    <Label text="Student Main Menu" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+    <Label fx:id="welcomeLabel" text="Welcome, student!" style="-fx-font-size: 14;"/>
+
+    <!-- Navigation Buttons -->
+    <Button text="Play Grammar Game" onAction="#openGrammar" prefWidth="200"/>
+    <Button text="Play Food Game" onAction="#openFood" prefWidth="200"/>
+    <Button text="Play Nature Game" onAction="#openNature" prefWidth="200"/>
+    <Button text="Settings" prefWidth="200" onAction="#openSettings"/>
+
+    <!-- Logout -->
+    <Button text="Logout"
+            onAction="#handleLogout"
+            style="-fx-background-color: red; -fx-text-fill: white;"
+            prefWidth="200"/>
+</VBox>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.learneria.controller.CreateAccountStudentController"
+      alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+
+    <Label text="Create Student Account" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+
+    <TextField fx:id="usernameField" promptText="Enter Username" maxWidth="200"/>
+    <PasswordField fx:id="passwordField" promptText="Enter Password" maxWidth="200"/>
+    <TextField fx:id="teacherCodeField" promptText="Teacher Code (optional)" maxWidth="200"/>
+
+    <Button text="Submit" onAction="#handleSubmit"/>
+    <Button text="Back" onAction="#handleBack"/>
+</VBox>

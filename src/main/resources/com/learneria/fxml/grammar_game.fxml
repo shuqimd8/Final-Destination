@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.GrammarGameController"
+            prefWidth="800" prefHeight="600">
+
+    <!-- Title -->
+    <Label text="Grammar Game"
+           layoutX="320" layoutY="20"
+           style="-fx-font-size: 26; -fx-font-weight: bold;"/>
+
+    <!-- Buckets -->
+    <Rectangle fx:id="bucketNoun" layoutX="150" layoutY="400"
+               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Noun" layoutX="170" layoutY="510"/>
+
+    <Rectangle fx:id="bucketVerb" layoutX="350" layoutY="400"
+               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Verb" layoutX="375" layoutY="510"/>
+
+    <Rectangle fx:id="bucketAdj" layoutX="550" layoutY="400"
+               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Adjective" layoutX="560" layoutY="510"/>
+
+    <!-- Words to drag -->
+    <Label fx:id="word1" text="Run"
+           layoutX="200" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: yellow; -fx-padding: 5;"/>
+    <Label fx:id="word2" text="Cat"
+           layoutX="400" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: yellow; -fx-padding: 5;"/>
+    <Label fx:id="word3" text="Happy"
+           layoutX="600" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: yellow; -fx-padding: 5;"/>
+
+    <!-- Back button -->
+    <Button text="Back to Menu"
+            layoutX="20" layoutY="20"
+            onAction="#handleBack"/>
+</AnchorPane>

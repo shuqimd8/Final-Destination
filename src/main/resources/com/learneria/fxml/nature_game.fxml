@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.NatureGameController"
+            prefWidth="800" prefHeight="600">
+
+    <Label text="Nature Game"
+           layoutX="340" layoutY="20"
+           style="-fx-font-size: 26; -fx-font-weight: bold;"/>
+
+    <!-- Buckets -->
+    <Rectangle fx:id="bucketPlant" layoutX="200" layoutY="400"
+               width="120" height="100" fill="LIGHTGREEN" stroke="BLACK"/>
+    <Label text="Plant" layoutX="240" layoutY="510"/>
+
+    <Rectangle fx:id="bucketAnimal" layoutX="500" layoutY="400"
+               width="120" height="100" fill="LIGHTYELLOW" stroke="BLACK"/>
+    <Label text="Animal" layoutX="540" layoutY="510"/>
+
+    <!-- Words -->
+    <Label fx:id="word1" text="Tree"
+           layoutX="200" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: yellow; -fx-padding: 5;"/>
+    <Label fx:id="word2" text="Dog"
+           layoutX="400" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: yellow; -fx-padding: 5;"/>
+
+    <!-- Back -->
+    <Button text="Back to Menu"
+            layoutX="20" layoutY="20"
+            onAction="#handleBack"/>
+</AnchorPane>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.learneria.controller.SettingsController"
+      alignment="TOP_CENTER"
+      spacing="20">
+
+    <!-- Proper Insets -->
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <!-- Title -->
+    <Label text="Settings"
+           style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+
+    <!-- Name row -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Name:" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <Label fx:id="nameLabel" text="Jake"/>
+        <Button text="✎" onAction="#editName"/>
+    </HBox>
+
+    <!-- Username row -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Username:" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <Label fx:id="usernameLabel" text="JakeyBoi23"/>
+        <Button text="✎" onAction="#editUsername"/>
+    </HBox>
+
+    <!-- Password row -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Password:" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <Label fx:id="passwordLabel" text="********"/>
+        <Button text="✎" onAction="#editPassword"/>
+    </HBox>
+
+    <!-- Colour Options -->
+    <Label text="Colour Options:" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Default"/>
+        <Button text="R/G Colour Blind"/>
+        <Button text="B/Y Colour Blind"/>
+    </HBox>
+
+    <!-- Back Button -->
+    <Button text="⬅ Back"
+            onAction="#handleBack"
+            style="-fx-background-color: #ff5bc3; -fx-text-fill: white; -fx-font-size: 14;"
+            prefWidth="120"/>
+
+</VBox>
