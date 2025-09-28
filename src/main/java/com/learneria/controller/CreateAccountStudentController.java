@@ -31,14 +31,17 @@ public class CreateAccountStudentController {
             return;
         }
 
-        try (Connection conn = Database.getInstance().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(
-                     "INSERT INTO users (username, password, role, teacher_code) VALUES (?, ?, 'student', ?)")) {
+        try {
+            Connection conn = Database.getInstance().getConnection();
+            PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO users (username, password, role, teacher_code) VALUES (?, ?, 'student', ?)"
+            );
 
             stmt.setString(1, username);
             stmt.setString(2, password);
             stmt.setString(3, teacherCode.isEmpty() ? null : teacherCode);
             stmt.executeUpdate();
+            stmt.close();
 
             System.out.println("✅ Student registered: " + username + " / Teacher Code: " + teacherCode);
 

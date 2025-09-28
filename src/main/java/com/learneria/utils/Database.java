@@ -15,7 +15,7 @@ public class Database {
             connection = DriverManager.getConnection(url);
             System.out.println("✅ Database connected at " + url);
 
-            // Ensure users table exists with teacher_code optional
+            // Create users table
             try (Statement stmt = connection.createStatement()) {
                 stmt.executeUpdate(
                         "CREATE TABLE IF NOT EXISTS users (" +
@@ -26,15 +26,19 @@ public class Database {
                                 "teacher_code TEXT NULL" +
                                 ")"
                 );
-                System.out.println("✅ Users table ready (teacher_code optional)");
             }
 
-            // Add teacher_code column if old table didn’t have it
+            // Create scores table
             try (Statement stmt = connection.createStatement()) {
-                stmt.executeUpdate("ALTER TABLE users ADD COLUMN teacher_code TEXT NULL");
-                System.out.println("✅ teacher_code column added to users table");
-            } catch (SQLException ignore) {
-                // Column already exists → safe to ignore
+                stmt.executeUpdate(
+                        "CREATE TABLE IF NOT EXISTS scores (" +
+                                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                "username TEXT NOT NULL," +
+                                "game TEXT NOT NULL," +
+                                "score INTEGER NOT NULL," +
+                                "date_played TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                                ")"
+                );
             }
 
         } catch (SQLException e) {
@@ -50,8 +54,21 @@ public class Database {
         return instance;
     }
 
+    // Always return the same open connection
     public Connection getConnection() {
         return connection;
+    }
+
+    // Optional: close at app shutdown
+    public void close() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                System.out.println("❌ Database connection closed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

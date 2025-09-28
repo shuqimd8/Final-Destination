@@ -62,5 +62,10 @@ public class StudentMainController implements UserAware {
                 "Sign In"
         );
     }
+    @FXML
+    private void handleProfile() {
+        SceneManager.switchScene("/com/learneria/fxml/profile.fxml", "Profile");
+    }
+
 }
 

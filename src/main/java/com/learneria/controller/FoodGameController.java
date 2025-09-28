@@ -20,26 +20,23 @@ public class FoodGameController {
     @FXML private Rectangle bucketFruit;
     @FXML private Rectangle bucketMeat;
 
-    // Track categories
     private final Map<String, String> wordCategory = new HashMap<>();
-
-    // Track score
     private int score = 0;
     private int totalWords = 0;
 
     @FXML
     public void initialize() {
-        // Example word setup (you can expand this list)
+        // Example words
         wordCategory.put("Apple", "Fruit");
         wordCategory.put("Banana", "Fruit");
         wordCategory.put("Chicken", "Meat");
         wordCategory.put("Beef", "Meat");
 
-        // Assign words to labels (demo)
+        // Assign demo words
         word1.setText("Apple");
         word2.setText("Chicken");
 
-        totalWords = 2; // update if you add more
+        totalWords = 2;
 
         setupDrag(word1);
         setupDrag(word2);
@@ -69,13 +66,13 @@ public class FoodGameController {
         bucket.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
+
             if (db.hasString()) {
                 String word = db.getString();
                 System.out.println("✅ Word '" + word + "' dropped into " + bucketType + " bucket!");
 
-                // Check correctness
                 if (wordCategory.containsKey(word) && wordCategory.get(word).equals(bucketType)) {
-                    score += 10; // correct
+                    score += 10;
                     System.out.println("🎉 Correct! +10 points");
                 } else {
                     System.out.println("❌ Incorrect! No points");
@@ -83,9 +80,9 @@ public class FoodGameController {
 
                 success = true;
             }
+
             event.setDropCompleted(success);
 
-            // If all words placed → finish game
             if (--totalWords == 0) {
                 handleGameOver();
             }
@@ -95,13 +92,13 @@ public class FoodGameController {
     }
 
     private void handleGameOver() {
-        String currentUser = SceneManager.getCurrentUser(); // assume you track logged-in user
+        String currentUser = SceneManager.getCurrentUser();
         System.out.println("🏁 Game Over! Final score: " + score);
 
-        // Save score to DB
+        // Save to DB
         ScoreManager.insertScore(currentUser, "Food", score);
 
-        // Switch back to Student Main Menu
+        // Back to menu
         SceneManager.switchSceneWithUser(
                 "/com/learneria/fxml/student_main.fxml",
                 "Student Main Menu",
@@ -114,3 +111,4 @@ public class FoodGameController {
         SceneManager.switchScene("/com/learneria/fxml/student_main.fxml", "Student Main Menu");
     }
 }
+

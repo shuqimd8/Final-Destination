@@ -23,6 +23,8 @@
     <Button text="Play Food Game" onAction="#openFood" prefWidth="200"/>
     <Button text="Play Nature Game" onAction="#openNature" prefWidth="200"/>
     <Button text="Settings" prefWidth="200" onAction="#openSettings"/>
+    <Button text="View Profile" onAction="#handleProfile" />
+
 
     <!-- Logout -->
     <Button text="Logout"

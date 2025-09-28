@@ -20,10 +20,7 @@ public class NatureGameController {
     @FXML private Rectangle bucketPlant;
     @FXML private Rectangle bucketAnimal;
 
-    // Track categories
     private final Map<String, String> wordCategory = new HashMap<>();
-
-    // Track score
     private int score = 0;
     private int totalWords = 0;
 
@@ -39,7 +36,7 @@ public class NatureGameController {
         word1.setText("Tree");
         word2.setText("Lion");
 
-        totalWords = 2; // update if you add more labels
+        totalWords = 2;
 
         setupDrag(word1);
         setupDrag(word2);
@@ -69,11 +66,11 @@ public class NatureGameController {
         bucket.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
+
             if (db.hasString()) {
                 String word = db.getString();
                 System.out.println("✅ Word '" + word + "' dropped into " + bucketType + " bucket!");
 
-                // Check correctness
                 if (wordCategory.containsKey(word) && wordCategory.get(word).equals(bucketType)) {
                     score += 10;
                     System.out.println("🎉 Correct! +10 points");
@@ -83,9 +80,9 @@ public class NatureGameController {
 
                 success = true;
             }
+
             event.setDropCompleted(success);
 
-            // If all words placed → finish
             if (--totalWords == 0) {
                 handleGameOver();
             }
@@ -101,7 +98,7 @@ public class NatureGameController {
         // Save score
         ScoreManager.insertScore(currentUser, "Nature", score);
 
-        // Switch back to Student Main
+        // Back to menu
         SceneManager.switchSceneWithUser(
                 "/com/learneria/fxml/student_main.fxml",
                 "Student Main Menu",
@@ -114,4 +111,3 @@ public class NatureGameController {
         SceneManager.switchScene("/com/learneria/fxml/student_main.fxml", "Student Main Menu");
     }
 }
-

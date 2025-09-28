@@ -27,13 +27,16 @@ public class CreateAccountFormController {
             return;
         }
 
-        try (Connection conn = Database.getInstance().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(
-                     "INSERT INTO users (username, password, role) VALUES (?, ?, 'teacher')")) {
+        try {
+            Connection conn = Database.getInstance().getConnection();
+            PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO users (username, password, role) VALUES (?, ?, 'teacher')"
+            );
 
             stmt.setString(1, username);
             stmt.setString(2, password);
             stmt.executeUpdate();
+            stmt.close();
 
             System.out.println("✅ Teacher registered: " + username);
 

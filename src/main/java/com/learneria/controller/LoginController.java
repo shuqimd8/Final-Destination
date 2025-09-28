@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class LoginController {
 
@@ -34,8 +33,9 @@ public class LoginController {
 
         String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
 
-        try (Connection conn = Database.getInstance().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try {
+            Connection conn = Database.getInstance().getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, username);
             pstmt.setString(2, password);
@@ -48,13 +48,13 @@ public class LoginController {
 
                 if ("student".equalsIgnoreCase(role)) {
                     SceneManager.switchSceneWithUser(
-                            "/com/learneria/fxml/student_main.fxml",   // ✅ Corrected path
+                            "/com/learneria/fxml/student_main.fxml",
                             "Student Main Menu",
                             username
                     );
                 } else if ("teacher".equalsIgnoreCase(role)) {
                     SceneManager.switchSceneWithUser(
-                            "/com/learneria/fxml/teacher_main.fxml",   // ✅ Corrected path
+                            "/com/learneria/fxml/teacher_main.fxml",
                             "Teacher Main Menu",
                             username
                     );
@@ -66,7 +66,9 @@ public class LoginController {
                 System.out.println("❌ Invalid credentials!");
             }
 
-        } catch (SQLException e) {
+            rs.close();
+            pstmt.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -77,8 +79,9 @@ public class LoginController {
     @FXML
     private void handleCreateAccount() {
         SceneManager.switchScene(
-                "/com/learneria/fxml/createAccount_Select.fxml",   // ✅ Corrected path
+                "/com/learneria/fxml/createAccount_Select.fxml",
                 "Create Account - Select Type"
         );
     }
 }
+

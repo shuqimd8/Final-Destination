@@ -20,10 +20,7 @@ public class GrammarGameController {
     @FXML private Rectangle bucketNoun;
     @FXML private Rectangle bucketVerb;
 
-    // Track categories
     private final Map<String, String> wordCategory = new HashMap<>();
-
-    // Track score
     private int score = 0;
     private int totalWords = 0;
 
@@ -31,15 +28,15 @@ public class GrammarGameController {
     public void initialize() {
         // Example words (expand as needed)
         wordCategory.put("Dog", "Noun");
-        wordCategory.put("Run", "Verb");
         wordCategory.put("Cat", "Noun");
+        wordCategory.put("Run", "Verb");
         wordCategory.put("Jump", "Verb");
 
         // Assign demo words
         word1.setText("Dog");
         word2.setText("Run");
 
-        totalWords = 2; // adjust if you add more labels
+        totalWords = 2;
 
         setupDrag(word1);
         setupDrag(word2);
@@ -69,11 +66,11 @@ public class GrammarGameController {
         bucket.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
+
             if (db.hasString()) {
                 String word = db.getString();
                 System.out.println("✅ Word '" + word + "' dropped into " + bucketType + " bucket!");
 
-                // Check correctness
                 if (wordCategory.containsKey(word) && wordCategory.get(word).equals(bucketType)) {
                     score += 10;
                     System.out.println("🎉 Correct! +10 points");
@@ -83,9 +80,9 @@ public class GrammarGameController {
 
                 success = true;
             }
+
             event.setDropCompleted(success);
 
-            // If all words placed → finish
             if (--totalWords == 0) {
                 handleGameOver();
             }
@@ -98,10 +95,10 @@ public class GrammarGameController {
         String currentUser = SceneManager.getCurrentUser();
         System.out.println("🏁 Game Over! Final score: " + score);
 
-        // Save score
+        // Save score in DB
         ScoreManager.insertScore(currentUser, "Grammar", score);
 
-        // Switch back to Student Main
+        // Back to Student Main
         SceneManager.switchSceneWithUser(
                 "/com/learneria/fxml/student_main.fxml",
                 "Student Main Menu",
@@ -114,3 +111,4 @@ public class GrammarGameController {
         SceneManager.switchScene("/com/learneria/fxml/student_main.fxml", "Student Main Menu");
     }
 }
+
