@@ -3,15 +3,33 @@ package learneria;
 import java.sql.*;
 
 public class Teacher {
-    String TeacherUsername;
-    String TeacherName;
-    String TeacherPassword;
-//
-//    public Teacher(String user, String pass, String name) {
-//        TeacherUsername = user;
-//        TeacherPassword = pass;
-//        TeacherName = name;
-//    }
+    String[] TeacherName;
+
+    public void getName (int username) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/?user=root",
+                    "root",
+                    "CompSci2004%"
+            );
+
+            String getTeacher = "SELECT * FROM `final_destination`.`teachers` WHERE username = ?";
+            stmt = conn.prepareStatement(getTeacher);
+            stmt.setInt(1, username);
+
+            rs = stmt.executeQuery(getTeacher);
+
+            if (rs.next()) {
+                TeacherName = rs.getString("name").split(" ");
+            }
+        } catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
+        }
+    }
 
     public static void addTeacher(int username, String password, String name) {
         Connection conn = null;
