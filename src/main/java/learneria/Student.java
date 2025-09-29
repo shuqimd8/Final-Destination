@@ -84,4 +84,28 @@ public class Student extends User {
     public String getFirstName() {
         return StudentName;
     }
+
+    public void setFirstName(String firstNameTwo) {
+        StudentName = firstNameTwo;
+    }
+
+    public String getUsername() {
+        return StudentUsername;
+    }
+
+    public String getPassword() {
+        return StudentPassword;
+    }
+
+    public void setPassword(String passwordTwo) {
+        StudentPassword = passwordTwo;
+    }
+
+    public String getTeacher() {
+        return Teacher;
+    }
+
+    public void setTeacher(String teacherTwo) {
+        Teacher = teacherTwo;
+    }
 }

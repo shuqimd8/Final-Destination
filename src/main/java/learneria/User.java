@@ -254,6 +254,9 @@ public class User {
             return false;
         }
     }
+    public boolean doPasswordsMatch(String password, String password1) {
+        return (password.equals(password1));
+    }
     public static void userLogin(String username, String password) {
         Connection conn = null;
         PreparedStatement pstmt = null;
