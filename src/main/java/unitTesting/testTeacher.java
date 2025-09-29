@@ -20,7 +20,7 @@ public class testTeacher {
         teacherClass.addTeacher(username, validPassword, "TestTeacher");
     }
     public boolean catchDuplicateUsername() {
-        if (!userClass.checkUsernameNotInDB(usernameStr)) {
+        if (!userClass.isUsernameUnique(usernameStr)) {
             return true;
         }
         else {
@@ -28,11 +28,11 @@ public class testTeacher {
         }
     }
     public boolean addValidPassword() {
-        return userClass.checkPassword(validPassword);
+        return userClass.isPasswordValid(validPassword);
     }
     public boolean catchInvalidPassword() {
         try {
-            userClass.checkPassword(invalidPassword);
+            userClass.isPasswordValid(invalidPassword);
         } catch (Exception e) {
             return true;
         }

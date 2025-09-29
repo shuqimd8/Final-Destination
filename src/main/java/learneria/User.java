@@ -52,7 +52,7 @@ public class User {
 
         System.out.print("Enter your username: ");
         String username = scanner.nextLine();
-        if (checkUsernameNotInDB(username)) {
+        if (isUsernameUnique(username)) {
             System.out.print("Enter your password: ");
         }
         else {
@@ -92,7 +92,7 @@ public class User {
 
         System.out.print("Enter your username: ");
         String username = scanner.nextLine();
-        if (checkUsernameNotInDB(username)) {
+        if (isUsernameUnique(username)) {
             System.out.print("Enter your password: ");
         }
         else {
@@ -192,7 +192,7 @@ public class User {
         }
     }
 
-    public static boolean checkUsernameNotInDB(String username) {
+    public static boolean isUsernameUnique(String username) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -222,7 +222,7 @@ public class User {
             return false;
         }
     }
-    public boolean checkPassword (String password) {
+    public boolean isPasswordValid (String password) {
         int uppercase = 0;
         int lowercase = 0;
         int numbers = 0;
