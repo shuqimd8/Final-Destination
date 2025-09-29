@@ -12,12 +12,12 @@ public class Student {
     private String Teacher;
     private String Level;
 
-    public Student(String user, String pass, String name, String teacher) {
-        StudentUsername = user;
-        StudentPassword = pass;
-        StudentName = name;
-        Teacher = teacher;
-    }
+//    public Student(String user, String pass, String name, String teacher) {
+//        StudentUsername = user;
+//        StudentPassword = pass;
+//        StudentName = name;
+//        Teacher = teacher;
+//    }
 
     public static void addStudent(String username, String password, int teacher, String name) {
         Connection conn = null;

@@ -9,10 +9,10 @@ public class User {
     private String Username;
     private String Password;
 
-    public User (String username, String password) {
-        Username = username;
-        Password = password;
-    }
+//    public User (String username, String password) {
+//        Username = username;
+//        Password = password;
+//    }
 
     public static void getLogin() {
         Scanner scanner = new Scanner(System.in);
@@ -52,11 +52,12 @@ public class User {
 
         System.out.print("Enter your username: ");
         String username = scanner.nextLine();
-        if (checkUsername(username)) {
+        if (checkUsernameNotInDB(username)) {
             System.out.print("Enter your password: ");
         }
         else {
-            System.out.print("Username taken");
+//            System.out.print("Username taken");
+            throw new DuplicateUsernameException("Username taken, please select another one.");
         }
         String password = scanner.nextLine();
 
@@ -67,7 +68,8 @@ public class User {
             System.out.print("Enter your teachers user number: ");
         }
         else {
-            System.out.print("Passwords do not match, please try again.");
+//            System.out.print("Passwords do not match, please try again.");
+            throw new PasswordsDoNotMatchException("Passwords do not match, please try again.");
         }
         String teach = scanner.nextLine();
 
@@ -90,7 +92,7 @@ public class User {
 
         System.out.print("Enter your username: ");
         String username = scanner.nextLine();
-        if (checkUsername(username)) {
+        if (checkUsernameNotInDB(username)) {
             System.out.print("Enter your password: ");
         }
         else {
@@ -190,7 +192,7 @@ public class User {
         }
     }
 
-    public static boolean checkUsername(String username) {
+    public static boolean checkUsernameNotInDB(String username) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -277,7 +279,8 @@ public class User {
                 if (password.equals(pWord)) {
                     System.out.println("Logged In");
                 } else {
-                    System.out.println("Incorrect username or password.");
+//                    System.out.println("Incorrect username or password.");
+                    throw new LoginFailedException("Incorrect username or password.");
                 }
             } else {
                 userID = Integer.parseInt(username);
@@ -293,11 +296,12 @@ public class User {
                     if (password.equals(pWord)) {
                         System.out.println("Logged In");
                     } else {
-                        System.out.println("Incorrect username or password.");
+//                        System.out.println("Incorrect username or password.");
+                        throw new LoginFailedException("Incorrect username or password.");
                     }
                 }
                 else {
-                    System.out.println("Username not found.");
+                    throw new LoginFailedException("Username not found.");
                 }
             }
         }

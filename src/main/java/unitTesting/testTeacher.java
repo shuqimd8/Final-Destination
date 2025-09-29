@@ -1,52 +1,83 @@
 package unitTesting;
 
+import learneria.Student;
+import learneria.Teacher;
+import learneria.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class testTeacher {
-    public static void addTest() {
-        Connection conn = null;
-        Statement stmt = null;
+    User userClass = new User();
+    Teacher teacherClass = new Teacher();
+    int username = 1;
+    String usernameStr = "1";
+    String validPassword = "PassWord002";
+    String invalidPassword = "pass";
 
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            // Add test teacher
-            String addTeacherToDB = "INSERT INTO `final_destination`.`teachers`(`teacher_ID`, `hashed_password`, `f_name`, `l_name`) VALUES ('1', 'TestPass20', 'Mister', 'Tester')";
-            stmt = conn.prepareStatement(addTeacherToDB);
-
-            stmt.executeUpdate(addTeacherToDB);
-
-            System.out.println("Created tests");
-        } catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
+    public void addTestTeacher() {
+        teacherClass.addTeacher(username, validPassword, "TestTeacher");
+    }
+    public boolean catchDuplicateUsername() {
+        if (!userClass.checkUsernameNotInDB(usernameStr)) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
-    public static void checkTeacherTable() {
-        Connection conn = null;
-        Statement stmt = null;
-
+    public boolean addValidPassword() {
+        return userClass.checkPassword(validPassword);
+    }
+    public boolean catchInvalidPassword() {
         try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            // Add test teacher
-            String getTeacherTable = "SELECT * FROM `final_destination`.`teachers`";
-            stmt = conn.prepareStatement(getTeacherTable);
-
-            stmt.executeQuery(getTeacherTable);
-
-            System.out.println("Table found");
+            userClass.checkPassword(invalidPassword);
         } catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
+            return true;
+        }
+        return false;
+    }
+    public boolean testValidLogin() {
+        try {
+            userClass.userLogin(usernameStr, validPassword);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean catchInvalidLogin() {
+        try {
+            userClass.userLogin(usernameStr, invalidPassword);
+        } catch (Exception e) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean teacherTestsCorrect() {
+        addTestTeacher();
+        if (catchDuplicateUsername()) {
+            if (addValidPassword()) {
+                if (catchInvalidPassword()) {
+                    if (testValidLogin()) {
+                        if (catchInvalidLogin()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 }
