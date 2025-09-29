@@ -1,71 +1,76 @@
 package com.learneria.controller;
 
 import com.learneria.utils.SceneManager;
-import com.learneria.utils.UserAware;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class StudentMainController implements UserAware {
+public class StudentMainController {
 
     @FXML
     private Label welcomeLabel;
 
-    private String username;
-
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
-        if (welcomeLabel != null) {
-            welcomeLabel.setText("Welcome, " + username + " (Student)!");
+    @FXML
+    public void initialize() {
+        // Show logged-in username in welcome message
+        String currentUser = SceneManager.getCurrentUser();
+        if (currentUser != null) {
+            welcomeLabel.setText("Welcome, " + currentUser + "!");
         }
     }
 
     @FXML
     private void openGrammar() {
-        SceneManager.switchScene(
+        SceneManager.switchSceneWithUser(
                 "/com/learneria/fxml/grammar_game.fxml",
-                "Grammar Game"
+                "Grammar Game",
+                SceneManager.getCurrentUser()
         );
     }
 
     @FXML
     private void openFood() {
-        SceneManager.switchScene(
+        SceneManager.switchSceneWithUser(
                 "/com/learneria/fxml/food_game.fxml",
-                "Food Game"
+                "Food Game",
+                SceneManager.getCurrentUser()
         );
     }
 
     @FXML
     private void openNature() {
-        SceneManager.switchScene(
+        SceneManager.switchSceneWithUser(
                 "/com/learneria/fxml/nature_game.fxml",
-                "Nature Game"
+                "Nature Game",
+                SceneManager.getCurrentUser()
         );
     }
 
     @FXML
     private void openSettings() {
         SceneManager.switchSceneWithUser(
-                "/com/learneria/fxml/settings.fxml",  // <-- add leading slash and package path
+                "/com/learneria/fxml/settings.fxml",
                 "Settings",
-                username
+                SceneManager.getCurrentUser()
         );
     }
 
-
+    @FXML
+    private void handleProfile() {
+        SceneManager.switchSceneWithUser(
+                "/com/learneria/fxml/profile.fxml",
+                "Profile",
+                SceneManager.getCurrentUser()
+        );
+    }
 
     @FXML
     private void handleLogout() {
+        SceneManager.setCurrentUser(null);
         SceneManager.switchScene(
                 "/com/learneria/fxml/login.fxml",
-                "Sign In"
+                "Login"
         );
     }
-    @FXML
-    private void handleProfile() {
-        SceneManager.switchScene("/com/learneria/fxml/profile.fxml", "Profile");
-    }
-
 }
+
 

@@ -1,31 +1,52 @@
 package com.learneria.controller;
 
 import com.learneria.utils.SceneManager;
-import com.learneria.utils.UserAware;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
-public class TeacherMainController implements UserAware {
+public class TeacherMainController {
 
     @FXML
-    private Label welcomeLabel;
+    private void openDashboard() {
+        SceneManager.switchSceneWithUser(
+                "/com/learneria/fxml/teacher_dashboard.fxml",
+                "Teacher Dashboard",
+                SceneManager.getCurrentUser()
+        );
+    }
 
-    private String username;
+    @FXML
+    private void openStudentList() {
+        SceneManager.switchSceneWithUser(
+                "/com/learneria/fxml/teacher_students.fxml",
+                "My Students",
+                SceneManager.getCurrentUser()
+        );
+    }
 
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
-        if (welcomeLabel != null) {
-            welcomeLabel.setText("Welcome, " + username + " (Teacher)!");
-        }
+    @FXML
+    private void openReports() {
+        SceneManager.switchSceneWithUser(
+                "/com/learneria/fxml/teacher_reports.fxml",
+                "Reports",
+                SceneManager.getCurrentUser()
+        );
+    }
+
+    @FXML
+    private void openSettings() {
+        SceneManager.switchSceneWithUser(
+                "/com/learneria/fxml/settings.fxml",
+                "Settings",
+                SceneManager.getCurrentUser() // ✅ Pass logged-in teacher username
+        );
     }
 
     @FXML
     private void handleLogout() {
-        // ✅ Go back to login screen
+        SceneManager.setCurrentUser(null);
         SceneManager.switchScene(
                 "/com/learneria/fxml/login.fxml",
-                "Sign In"
+                "Login"
         );
     }
 }

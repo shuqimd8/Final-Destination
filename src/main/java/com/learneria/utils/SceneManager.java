@@ -23,7 +23,15 @@ public class SceneManager {
 
     public static void switchScene(String fxmlPath, String title) {
         try {
-            Parent root = FXMLLoader.load(SceneManager.class.getResource(fxmlPath));
+            FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxmlPath));
+            Parent root = loader.load();
+
+            // If controller is UserAware → inject username
+            Object controller = loader.getController();
+            if (controller instanceof com.learneria.utils.UserAware) {
+                ((com.learneria.utils.UserAware) controller).setUsername(currentUser);
+            }
+
             primaryStage.setScene(new Scene(root));
             primaryStage.setTitle(title);
             primaryStage.show();
@@ -33,7 +41,8 @@ public class SceneManager {
     }
 
     public static void switchSceneWithUser(String fxmlPath, String title, String username) {
-        setCurrentUser(username); // Save user when switching scenes
+        setCurrentUser(username); // Save logged-in user
         switchScene(fxmlPath, title);
     }
 }
+

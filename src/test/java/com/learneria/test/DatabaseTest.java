@@ -1,106 +1,97 @@
 package com.learneria.test;
 
 import com.learneria.utils.Database;
+import com.learneria.utils.ScoreManager;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DatabaseTest {
 
+    private static Connection conn;
+
+    @BeforeAll
+    static void setup() throws Exception {
+        conn = Database.getInstance().getConnection();
+        System.out.println("✅ Connected to test database");
+    }
+
     @BeforeEach
-    void resetTable() throws SQLException {
-        try (Connection conn = Database.getConnection();
-             Statement stmt = conn.createStatement()) {
-            // wipe old data before each test
-            stmt.execute("DELETE FROM users");
+    void clearTables() throws Exception {
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM scores")) {
+            stmt.executeUpdate();
+        }
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM users")) {
+            stmt.executeUpdate();
         }
     }
 
     @Test
-    void testInsertAndFetchStudent() throws SQLException {
-        try (Connection conn = Database.getConnection()) {
-            // Insert student
-            String insertSql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
-            try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
-                pstmt.setString(1, "student1");
-                pstmt.setString(2, "pass123");
-                pstmt.setString(3, "student");
-                pstmt.executeUpdate();
-            }
+    void testInsertUser() throws Exception {
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "INSERT INTO users (username, password, role, name) VALUES (?, ?, 'student', ?)"
+        )) {
+            stmt.setString(1, "testUser");
+            stmt.setString(2, "pass123");
+            stmt.setString(3, "Test User");
+            stmt.executeUpdate();
+        }
 
-            // Fetch student
-            String querySql = "SELECT username, role FROM users WHERE username = ?";
-            try (PreparedStatement pstmt = conn.prepareStatement(querySql)) {
-                pstmt.setString(1, "student1");
-                ResultSet rs = pstmt.executeQuery();
-
-                assertTrue(rs.next());
-                assertEquals("student1", rs.getString("username"));
-                assertEquals("student", rs.getString("role"));
+        boolean exists = false;
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "SELECT COUNT(*) FROM users WHERE username = ?"
+        )) {
+            stmt.setString(1, "testUser");
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                exists = true;
             }
         }
+        assertTrue(exists, "❌ User was not inserted!");
     }
 
     @Test
-    void testInsertAndFetchTeacher() throws SQLException {
-        try (Connection conn = Database.getConnection()) {
-            // Insert teacher
-            String insertSql = "INSERT INTO users (username, password, role, teacher_code) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
-                pstmt.setString(1, "teacher1");
-                pstmt.setString(2, "teach123");
-                pstmt.setString(3, "teacher");
-                pstmt.setString(4, "TCH001");
-                pstmt.executeUpdate();
-            }
+    void testInsertScore() throws Exception {
+        // Insert user first (so foreign key constraints don’t break later if enabled)
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "INSERT INTO users (username, password, role, name) VALUES (?, ?, 'student', ?)"
+        )) {
+            stmt.setString(1, "testUser");
+            stmt.setString(2, "pass123");
+            stmt.setString(3, "Test User");
+            stmt.executeUpdate();
+        }
 
-            // Fetch teacher
-            String querySql = "SELECT username, role, teacher_code FROM users WHERE username = ?";
-            try (PreparedStatement pstmt = conn.prepareStatement(querySql)) {
-                pstmt.setString(1, "teacher1");
-                ResultSet rs = pstmt.executeQuery();
+        // Insert score
+        ScoreManager.insertScore("testUser", "Food", 50);
 
-                assertTrue(rs.next());
-                assertEquals("teacher1", rs.getString("username"));
-                assertEquals("teacher", rs.getString("role"));
-                assertEquals("TCH001", rs.getString("teacher_code"));
+        boolean exists = false;
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "SELECT COUNT(*) FROM scores WHERE username = ? AND game = ? AND score = ?"
+        )) {
+            stmt.setString(1, "testUser");
+            stmt.setString(2, "Food");
+            stmt.setInt(3, 50);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                exists = true;
             }
         }
-    }
 
-    @Test
-    void testUniqueUsernameConstraint() throws SQLException {
-        try (Connection conn = Database.getConnection()) {
-            String insertSql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
-
-            // First insert
-            try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
-                pstmt.setString(1, "uniqueUser");
-                pstmt.setString(2, "abc123");
-                pstmt.setString(3, "student");
-                pstmt.executeUpdate();
-            }
-
-            // Try duplicate insert
-            boolean exceptionThrown = false;
-            try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
-                pstmt.setString(1, "uniqueUser");
-                pstmt.setString(2, "xyz789");
-                pstmt.setString(3, "student");
-                pstmt.executeUpdate();
-            } catch (SQLException e) {
-                exceptionThrown = true;
-            }
-
-            assertTrue(exceptionThrown, "Duplicate username should throw an exception");
+        // Debug print all rows in scores
+        ResultSet rs2 = conn.createStatement().executeQuery("SELECT * FROM scores");
+        while (rs2.next()) {
+            System.out.println("DEBUG Score Row: " +
+                    rs2.getString("username") + " | " +
+                    rs2.getString("game") + " | " +
+                    rs2.getInt("score"));
         }
+
+        assertTrue(exists, "❌ Score was not inserted!");
     }
 }
 

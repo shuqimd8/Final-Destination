@@ -17,10 +17,13 @@
     <Label fx:id="welcomeLabel" text="Welcome, teacher!" style="-fx-font-size: 14;"/>
 
     <!-- Teacher-specific options -->
-    <Button text="Manage Students" prefWidth="200"/>
-    <Button text="View Reports" prefWidth="200"/>
-    <Button text="Settings" prefWidth="200"/>
+    <Button text="Dashboard" onAction="#openDashboard" prefWidth="200"/>
+    <Button text="Manage Students" onAction="#openStudentList" prefWidth="200"/>
+    <Button text="View Reports" onAction="#openReports" prefWidth="200"/>
+    <Button text="Settings" onAction="#openSettings" prefWidth="200"/>
 
     <!-- Logout -->
-    <Button text="Logout" onAction="#handleLogout" style="-fx-background-color: red; -fx-text-fill: white;" prefWidth="200"/>
+    <Button text="Logout" onAction="#handleLogout"
+            style="-fx-background-color: red; -fx-text-fill: white;" prefWidth="200"/>
 </VBox>
+

@@ -15,7 +15,7 @@ public class Database {
             connection = DriverManager.getConnection(url);
             System.out.println("✅ Database connected at " + url);
 
-            // Create users table
+            // Create users table (new installs)
             try (Statement stmt = connection.createStatement()) {
                 stmt.executeUpdate(
                         "CREATE TABLE IF NOT EXISTS users (" +
@@ -23,9 +23,18 @@ public class Database {
                                 "username TEXT UNIQUE NOT NULL," +
                                 "password TEXT NOT NULL," +
                                 "role TEXT NOT NULL," +
-                                "teacher_code TEXT NULL" +
+                                "teacher_code TEXT NULL," +
+                                "name TEXT" +
                                 ")"
                 );
+            }
+
+            // Ensure 'name' column exists (migration for old DBs)
+            try (Statement stmt = connection.createStatement()) {
+                stmt.executeUpdate("ALTER TABLE users ADD COLUMN name TEXT");
+                System.out.println("⚡ Added missing 'name' column to users table");
+            } catch (SQLException ignore) {
+                // ignore: column already exists
             }
 
             // Create scores table

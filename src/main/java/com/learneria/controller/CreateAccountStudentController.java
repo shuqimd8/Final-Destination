@@ -20,6 +20,9 @@ public class CreateAccountStudentController {
     @FXML
     private TextField teacherCodeField;
 
+    /**
+     * Handle form submission for creating a new student account.
+     */
     @FXML
     private void handleSubmit() {
         String username = usernameField.getText().trim();
@@ -34,12 +37,13 @@ public class CreateAccountStudentController {
         try {
             Connection conn = Database.getInstance().getConnection();
             PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO users (username, password, role, teacher_code) VALUES (?, ?, 'student', ?)"
+                    "INSERT INTO users (username, password, role, teacher_code, name) VALUES (?, ?, 'student', ?, ?)"
             );
 
             stmt.setString(1, username);
             stmt.setString(2, password);
             stmt.setString(3, teacherCode.isEmpty() ? null : teacherCode);
+            stmt.setString(4, username); // default: name = username
             stmt.executeUpdate();
             stmt.close();
 
@@ -57,9 +61,16 @@ public class CreateAccountStudentController {
         }
     }
 
+    /**
+     * Handle back button → return to account type selection
+     */
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("/com/learneria/fxml/createAccount_Select.fxml", "Select Account Type");
+        SceneManager.switchScene(
+                "/com/learneria/fxml/createAccount_Select.fxml",
+                "Select Account Type"
+        );
     }
 }
+
 
