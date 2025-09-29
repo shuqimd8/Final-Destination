@@ -5,19 +5,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class Student {
+public class Student extends User {
     private String StudentUsername;
     private String StudentName;
     private String StudentPassword;
     private String Teacher;
     private String Level;
 
-//    public Student(String user, String pass, String name, String teacher) {
-//        StudentUsername = user;
-//        StudentPassword = pass;
-//        StudentName = name;
-//        Teacher = teacher;
-//    }
+    public Student(String user, String pass, String name, String teacher) {
+        StudentUsername = user;
+        StudentPassword = pass;
+        StudentName = name;
+        Teacher = teacher;
+    }
 
     public static void addStudent(String username, String password, int teacher, String name) {
         Connection conn = null;
@@ -79,5 +79,9 @@ public class Student {
         catch (Exception e) {
             System.out.println("Exception: " + e + "has occurred.");
         }
+    }
+
+    public String getFirstName() {
+        return StudentName;
     }
 }
