@@ -25,10 +25,10 @@ public class MySQL {
         return c;
     }
 
-    public static List<String> getStudentFromDB(Connection conn, String username) {
+    public static List<String> getUserFromDB(Connection conn, String username) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<String> studentData = new List<String>() {
+        List<String> userData = new List<String>() {
             @Override
             public int size() {
                 return 0;
@@ -163,7 +163,7 @@ public class MySQL {
 
             if (rs.next()) {
                 for (int i = 1; i <= (columnCount-1); i++) {
-                    studentData.add(rs.getString(i));
+                    userData.add(rs.getString(i));
                 }
             } else {
                 throw new UserNotFoundException("User not found");
@@ -172,7 +172,7 @@ public class MySQL {
         catch (Exception e) {
             System.out.println("Exception: " + e + "has occurred.");
         }
-        return studentData;
+        return userData;
     }
 
     // Add two test users (teacher and student)
