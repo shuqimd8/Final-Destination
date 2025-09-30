@@ -22,6 +22,7 @@ public class MySQL {
         } catch( Exception e ) {
             throw new DatabaseConnectionFailedException("Could not establish connection");
         }
+        System.out.print("Connected");
         return c;
     }
 
