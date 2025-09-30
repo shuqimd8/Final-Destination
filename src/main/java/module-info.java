@@ -18,4 +18,6 @@ module View {
     exports View;
     exports Model;
     opens Model to javafx.fxml;
+    exports Controller;
+    opens Controller to javafx.fxml;
 }
