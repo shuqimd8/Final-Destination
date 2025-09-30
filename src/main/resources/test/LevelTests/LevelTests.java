@@ -1,7 +1,9 @@
 package LevelTests;
 
-import learneria.*;
+import Model.Level;
 import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LevelTests {
     private static String LEVEL_NAME = "Spelling Bee";
@@ -22,39 +24,40 @@ public class LevelTests {
     }
 
     @Test
-    public void getLevelNameTest(){assertEquals(LEVEL_NAME, getLevelName());}
+    public void getLevelNameTest(){assertEquals(LEVEL_NAME, level.getLevelName());}
+
 
     @Test
     public void setLevelNameTest(){
         level.setLevelName(LEVEL_NAME_TWO);
-        assertEquals(LEVEL_NAME, getLevelName());
+        assertEquals(LEVEL_NAME, level.getLevelName());
     }
 
     @Test
-    public void getMinScoreTest(){assertEquals(MIN_SCORE, getMinScore());}
+    public void getMinScoreTest(){assertEquals(MIN_SCORE, level.getMinScore());}
 
     @Test
     public void setMinScoreTest(){
         level.setMinScore(MIN_SCORE_TWO);
-        assertEquals(MIN_SCORE_TWO, getMinScore());
+        assertEquals(MIN_SCORE_TWO, level.getMinScore());
     }
 
     @Test
-    public void getMaxScoreTest(){assertEquals(MAX_SCORE, getMaxScore());}
+    public void getMaxScoreTest(){assertEquals(MAX_SCORE, level.getMaxScore());}
 
     @Test
     public void setMaxScoreTest(){
         level.setMAXScore(MAX_SCORE_TWO);
-        assertEquals(MAX_SCORE_TWO, getMaxScore());
+        assertEquals(MAX_SCORE_TWO, level.getMaxScore());
     }
 
     @Test
-    public void getImagePathTest(){assertEquals(IMAGE_PATH, getImagePath());}
+    public void getImagePathTest(){assertEquals(IMAGE_PATH, level.getImagePath());}
 
     @Test
     public void setImagePathTest(){
         level.setImagePath(IMAGE_PATH_TWO);
-        assertEquals(IMAGE_PATH_TWO, getImagePath());
+        assertEquals(IMAGE_PATH_TWO, level.getImagePath());
     }
 
 

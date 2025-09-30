@@ -1,4 +1,5 @@
-import learneria.Student;
+package UserTests;
+import Model.*;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

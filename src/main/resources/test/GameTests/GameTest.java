@@ -1,5 +1,6 @@
 package GameTests;
-import Model.*;
+import Model.Game;
+import Model.Bucket;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

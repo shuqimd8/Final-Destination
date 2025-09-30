@@ -165,4 +165,36 @@ public class Level {
         levelList.add(bee);
         levelList.add(butterfly);
     }
+
+    public String getLevelName() {
+        return "";//dummy
+    }
+
+    public void setLevelName(String levelName) {
+    }
+
+    public int getMinScore() {
+        return 0;//dummy
+    }
+
+    public void setMinScore(int minScoreTwo) {
+    }
+
+    public int getMaxScore() {
+        return 0;//dummy
+    }
+
+    public void setMAXScore(int maxScoreTwo) {
+    }
+
+    public String getImagePath() {
+        return "";//dummy
+    }
+
+    public void setImagePath(String imagePathTwo) {
+    }
+
+    public boolean isStudentOnLevel(Student student) {
+        return true; //dummy value
+    }
 }
