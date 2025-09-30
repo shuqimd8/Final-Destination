@@ -1,4 +1,49 @@
 package LevelTests;
+import learneria.*;
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import learneria.Student;
 
 public class isStudentOnLevelTest {
+    //create a test student
+    private Student student = new Student("Billy32", "BillyIsCool", "Billy", "msDaisy");
+    //Cleary define the values that matter
+    private static int MIN_SCORE = 50;
+    private static int MAX_SCORE = 100;
+    //create a test Level using the above values (other variables don't matter for the tests)
+    private static Level level = new Level("Worker Ant", MIN_SCORE, MAX_SCORE,"/this/image/path");
+
+
+    //student at min value, and hence function should return true
+    @Test
+    public void isStudentOnLevelTest_StudentScoreAtMinLevelValue(){
+        student.setTotalScore(MIN_SCORE);
+        assertTrue(level.isStudentOnLevel(student));
+    }
+    //student at max, and hence function should return true
+    @Test
+    public void isStudentOnLevelTest_StudentScoreAtMaxLevelValue(){
+        student.setTotalScore(MAX_SCORE);
+        assertTrue(level.isStudentOnLevel(student));
+    }
+    //student within range, and hence function should return true
+    @Test
+    public void isStudentOnLevelTest_StudentScoreWithinLevelRange(){
+        student.setTotalScore(MIN_SCORE + 1);
+        assertTrue(level.isStudentOnLevel(student));
+    }
+    //student below range, and hence function should return false
+    @Test
+    public void isStudentOnLevelTest_StudentScoreBelowMinLevelRange(){
+        student.setTotalScore(MIN_SCORE-1);
+        assertFalse(level.isStudentOnLevel(student));
+    }
+    //student above range, and hence function should return false
+    @Test
+    public void isStudentOnLevelTest_StudentScoreAboveMaxLevelRange(){
+        student.setTotalScore(MAX_SCORE+1);
+        assertFalse(level.isStudentOnLevel(student));
+    }
 }
