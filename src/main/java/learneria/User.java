@@ -255,7 +255,7 @@ public class User {
             return false;
         }
     }
-    public boolean doPasswordsMatch(String password, String password1) {
+    public static boolean doPasswordsMatch(String password, String password1) {
         return (password.equals(password1));
     }
     public static void userLogin(String username, String password) {
@@ -263,7 +263,7 @@ public class User {
         List<String> studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
 
         if (studentDetails != null) {
-            if (studentDetails.get(1).equals(password)) {
+            if (doPasswordsMatch(studentDetails.get(1), password)) {
                 //success
             }
             else {
