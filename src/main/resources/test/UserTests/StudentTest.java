@@ -1,18 +1,19 @@
-import learneria.*;
+package UserTests;
+import Model.*;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentTest {
-    private static String FIRST_NAME = "James";
-    private static String FIRST_NAME_TWO = "Jamie";
-    private static String USERNAME = "JBoy66";
-    private static String PASSWORD = "CoolMan123";
-    private static String PASSWORD_TWO = "CoolBoy321";
-    private static String TEACHER = "msDaisy";
-    private static String TEACHER_TWO = "mrColby";
-    private static int TOTAL_SCORE = 10;
-    private static int TOTAL_SCORE_TWO = 20;
+    private static final String FIRST_NAME = "James";
+    private static final String FIRST_NAME_TWO = "Jamie";
+    private static final String USERNAME = "JBoy66";
+    private static final String PASSWORD = "CoolMan123";
+    private static final String PASSWORD_TWO = "CoolBoy321";
+    private static final String TEACHER = "msDaisy";
+    private static final String TEACHER_TWO = "mrColby";
+    private static final int TOTAL_SCORE = 10;
+    private static final int TOTAL_SCORE_TWO = 20;
 
     private Student student;
 
