@@ -1,3 +1,5 @@
+package UserTests;
+
 import learneria.Student;
 import org.junit.jupiter.api.*;
 

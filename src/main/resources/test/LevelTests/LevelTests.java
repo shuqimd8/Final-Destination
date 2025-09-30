@@ -1,7 +1,7 @@
+package LevelTests;
+
 import learneria.*;
 import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class LevelTests {
     private static String LEVEL_NAME = "Spelling Bee";
