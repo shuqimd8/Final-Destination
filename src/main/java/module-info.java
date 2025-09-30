@@ -1,4 +1,4 @@
-module learneria {
+module View {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -14,6 +14,10 @@ module learneria {
     requires annotations;
     requires mysql.connector.j;
 
-    opens learneria to javafx.fxml;
-    exports learneria;
+    opens View to javafx.fxml;
+    exports View;
+    exports Model;
+    opens Model to javafx.fxml;
+    exports Controller;
+    opens Controller to javafx.fxml;
 }

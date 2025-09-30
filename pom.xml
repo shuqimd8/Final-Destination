@@ -126,7 +126,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>learneria.Main</mainClass>
+                            <mainClass>View.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>
