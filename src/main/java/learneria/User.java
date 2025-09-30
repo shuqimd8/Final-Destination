@@ -1,9 +1,10 @@
 package learneria;
 
 import learneria.Student ;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class User {
     private String Username;
@@ -112,114 +113,15 @@ public class User {
 //        Teacher.addTeacher(username, password, name);
     }
 
-    public static void getStudents() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            String getAllStudents = "SELECT * FROM `final_destination`.`Students`";
-            stmt = conn.prepareStatement(getAllStudents);
-
-            rs = stmt.executeQuery(getAllStudents);
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            int columnCount = rsmd.getColumnCount();
-
-            // Print column headers
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(rsmd.getColumnName(i) + "\t");
-            }
-            System.out.println();
-
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                }
-                System.out.println();
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
-        }
-    }
-
-    public static void getTeachers() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            String getAllTeachers = "SELECT * FROM `final_destination`.`teachers`";
-            stmt = conn.prepareStatement(getAllTeachers);
-
-            rs = stmt.executeQuery(getAllTeachers);
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            int columnCount = rsmd.getColumnCount();
-
-            // Print column headers
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(rsmd.getColumnName(i) + "\t");
-            }
-            System.out.println();
-
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                }
-                System.out.println();
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
-        }
-    }
-
     public static boolean isUsernameUnique(String username) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        MySQL database = new MySQL();
+        List<String> studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
 
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
-            pstmt = conn.prepareStatement(checkForUsername);
-            pstmt.setString(1, username);
-
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
+        if (studentDetails != null) {
             return false;
+        }
+        else {
+            return true;
         }
     }
     public boolean isPasswordValid (String password) {
@@ -254,62 +156,34 @@ public class User {
             return false;
         }
     }
-    public boolean doPasswordsMatch(String password, String password1) {
+    public static boolean doPasswordsMatch(String password, String password1) {
         return (password.equals(password1));
     }
     public static void userLogin(String username, String password) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        int userID = 0;
+        MySQL database = new MySQL();
+        List<String> studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
+        List<String> teacherDetails = (database.getTeacherFromDB(database.establishConnection(), username));
 
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
-            pstmt = conn.prepareStatement(checkForUsername);
-            pstmt.setString(1, username);
-
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                String pWord = rs.getString("password");
-
-                if (password.equals(pWord)) {
-                    System.out.println("Logged In");
-                } else {
-//                    System.out.println("Incorrect username or password.");
-                    throw new LoginFailedException("Incorrect username or password.");
-                }
-            } else {
-                userID = Integer.parseInt(username);
-                checkForUsername = "SELECT * FROM `final_destination`.`teachers` WHERE username = ?";
-                pstmt = conn.prepareStatement(checkForUsername);
-                pstmt.setInt(1, userID);
-
-                rs = pstmt.executeQuery();
-
-                if (rs.next()) {
-                    String pWord = rs.getString("password");
-
-                    if (password.equals(pWord)) {
-                        System.out.println("Logged In");
-                    } else {
-//                        System.out.println("Incorrect username or password.");
-                        throw new LoginFailedException("Incorrect username or password.");
-                    }
-                }
-                else {
-                    throw new LoginFailedException("Username not found.");
-                }
+        if (studentDetails != null) {
+            if (doPasswordsMatch(studentDetails.get(1), password)) {
+                //success
+            }
+            else {
+                throw new LoginFailedException("Login failed, please check that your details are correct;");
             }
         }
-        catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
+        else {
+            if (teacherDetails != null) {
+                if (doPasswordsMatch(teacherDetails.get(1), password)) {
+                    //success
+                }
+                else {
+                    throw new LoginFailedException("Login failed, please check that your details are correct;");
+                }
+            }
+            else {
+                throw new LoginFailedException("Login failed, please check that your details are correct;");
+            }
         }
     }
 }
