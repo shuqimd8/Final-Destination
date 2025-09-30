@@ -1,10 +1,9 @@
 package LevelTests;
-import learneria.*;
+import Model.*;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import learneria.Student;
 
 public class isStudentOnLevelTest {
     //create a test student
