@@ -9,8 +9,8 @@ public class isStudentOnLevelTest {
     //create a test student
     private Student student = new Student("Billy32", "BillyIsCool", "Billy", "msDaisy");
     //Cleary define the values that matter
-    private static int MIN_SCORE = 50;
-    private static int MAX_SCORE = 100;
+    private static final int MIN_SCORE = 50;
+    private static final int MAX_SCORE = 100;
     //create a test Level using the above values (other variables don't matter for the tests)
     private static Level level = new Level("Worker Ant", MIN_SCORE, MAX_SCORE,"/this/image/path");
 
