@@ -175,6 +175,156 @@ public class MySQL {
         return userData;
     }
 
+    public static List<String> getStatsFromDB(Connection conn, String username) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<String> userData = new List<String>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @NotNull
+            @Override
+            public Iterator<String> iterator() {
+                return null;
+            }
+
+            @NotNull
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @NotNull
+            @Override
+            public <T> T[] toArray(@NotNull T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(@NotNull Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(@NotNull Collection<? extends String> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, @NotNull Collection<? extends String> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(@NotNull Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(@NotNull Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public String get(int index) {
+                return "";
+            }
+
+            @Override
+            public String set(int index, String element) {
+                return "";
+            }
+
+            @Override
+            public void add(int index, String element) {
+
+            }
+
+            @Override
+            public String remove(int index) {
+                return "";
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @NotNull
+            @Override
+            public ListIterator<String> listIterator() {
+                return null;
+            }
+
+            @NotNull
+            @Override
+            public ListIterator<String> listIterator(int index) {
+                return null;
+            }
+
+            @NotNull
+            @Override
+            public List<String> subList(int fromIndex, int toIndex) {
+                return List.of();
+            }
+        };
+        try {
+            String checkForUsername = "SELECT * FROM `final_destination`.`student_statistics` WHERE student_user = ?";
+            pstmt = conn.prepareStatement(checkForUsername);
+            pstmt.setString(1, username);
+
+            rs = pstmt.executeQuery();
+
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            int columnCount = rsmd.getColumnCount();
+
+            if (rs.next()) {
+                for (int i = 1; i <= (columnCount-1); i++) {
+                    userData.add(rs.getString(i));
+                }
+            } else {
+                throw new UserNotFoundException("User not found");
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Exception: " + e + "has occurred.");
+        }
+        return userData;
+    }
+
     // Add two test users (teacher and student)
     public static void addTest() {
         Connection conn = null;
