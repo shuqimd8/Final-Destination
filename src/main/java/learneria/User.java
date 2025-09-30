@@ -113,114 +113,15 @@ public class User {
 //        Teacher.addTeacher(username, password, name);
     }
 
-    public static void getStudents() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            String getAllStudents = "SELECT * FROM `final_destination`.`Students`";
-            stmt = conn.prepareStatement(getAllStudents);
-
-            rs = stmt.executeQuery(getAllStudents);
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            int columnCount = rsmd.getColumnCount();
-
-            // Print column headers
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(rsmd.getColumnName(i) + "\t");
-            }
-            System.out.println();
-
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                }
-                System.out.println();
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
-        }
-    }
-
-    public static void getTeachers() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            String getAllTeachers = "SELECT * FROM `final_destination`.`teachers`";
-            stmt = conn.prepareStatement(getAllTeachers);
-
-            rs = stmt.executeQuery(getAllTeachers);
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            int columnCount = rsmd.getColumnCount();
-
-            // Print column headers
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(rsmd.getColumnName(i) + "\t");
-            }
-            System.out.println();
-
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                }
-                System.out.println();
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
-        }
-    }
-
     public static boolean isUsernameUnique(String username) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        MySQL database = new MySQL();
+        List<String> studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
 
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
-            String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
-            pstmt = conn.prepareStatement(checkForUsername);
-            pstmt.setString(1, username);
-
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
+        if (studentDetails != null) {
             return false;
+        }
+        else {
+            return true;
         }
     }
     public boolean isPasswordValid (String password) {
