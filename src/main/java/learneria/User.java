@@ -1,9 +1,10 @@
 package learneria;
 
 import learneria.Student ;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class User {
     private String Username;
@@ -258,58 +259,141 @@ public class User {
         return (password.equals(password1));
     }
     public static void userLogin(String username, String password) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        int userID = 0;
+        MySQL database = new MySQL();
+        List<String> studentDetails = new List<String>() {
+            @Override
+            public int size() {
+                return 0;
+            }
 
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
 
-            String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
-            pstmt = conn.prepareStatement(checkForUsername);
-            pstmt.setString(1, username);
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
 
-            rs = pstmt.executeQuery();
+            @NotNull
+            @Override
+            public Iterator<String> iterator() {
+                return null;
+            }
 
-            if (rs.next()) {
-                String pWord = rs.getString("password");
+            @NotNull
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
 
-                if (password.equals(pWord)) {
-                    System.out.println("Logged In");
-                } else {
-//                    System.out.println("Incorrect username or password.");
-                    throw new LoginFailedException("Incorrect username or password.");
-                }
-            } else {
-                userID = Integer.parseInt(username);
-                checkForUsername = "SELECT * FROM `final_destination`.`teachers` WHERE username = ?";
-                pstmt = conn.prepareStatement(checkForUsername);
-                pstmt.setInt(1, userID);
+            @NotNull
+            @Override
+            public <T> T[] toArray(@NotNull T[] a) {
+                return null;
+            }
 
-                rs = pstmt.executeQuery();
+            @Override
+            public boolean add(String s) {
+                return false;
+            }
 
-                if (rs.next()) {
-                    String pWord = rs.getString("password");
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
 
-                    if (password.equals(pWord)) {
-                        System.out.println("Logged In");
-                    } else {
-//                        System.out.println("Incorrect username or password.");
-                        throw new LoginFailedException("Incorrect username or password.");
-                    }
-                }
-                else {
-                    throw new LoginFailedException("Username not found.");
-                }
+            @Override
+            public boolean containsAll(@NotNull Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(@NotNull Collection<? extends String> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, @NotNull Collection<? extends String> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(@NotNull Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(@NotNull Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public String get(int index) {
+                return "";
+            }
+
+            @Override
+            public String set(int index, String element) {
+                return "";
+            }
+
+            @Override
+            public void add(int index, String element) {
+
+            }
+
+            @Override
+            public String remove(int index) {
+                return "";
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @NotNull
+            @Override
+            public ListIterator<String> listIterator() {
+                return null;
+            }
+
+            @NotNull
+            @Override
+            public ListIterator<String> listIterator(int index) {
+                return null;
+            }
+
+            @NotNull
+            @Override
+            public List<String> subList(int fromIndex, int toIndex) {
+                return List.of();
+            }
+        };
+        studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
+
+        if (studentDetails != null) {
+            if (studentDetails.get(1).equals(password)) {
+                //success
+            }
+            else {
+                throw new LoginFailedException("Login failed, please check that your details are correct;");
             }
         }
-        catch (Exception e) {
-            System.out.println("Exception: " + e + "has occurred.");
+        else {
+            throw new LoginFailedException("Login failed, please check that your details are correct;");
         }
     }
 }
