@@ -261,6 +261,7 @@ public class User {
     public static void userLogin(String username, String password) {
         MySQL database = new MySQL();
         List<String> studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
+        List<String> teacherDetails = (database.getTeacherFromDB(database.establishConnection(), username));
 
         if (studentDetails != null) {
             if (doPasswordsMatch(studentDetails.get(1), password)) {
@@ -271,7 +272,17 @@ public class User {
             }
         }
         else {
-            throw new LoginFailedException("Login failed, please check that your details are correct;");
+            if (teacherDetails != null) {
+                if (doPasswordsMatch(teacherDetails.get(1), password)) {
+                    //success
+                }
+                else {
+                    throw new LoginFailedException("Login failed, please check that your details are correct;");
+                }
+            }
+            else {
+                throw new LoginFailedException("Login failed, please check that your details are correct;");
+            }
         }
     }
 }
