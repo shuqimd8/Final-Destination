@@ -13,6 +13,8 @@ public class StudentTest {
     private static String PASSWORD_TWO = "CoolBoy321";
     private static String TEACHER = "msDaisy";
     private static String TEACHER_TWO = "mrColby";
+    private static int TOTAL_SCORE = 10;
+    private static int TOTAL_SCORE_TWO = 20;
 
     private Student student;
 
@@ -59,6 +61,18 @@ public class StudentTest {
         student.setTeacher(TEACHER_TWO);
         assertEquals(TEACHER_TWO, student.getTeacher());
     }
+
+    @Test
+    public void testGetTotalScore(){
+        assertEquals(TOTAL_SCORE,student.getTotalScore());
+    }
+
+    @Test
+    public void testSetTotalScore(){
+        student.setTotalScore(TOTAL_SCORE_TWO);
+        assertEquals(TOTAL_SCORE_TWO,student.getTotalScore());
+    }
+
 
     @Test
     public void testDoPasswordsMatch_True(){
