@@ -24,62 +24,62 @@ public class StudentTest {
     }
 
     @Test
-    public void testGetFirstName(){
+    public void testGetFirstName_Student(){
         assertEquals(FIRST_NAME, student.getFirstName());
     }
 
     @Test
-    public void testSetFirstName(){
+    public void testSetFirstName_Student(){
         student.setFirstName(FIRST_NAME_TWO);
         assertEquals(FIRST_NAME_TWO, student.getFirstName());
     }
 
     @Test
-    public void testGetUsername(){
+    public void testGetUsername_Student(){
         assertEquals(USERNAME, student.getUsername());
     }
 
     @Test
-    public void testGetPassword(){
+    public void testGetPassword_Student(){
         assertEquals(PASSWORD, student.getPassword());
     }
 
     @Test
-    public void testSetPassword(){
+    public void testSetPassword_Student(){
         student.setPassword(PASSWORD_TWO);
         assertEquals(PASSWORD_TWO, student.getPassword());
     }
 
     @Test
-    public void testGetTeacher(){
+    public void testGetTeacher_Student(){
         assertEquals(TEACHER, student.getTeacher());
     }
 
     @Test
-    public void testSetTeacher(){
+    public void testSetTeacher_Student(){
         student.setTeacher(TEACHER_TWO);
         assertEquals(TEACHER_TWO, student.getTeacher());
     }
 
     @Test
-    public void testGetTotalScore(){
+    public void testGetTotalScore_Student(){
         assertEquals(TOTAL_SCORE,student.getTotalScore());
     }
 
     @Test
-    public void testSetTotalScore(){
+    public void testSetTotalScore_Student(){
         student.setTotalScore(TOTAL_SCORE_TWO);
         assertEquals(TOTAL_SCORE_TWO,student.getTotalScore());
     }
 
 
     @Test
-    public void testDoPasswordsMatch_True(){
+    public void testDoPasswordsMatch_True_Student(){
         assertTrue(student.doPasswordsMatch(PASSWORD,PASSWORD));
     }
 
     @Test
-    public void testDoPasswordsMatch_False(){
+    public void testDoPasswordsMatch_False_Student(){
         assertFalse(student.doPasswordsMatch(PASSWORD,PASSWORD_TWO));
     }
 }
