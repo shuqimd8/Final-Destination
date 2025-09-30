@@ -149,14 +149,8 @@ public class MySQL {
             public List<String> subList(int fromIndex, int toIndex) {
                 return List.of();
             }
-        }
+        };
         try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/?user=root",
-                    "root",
-                    "CompSci2004%"
-            );
-
             String checkForUsername = "SELECT * FROM `final_destination`.`Students` WHERE username = ?";
             pstmt = conn.prepareStatement(checkForUsername);
             pstmt.setString(1, username);
@@ -178,6 +172,7 @@ public class MySQL {
         catch (Exception e) {
             System.out.println("Exception: " + e + "has occurred.");
         }
+        return studentData;
     }
 
     // Add two test users (teacher and student)
