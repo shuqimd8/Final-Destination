@@ -28,7 +28,7 @@ public class GameTest {
     //make a list for the buckets
     public static Bucket[] EXPECTED_BUCKET_LIST = {BUCKET_1, BUCKET_2, BUCKET_3};
 
-    private Game game;
+    private static Game game;
 
     @BeforeEach
     public void setUp(){
@@ -62,8 +62,27 @@ public class GameTest {
     }
 
     @Test
+    public void game_extractGameID_test(){
+        assertEquals(GAME_ID, game.extractGameID(TEXT_FILE_LINE));
+
+    }
+
+
+    @Test
     public void game_extractBucketImagePath_test(){
         assertEquals(BUCKET_IMAGEPATH_FROM_TEXT_FILE_LINE, game.extractBucketImagePath(TEXT_FILE_LINE));
     }
+
+    @Test
+    public void game_createBuckets_test(){
+        //reset bucket lists
+    }
+
+    @Test
+    public void game_createBucket_test(){
+
+        assertSame(BUCKET_1.toString(), game.createBucket(TEXT_FILE_LINE).toString());
+    }
+
 
 }
