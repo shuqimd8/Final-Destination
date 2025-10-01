@@ -237,6 +237,7 @@ public class User {
     public String getPassword() {return "";//dummy
     }
 
-    public void setPassword(String passwordTwo) {//dummy
+    public void setPassword(String passwordInput) {
+        Password = passwordInput;
     }
 }
