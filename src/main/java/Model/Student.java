@@ -108,4 +108,10 @@ public class Student extends User {
     public void setTeacher(String teacherTwo) {
         Teacher = teacherTwo;
     }
+
+    public void setTotalScore(int minScore) {//to do
+    }
+
+    public int getTotalScore() {return 0;//dummy value
+    }
 }

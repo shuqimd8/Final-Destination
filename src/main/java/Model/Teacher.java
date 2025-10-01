@@ -2,8 +2,9 @@ package Model;
 
 import java.sql.*;
 
-public class Teacher {
+public class Teacher extends User{
     String[] TeacherName;
+
 
     public void getName (int username) {
         Connection conn = null;
@@ -98,4 +99,5 @@ public class Teacher {
             System.out.println("Exception: " + e + "has occurred.");
         }
     }
+
 }

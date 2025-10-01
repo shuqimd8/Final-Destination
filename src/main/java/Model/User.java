@@ -182,4 +182,19 @@ public class User {
             }
         }
     }
+
+    public void setFirstName(String firstNameTwo) {
+        //dummy
+    }
+
+    public String getUsername() {return "";//dummy
+    }
+
+    public String getPassword() {return "";//dummy
+    }
+
+    public void setPassword(String passwordTwo) {//dummy
+    }
+    public String getFirstName() {
+        return "";}//dummy
 }
