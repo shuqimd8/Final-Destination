@@ -7,6 +7,9 @@ public class Word {
     String Bucket;
     int letterCount;
 
+    public Word(int wordIdFromTextFileLine, String wordFromTextFileLine, int bucketIdFromTextFileLine) {
+    }
+
     public void addNewWord(String word, int category, String bucket) {
         WordID++;
         WordString = word;
