@@ -1,0 +1,11 @@
+BucketID-BucketName-GameID<<bucketImagePath>>
+11-Noun-1<<image_path>>
+12-Verb-1<<image_path>>
+13-Adjective-1<<image_path>>
+21-Plant-2<<image_path>>
+22-Animal-2<<image_path>>
+23-Non-living-2<<image_path>>
+31-Fruit/Veg-3<<image_path>>
+32-Grain-3<<image_path>>
+33-Meat-3<<image_path>>
+34-Dairy-3<<image_path>>
