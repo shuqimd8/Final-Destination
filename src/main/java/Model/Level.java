@@ -7,19 +7,34 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * Provides a way to initialise the levels within the game
+ *
+ * @author Olivia Greensill
+ */
 public class Level {
     String LevelName;
     int MinScore;
     int MaxScore;
     String ImageURL;
 
-    public Level(String name, int min, int max, String image) {
-        LevelName = name;
-        MinScore = min;
-        MaxScore = max;
-        ImageURL = image;
+    /**
+     *
+     * @param LevelName The string name of the level that will be displayed to users
+     * @param MinScore The minimum score boundary for a user to have a level
+     * @param MaxScore The maximum score boundary for a user to have a level
+     * @param ImageURL The URL for the levels' respective icon
+     */
+    public Level(String LevelName, int MinScore, int MaxScore, String ImageURL) {
+        this.LevelName = LevelName;
+        this.MinScore = MinScore;
+        this.MaxScore = MaxScore;
+        this.ImageURL = ImageURL;
     }
 
+    /**
+     * Provides an empty list to store the level details in it
+     */
     public List<Level> levelList = new List<Level>() {
         @Override
         public int size() {
@@ -153,6 +168,9 @@ public class Level {
         }
     };
 
+    /**
+     * A method to insert each level into the list
+     */
     public void initializeLevels() {
         Level ant = new Level ("Worker Ant", 0, 5000, "ant.png");
         Level worm = new Level ("Book Worm", 5001, 10000, "worm.png");

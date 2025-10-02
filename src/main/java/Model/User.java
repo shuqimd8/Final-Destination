@@ -2,15 +2,23 @@ package Model;
 
 import java.util.*;
 
+/**
+ * A class for all users
+ *
+ * @author Olivia Greensill
+ */
 public class User {
     private String Username;
     private String Password;
+    private String FirstName;
 
-//    public User (String username, String password) {
+//    public User (String Username) {
 //        Username = username;
-//        Password = password;
 //    }
 
+    /**
+     * A method to receive the login details and run the method to verify the information
+     */
     public static void getLogin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your username: ");
@@ -109,6 +117,14 @@ public class User {
 //        Teacher.addTeacher(username, password, name);
     }
 
+    /**
+     * A method to check whether the inputted username already exists in the database
+     *
+     * @param username The username that a new user has inputted
+     *
+     * @return true if the username does not already exist
+     * @return false if the username already exists in the database
+     */
     public static boolean isUsernameUnique(String username) {
         MySQL database = new MySQL();
         List<String> studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
@@ -120,6 +136,15 @@ public class User {
             return true;
         }
     }
+
+    /**
+     * A method to check whether the password matches the constraints
+     *
+     * @param password The password that a new user has inputted
+     *
+     * @return true if the password is valid
+     * @return false if the password is invalid
+     */
     public boolean isPasswordValid (String password) {
         int uppercase = 0;
         int lowercase = 0;
@@ -152,9 +177,25 @@ public class User {
             return false;
         }
     }
+
+    /**
+     * A method to check if an inputted password is the same as another password (either inputted or in the database)
+     * @param password The password that the user has inputted
+     * @param password1 The second password that will be compared
+     * @return true if the passwords match
+     * @return false if the passwords do not match
+     */
     public static boolean doPasswordsMatch(String password, String password1) {
         return (password.equals(password1));
     }
+
+    /**
+     * The method to find the data for the user and verify that the inputted data is correct
+     *
+     * @param username The inputted username
+     * @param password The inputted password
+     * @throws LoginFailedException
+     */
     public static void userLogin(String username, String password) {
         MySQL database = new MySQL();
         List<String> studentDetails = (database.getStudentFromDB(database.establishConnection(), username));
@@ -182,9 +223,12 @@ public class User {
             }
         }
     }
+    public String getFirstName() {
+        return FirstName;
+    }
 
-    public void setFirstName(String firstNameTwo) {
-        //dummy
+    public void setFirstName(String NameInput) {
+        FirstName = NameInput;
     }
 
     public String getUsername() {return "";//dummy
@@ -193,8 +237,7 @@ public class User {
     public String getPassword() {return "";//dummy
     }
 
-    public void setPassword(String passwordTwo) {//dummy
+    public void setPassword(String passwordInput) {
+        Password = passwordInput;
     }
-    public String getFirstName() {
-        return "";}//dummy
 }
