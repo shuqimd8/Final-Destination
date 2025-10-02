@@ -107,4 +107,8 @@ public class Game {
     public File getWordFile() {
         return null; //dummy value
     }
+
+    public boolean isBucketInGame(int bucketId) {
+        return true;//dummy value
+    }
 }

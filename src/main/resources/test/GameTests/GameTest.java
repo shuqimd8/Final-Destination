@@ -20,6 +20,8 @@ public class GameTest {
     public static final String BUCKET_NAME_FROM_TEXT_FILE_LINE = "Noun";
     public static final String BUCKET_IMAGEPATH_FROM_TEXT_FILE_LINE = "imagepath1";
 
+    public static final int BUCKET_ID_NOT_IN_GAME = 21;
+
     //make buckets for the game 1 buckets in BucketDB.txt
     public static final Bucket BUCKET_1 = new Bucket(11,"Noun","imagepath1");
     public static final Bucket BUCKET_2 = new Bucket(12,"Noun","imagepath2");
@@ -83,15 +85,21 @@ public class GameTest {
         assertEquals(BUCKET_IMAGEPATH_FROM_TEXT_FILE_LINE, game.extractBucketImagePath(TEXT_FILE_LINE));
     }
 
-    /*
-    @Test
-    public void game_createBuckets_test(){
-        //reset bucket lists
-    }*/
-
     @Test
     public void game_createBucket_test(){
         assertSame(BUCKET_1.toString(), game.createBucket(TEXT_FILE_LINE).toString());
     }
+
+    //isBucketInGame(bucketID): boolean - true
+    @Test
+    public void game_IsBucketInGame_BucketInGameTest(){
+        assertTrue(game.isBucketInGame(BUCKET_ID_FROM_TEXT_FILE_LINE));
+    }
+    //isBucketInGame(bucketID): boolean - false
+    @Test
+    public void game_IsBucketInGame_BucketNOTinGameTest(){
+        assertFalse(game.isBucketInGame(BUCKET_ID_NOT_IN_GAME));
+    }
+
 
 }
