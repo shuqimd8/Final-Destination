@@ -13,6 +13,7 @@ public class GameTest {
     //define variable to create game class
     public static final File BUCKET_FILE = new File("BucketDB.txt");
     public static final int GAME_ID = 1;
+    public static final String GAME_NAME = "NATURE";
 
     //variable to test calling information from the txt file
     public static final String TEXT_FILE_LINE = "11-Noun-1<<imagepath1>>";
@@ -33,12 +34,18 @@ public class GameTest {
     @BeforeEach
     public void setUp(){
         //create the test game using the variable defined above
-        game = new Game(GAME_ID,BUCKET_FILE);
+        game = new Game(GAME_ID,GAME_NAME,BUCKET_FILE);
     }
 
     @Test
     public void game_getGameID_test(){
         assertEquals(GAME_ID, game.getGameID());
+    }
+
+    @Test
+    public void game_getGameName_test(){
+        assertEquals(GAME_NAME, game.getGameName());
+
     }
 
     @Test
@@ -67,22 +74,20 @@ public class GameTest {
 
     }
 
-
     @Test
     public void game_extractBucketImagePath_test(){
         assertEquals(BUCKET_IMAGEPATH_FROM_TEXT_FILE_LINE, game.extractBucketImagePath(TEXT_FILE_LINE));
     }
 
+    /*
     @Test
     public void game_createBuckets_test(){
         //reset bucket lists
-    }
+    }*/
 
     @Test
     public void game_createBucket_test(){
-
         assertSame(BUCKET_1.toString(), game.createBucket(TEXT_FILE_LINE).toString());
     }
-
 
 }

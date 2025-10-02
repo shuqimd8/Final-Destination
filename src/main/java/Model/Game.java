@@ -4,12 +4,14 @@ import java.io.File;
 
 public class Game {
     private int gameID;
+    private String gameName;
     private File bucketFile;
     private Bucket[] buckets = {};
 
-    public Game(int gameId, File bucketFile) {
+    public Game(int gameId,String gameName, File bucketFile) {
         this.gameID = gameId;
         this.bucketFile = bucketFile;
+        this.gameName = gameName;
         createBuckets();
     }
 
@@ -96,5 +98,9 @@ public class Game {
 
     public int extractGameID(String textFileLine) {
         return 0; //dummy value
+    }
+
+    public String getGameName() {
+        return "";//dummy value
     }
 }
