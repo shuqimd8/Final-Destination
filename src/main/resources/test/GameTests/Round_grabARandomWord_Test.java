@@ -25,6 +25,8 @@ public class Round_grabARandomWord_Test {
 
     public static final Word WORD = new Word(WORD_ID_FROM_TEXT_FILE_LINE, WORD_FROM_TEXT_FILE_LINE, BUCKET_ID_FROM_TEXT_FILE_LINE);
 
+    public static final String TEXT_FILE_LINE_WORD_NOT_FOR_GAME = "162-chair-23";
+
     private Round round;
 
     @BeforeEach
@@ -53,6 +55,15 @@ public class Round_grabARandomWord_Test {
         assertEquals(BUCKET_ID_FROM_TEXT_FILE_LINE, round.extractBucketIDForWord(TEXT_FILE_LINE));
     }
 
-    //+ isWordForGame(String): boolean
-    //+ isBucketInGame(bucketID): boolean
+    //+ isWordForGame(String textfileline): boolean
+    //yes for game
+    @Test
+    public void round_isWordForGame_WordIsForGameTest(){
+        assertTrue(round.isWordForGame(TEXT_FILE_LINE));
+    }
+    //not for game
+    @Test
+    public void round_isWordForGame_WordIsNotGameTest(){
+        assertFalse(round.isWordForGame(TEXT_FILE_LINE_WORD_NOT_FOR_GAME));
+    }
 }

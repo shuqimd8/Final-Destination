@@ -38,4 +38,19 @@ public class Round {
     }
 
 
+    public int extractWordID(String textFileLine) {
+        return 0;//dummy value
+    }
+
+    public String extractWord(String textFileLine) {
+        return "";//dummy value
+    }
+
+    public int extractBucketIDForWord(String textFileLine) {
+        return 0; //dummy value
+    }
+
+    public boolean isWordForGame(String textFileLine) {
+        return true;//dummy value
+    }
 }
