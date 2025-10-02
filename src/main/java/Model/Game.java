@@ -8,7 +8,7 @@ public class Game {
     private File bucketFile;
     private Bucket[] buckets = {};
 
-    public Game(int gameId,String gameName, File bucketFile) {
+    public Game(int gameId, String gameName, File bucketFile, File wordFile) {
         this.gameID = gameId;
         this.bucketFile = bucketFile;
         this.gameName = gameName;
@@ -102,5 +102,9 @@ public class Game {
 
     public String getGameName() {
         return "";//dummy value
+    }
+
+    public File getWordFile() {
+        return null; //dummy value
     }
 }

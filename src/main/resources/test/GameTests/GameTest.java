@@ -4,14 +4,13 @@ import Model.Bucket;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
     //define variable to create game class
     public static final File BUCKET_FILE = new File("BucketDB.txt");
+    public static final File WORD_FILE = new File("WordDB.txt");
     public static final int GAME_ID = 1;
     public static final String GAME_NAME = "NATURE";
 
@@ -34,7 +33,7 @@ public class GameTest {
     @BeforeEach
     public void setUp(){
         //create the test game using the variable defined above
-        game = new Game(GAME_ID,GAME_NAME,BUCKET_FILE);
+        game = new Game(GAME_ID,GAME_NAME,BUCKET_FILE, WORD_FILE);
     }
 
     @Test
@@ -51,6 +50,11 @@ public class GameTest {
     @Test
     public void game_getBucketFile_test(){
         assertEquals(BUCKET_FILE, game.getBucketFile());
+    }
+
+    @Test
+    public void game_getWordFile_test(){
+        assertEquals(WORD_FILE, game.getWordFile());
     }
 
     @Test
