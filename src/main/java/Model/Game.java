@@ -10,7 +10,7 @@ public class Game {
     private Bucket[] buckets = {};
 
     /**
-     * Constructor for the Game class
+     * Constructor for the Game class. Will create bucket objects for the game on creation.
      * @param gameId int identifying number for the game
      * @param gameName string name of the game
      * @param bucketFile txt file with all the bucket information for the whole system, each line will follow the format 'BucketID-BucketName-GameID<<bucketImagePath>>'
@@ -23,14 +23,42 @@ public class Game {
         createBuckets();
     }
 
+    /**
+     * Getter for GameName method
+     * @return the name of the game
+     */
+    public String getGameName() {
+        return "";//dummy value
+    }
+
+    /**
+     * Getter for wordFile method
+     * @return file with word information
+     */
+    public File getWordFile() {
+        return null; //dummy value
+    }
+
+    /**
+     * Getter for bucketFile
+     * @return will return the File with all the bucket information
+     */
     public File getBucketFile() {
         return this.bucketFile;
     }
 
+    /**
+     * Getter for gameID
+     * @return will return integer game identifier for this game
+     */
     public int getGameID() {
         return this.gameID;
     }
 
+    /**
+     * Getter method for the BucketList
+     * @return List of the buckets in the game
+     */
     public Bucket[] getBucketList() {
         return null; //dummy value
     }
@@ -43,8 +71,8 @@ public class Game {
     private void createBuckets(){
         //logic
         //for each line in text file get line:
-
-
+        //is in game
+        //if yes create bucket
     }
 
     /**
@@ -61,7 +89,12 @@ public class Game {
         return bucket;
     }
 
-    // returns the position of the next '-' in the line from the starting index given
+    /**
+     * returns the position of the next '-' in the line from the given starting index
+     * @param startPosition
+     * @param textFileLine
+     * @return
+     */
     public int positionOfNextBreak(int startPosition, String textFileLine){
         final String breakCharacter = "-";
         int nextBreak = textFileLine.indexOf(breakCharacter,startPosition);
@@ -137,15 +170,11 @@ public class Game {
     }
 
 
-
-    public String getGameName() {
-        return "";//dummy value
-    }
-
-    public File getWordFile() {
-        return null; //dummy value
-    }
-
+    /**
+     * Given a bucketID the method will return whether the bucket belongs to this game
+     * @param bucketId int bucketId identifier for the bucket
+     * @return True: the bucket does belong to this game False: bucket does not belong to this game
+     */
     public boolean isBucketInGame(int bucketId) {
         return true;//dummy value
     }
