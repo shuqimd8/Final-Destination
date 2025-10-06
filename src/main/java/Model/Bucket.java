@@ -6,5 +6,9 @@ public class Bucket {
     private String imagePath;
 
     public Bucket(int bucketId, String bucketName, String imagePath){
+        this.bucketID=bucketId;
+        this.bucketName=bucketName;
+        this.imagePath = imagePath;
     }
+
 }

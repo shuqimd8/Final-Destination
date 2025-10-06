@@ -87,6 +87,7 @@ public class GameTest {
 
     @Test
     public void game_createBucket_test(){
+        Bucket bucket = game.createBucket(TEXT_FILE_LINE);
         assertSame(BUCKET_1.toString(), game.createBucket(TEXT_FILE_LINE).toString());
     }
 

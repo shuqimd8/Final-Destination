@@ -20,6 +20,7 @@ public class Game {
         this.gameID = gameId;
         this.bucketFile = bucketFile;
         this.gameName = gameName;
+        this.wordFile = wordFile;
         createBuckets();
     }
 
@@ -28,7 +29,7 @@ public class Game {
      * @return the name of the game
      */
     public String getGameName() {
-        return "";//dummy value
+        return gameName;//dummy value
     }
 
     /**
@@ -36,7 +37,7 @@ public class Game {
      * @return file with word information
      */
     public File getWordFile() {
-        return null; //dummy value
+        return wordFile; //dummy value
     }
 
     /**
@@ -99,6 +100,42 @@ public class Game {
         final String breakCharacter = "-";
         int nextBreak = textFileLine.indexOf(breakCharacter,startPosition);
         return nextBreak;
+    }
+
+    /**
+     * Given a line from the bucketFile the method will return a list of indexes of each break:'-' in the segment
+     * @param textFileLine a line from the bucketFile File as a string, which will have the format 'BucketID-BucketName-GameID<<bucketImagePath>>'
+     * @return list of each '-' in the textfileLine
+     */
+    public int[] positionOfBreaks(String textFileLine){
+        final String breakCharacter ="-";
+        //there are two breaks the first break is after BucketID, so the start position will be 0
+        int startPosition = 0;
+        //find the first break
+        int firstBreak = textFileLine.indexOf(breakCharacter, startPosition);
+        //add this to the list of breaks
+        int[] breakList = new int[4];
+        breakList[0] = firstBreak;
+        //the next starting position to find the next break will be the first break + 1
+        startPosition += (firstBreak+1);
+        //find the next break character
+        int secondBreak = textFileLine.indexOf(breakCharacter, startPosition);
+        breakList[1] = secondBreak;
+
+        //define what the starting character is
+        final String startCharacter = "<<";
+        //define the ending character
+        final String endCharacter = ">>";
+        //get the index for the starting character of the imagepath in the textfile string
+        int startOfImagePath = textFileLine.indexOf(startCharacter);
+        //get the index for the ending character of the imagepath in the textfile string
+        int endOfImagePath = textFileLine.indexOf(endCharacter);
+
+        //add these to the list
+        breakList[2] = startOfImagePath;
+        breakList[3] = endOfImagePath;
+
+        return breakList;
     }
     /**
      * Given a string from the bucketFile it will return the BucketID
@@ -166,7 +203,25 @@ public class Game {
      * @return int value of 'GameID' from the text file line
      */
     public int extractGameID(String textFileLine) {
-        return 0; //dummy value
+        //get the list of break points in the textfile
+        int[] breakpoints = positionOfBreaks(textFileLine);
+        //GameID will be between the second breakpoint and the third, then plus one so it skips the break character
+        int startOfGameID = breakpoints[1]+1;
+        int endOfGameID = breakpoints[2];
+
+        String gameIDSegment = textFileLine.substring(startOfGameID, endOfGameID);
+
+        //attempt to turn the gameID string to an int
+        int gameId_int;
+        try {
+            gameId_int = Integer.parseInt(gameIDSegment);
+            System.out.println("Converted integer using parseInt(): " + gameId_int);
+        } catch (NumberFormatException e) {
+            gameId_int = -1;
+            System.out.println("Invalid number format: " + e.getMessage());
+        }
+        //return int
+        return gameId_int;
     }
 
 
