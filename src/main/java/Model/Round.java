@@ -108,8 +108,21 @@ public class Round{
      * @return WordID in the line as an int
      */
     public int extractWordID(String textFileLine) {
+        //get the position of the first break point '-'
+        int endWordID = textFileLine.indexOf('-');
+        //create a substring with just the wordID
+        String wordIDSegment = textFileLine.substring(0,endWordID);
+        //covert the string to Int
+        int wordId_int;
+        try {
+            wordId_int = Integer.parseInt(wordIDSegment);
+            //System.out.println("Converted integer using parseInt(): " + gameId_int);
+        } catch (NumberFormatException e) {
+            wordId_int = -1;
+            System.out.println("ROUND_extractWordID Invalid number format: " + e.getMessage());
+        }
 
-        return 0;//dummy value
+        return wordId_int;//dummy value
     }
     /**
      * Given a line from the WordFile text file, the method will return the Word.
@@ -117,7 +130,15 @@ public class Round{
      * @return 'Word' in the line as a string
      */
     public String extractWord(String textFileLine) {
-        return "";//dummy value
+        //get the start position of the first break point '-'
+        int startWord = textFileLine.indexOf('-')+1;
+        //get the second break
+        int endWord = textFileLine.indexOf('-',startWord);
+
+        //create substring with just the word
+        String word = textFileLine.substring(startWord,endWord);
+
+        return word;
     }
 
     /**
@@ -144,9 +165,9 @@ public class Round{
         //get list of lines from word file
         List<String> wordFileLines = turnFileToListOfLines(this.wordFile);
         //check if there are words available for the game
-        if(!areThereWordsAvailbleForTheGame()){
+        if(!areThereWordsAvailableForTheGame()){
             //no words for this game are available throw error
-            throw new Exception("There are no words availble for this game in the word file");
+            throw new Exception("There are no words available for this game in the word file");
         }
         //continue
         //get length of list
@@ -177,18 +198,14 @@ public class Round{
      * This is called by the generateRandomWord class as a form of data validation. It checks every line of the WordFile to ensure there is a valid word availble for the game.
      * @return TRUE: there is a word in the file for this game FALSE: there is not a word in the file for this game
      */
-    public boolean areThereWordsAvailbleForTheGame(){
-        //get list of lines from the word file
+    public boolean areThereWordsAvailableForTheGame(){
+        //get list of lines from the words file
         List<String> wordFileLines = turnFileToListOfLines(this.wordFile);
         //set word available to false
         boolean wordAvailable = false;
-        //go through each line and grab the bucket id, check if the bucket id is in the game
+        //go through each line and grab the bucket id, check if the word is for the game
         for(String line:wordFileLines){
-            //get the bucket id for the word in the line
-            int bucketId = extractBucketIDForWord(line);
-            //check whether the bucket is in the game
-            boolean bucketIsInGame = game.isBucketInGame(bucketId);
-            if(bucketIsInGame){
+            if(isWordForGame(line)){
                 //set word available to true
                 wordAvailable = true;
             }
@@ -204,7 +221,25 @@ public class Round{
      * @return 'bucketID' in line as int
      */
     public int extractBucketIDForWord(String textFileLine) {
-        return 0; //dummy value
+        //get the start position of the first break point '-'
+        int firstBreak = textFileLine.indexOf('-')+1;
+        //get the second break
+        int secondBreak = textFileLine.indexOf('-',firstBreak)+1;
+
+        //create substring for bucketId
+        String bucketIDSegment = textFileLine.substring(secondBreak);
+
+        //turn into int
+        int bucketId_int;
+        try {
+            bucketId_int = Integer.parseInt(bucketIDSegment);
+            //System.out.println("Converted integer using parseInt(): " + gameId_int);
+        } catch (NumberFormatException e) {
+            bucketId_int = -1;
+            System.out.println("ROUND_extractBucketID Invalid number format: " + e.getMessage());
+        }
+
+        return bucketId_int;
     }
 
     /**
@@ -213,7 +248,19 @@ public class Round{
      * @return TRUE: word is for the game, FALSE: word is not for the game
      */
     public boolean isWordForGame(String textFileLine) {
-        return true;//dummy value
+        boolean wordIsForGame;
+        //get bucket
+        int bucketId = extractBucketIDForWord(textFileLine);
+        //check whether the bucket is in the game
+        boolean bucketIsInGame = game.isBucketInGame(bucketId);
+        if(bucketIsInGame){
+            //set word available to true
+            wordIsForGame = true;
+        }
+        else{
+            wordIsForGame = false;
+        }
+        return wordIsForGame;
     }
 
 }
