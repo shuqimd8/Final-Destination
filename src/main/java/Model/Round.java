@@ -15,6 +15,8 @@ public class Round{
     private int noWordsDisplayed;
     private Word currentWordDisplayed;
 
+    public static final int scoreModifier = 5;
+
     /**
      * Constructor for Round class. Starts the round by setting all the game stats to 0, and generating the first word.
      * @param game game class parent of Round
@@ -27,9 +29,37 @@ public class Round{
         this.setNoCorrectWords(0);
         this.setNoWordsDisplayed(0);
 
-        //set starting word to random word
-        currentWordDisplayed = generateRandomWord();
+        //reset all the buckets
+        resetBuckets();
 
+        //set starting word to random word
+        DisplayRandomWord();
+
+    }
+
+    /**
+     * Displays a random word
+     */
+    public void DisplayRandomWord(){
+        setCurrentWordDisplayed(generateRandomWord());
+    }
+
+    /**
+     * Getter for currentWordDisplayed
+     * @return current word being displayed on the screen
+     */
+    public Word getCurrentWordDisplayed(){
+        return this.currentWordDisplayed;
+    }
+
+    /**
+     * setter for current word displayed.
+     * @param word the word being displayed
+     */
+    public void setCurrentWordDisplayed(Word word){
+        //add to no words displayed
+        noWordsDisplayed += 1;
+        this.currentWordDisplayed = word;
     }
 
     /**
@@ -265,5 +295,105 @@ public class Round{
         }
         return wordIsForGame;
     }
+
+    /**
+     * Updates all the round variables to the up-to-date variables
+     */
+    public void updateRound(){
+        setScore(calculateScore());
+        updateNoCorrectWords();
+        updateNoIncorrectWords();
+    }
+
+    /**
+     * Grabs the updated number of correctly allocated words from all the buckets and updates the noCorrectWords variable accordingly
+     */
+    public void updateNoCorrectWords(){
+        //get the current number of correct words in all the buckets
+        int noCorrectWords = findNoCorrectWords();
+        //set noCorrectWord
+        setNoCorrectWords(noCorrectWords);
+    }
+
+    /**
+     * Grabs the updated number of correctly allocated words from all the buckets and updates the noCorrectWords variable accordingly
+     */
+    public void updateNoIncorrectWords(){
+        //get the current number of incorrect words in all the buckets
+        int noIncorrectWords = findNoIncorrectWords();
+        //set noIncorrectWord
+        setNoCorrectWords(noIncorrectWords);
+    }
+
+    /**
+     * Will go through each bucket in the game and check how many words have been correctly allocated
+     * @return int number of words correctly allocated
+     */
+    public int findNoCorrectWords(){
+        //create a variable to count the number of correct words
+        int noCorrectWords = 0;
+        //get all the buckets
+        List<Bucket> buckets = this.game.getBuckets();
+        //for each bucket get the number of correct words in the bucket
+        for(Bucket bucket:buckets){
+            //add the number of correct words in the bucket to the total no of correct words
+            noCorrectWords += bucket.getNoCorrectWords();
+        }
+        return noCorrectWords;
+    }
+    /**
+     * Will go through each bucket in the game and check how many words have been incorrectly allocated
+     * @return int number of words incorrectly allocated
+     */
+    public int findNoIncorrectWords(){
+        //create a variable to count the number of Incorrect words
+        int noIncorrectWords = 0;
+        //get all the buckets
+        List<Bucket> buckets = this.game.getBuckets();
+        //for each bucket get the number of Incorrect words in the bucket
+        for(Bucket bucket:buckets){
+            //add the number of correct words in the bucket to the total no of correct words
+            noIncorrectWords += bucket.getNoIncorrectWords();
+        }
+        return noIncorrectWords;
+    }
+
+
+    /**
+     * Grabs the number of correct words and applies the score modifier to get the latest score
+     * @return users current score for the round
+     */
+    public int calculateScore(){
+        return findNoCorrectWords()*scoreModifier;
+    }
+
+    /**
+     * THIS FUNCTION WILL LIKELY CHANGE DEPENDING ON THE FXML IMPLEMENTATION:
+     * This is the function that will be called when a used drags a word to a bucket. The function assigns the word to a bucket and then changes the word being displayed.
+     * @param bucket the bucket object that the user has dragged the word to
+     * @param word the word the user is putting in the bucket
+     */
+    public void putWordInBucket(Bucket bucket, Word word){
+        //add the word to the bucket
+        bucket.addWordToBucket(word);
+        //update the round information
+        updateRound();
+        //change the word
+        DisplayRandomWord();
+    }
+
+    /**
+     * Goes through every bucket in the game and resets it so that it no longer has words in it
+     */
+    public void resetBuckets(){
+        //get a list of all the buckets
+        List<Bucket> buckets = this.game.getBuckets();
+        //go through each bucket in the games list of bucket
+        for(Bucket bucket:buckets){
+            //reset the bucket
+            bucket.resetBucket();
+        }
+    }
+
 
 }

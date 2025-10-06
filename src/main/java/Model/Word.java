@@ -19,4 +19,8 @@ public class Word {
         Category = category;
         letterCount = word.length();
     }
+
+    public int getBucketID() {
+        return this.bucketId;
+    }
 }
