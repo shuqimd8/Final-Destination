@@ -19,7 +19,7 @@ public class Round{
      * Constructor for Round class. Starts the round by setting all the game stats to 0, and generating the first word.
      * @param game game class parent of Round
      */
-    public Round(Game game) {
+    public Round(Game game){
         this.game = game;
         this.wordFile = game.getWordFile();
         //score, noCorrectWords, and noWordsDisplayed starts at 0
@@ -28,6 +28,8 @@ public class Round{
         this.setNoWordsDisplayed(0);
 
         //set starting word to random word
+        currentWordDisplayed = generateRandomWord();
+
     }
 
     /**
@@ -75,7 +77,8 @@ public class Round{
      * @param addToScore integer value to increase the score by
      */
     public void addToScore(int addToScore) {
-        this.score += addToScore;
+        int newScore = this.score + addToScore;
+        setScore(newScore);
     }
 
     /**
@@ -160,14 +163,14 @@ public class Round{
      * This method runs data validation using areThereWordsAvailableForTheGame and if not will throw an error.
      * @return
      */
-    public Word generateRandomWord() throws Exception {
+    public Word generateRandomWord(){
         Word randomWord = null;
         //get list of lines from word file
         List<String> wordFileLines = turnFileToListOfLines(this.wordFile);
         //check if there are words available for the game
         if(!areThereWordsAvailableForTheGame()){
             //no words for this game are available throw error
-            throw new Exception("There are no words available for this game in the word file");
+            System.out.println("GENERATE RANDOM WORD ERROR: There are no words available for this game in the word file");
         }
         //continue
         //get length of list
@@ -179,7 +182,7 @@ public class Round{
         //create a while loop to run until a word is found.
         //while no word is found generate a random word from the list and check whether to word is for the game and if so then use that word and mark wordFound as true
         while (!wordFound){
-            int randomInt = random.nextInt(lenWordList+1);
+            int randomInt = random.nextInt(lenWordList);
             //get the text file line
             String text_file_line = wordFileLines.get(randomInt);
             //check whether the word in this line belongs to the game

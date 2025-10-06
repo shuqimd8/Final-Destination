@@ -10,8 +10,8 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 public class RoundTest {
     //define variable to create game parent class
-    public static final File BUCKET_FILE = new File("BucketDB.txt");
-    public static final File WORD_FILE = new File("WordDB.txt");
+    public static final File BUCKET_FILE = new File("src/main/resources/test/GameTests/BucketDB");
+    public static final File WORD_FILE = new File("src/main/resources/test/GameTests/WordDB");
     public static final int GAME_ID = 1;
     public static final String GAME_NAME = "NATURE";
     //establish parent class
@@ -71,6 +71,7 @@ public class RoundTest {
     //+ addToScore(int):void
     @Test
     public void round_addToScore_test(){
+        round.setScore(SCORE);
         round.addToScore(ADD_TO_SCORE);
         assertEquals(NEW_SCORE, round.getScore());
     }
