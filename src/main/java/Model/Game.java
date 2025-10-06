@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static Model.GameSystem.turnFileToListOfLines;
+
 public class Game {
     private int gameID;
     private String gameName;
@@ -124,7 +126,7 @@ public class Game {
      * @param textFileLine a line from the bucketFile File as a string, which will have the format 'BucketID-BucketName-GameID<<bucketImagePath>>'
      * @return list of each '-' in the textfileLine
      */
-    public int[] positionOfBreaks(String textFileLine){
+    private int[] positionOfBreaks(String textFileLine){
         final String breakCharacter ="-";
         //there are two breaks the first break is after BucketID, so the start position will be 0
         int startPosition = 0;
@@ -261,26 +263,5 @@ public class Game {
         return inGame;//dummy value
     }
 
-    /**
-     * Given a file it will read the file and return a list with each line of the file as a string
-     * @param file File you want to read
-     * @return list of lines from the file
-     */
-    public List<String> turnFileToListOfLines(File file){
-        List<String> fileLines = new ArrayList<>();
-        //get file path
-        String filePath = file.getPath();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                fileLines.add(line);
-                // Process each line here
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        }
-        //remove the first line because it just shows the line format
-        fileLines.removeFirst();
-        return fileLines;
-    }
+
 }

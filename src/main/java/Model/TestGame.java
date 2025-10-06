@@ -11,20 +11,12 @@ import java.util.List;
 
 public class TestGame {
     public static void main(String[] args) {
-        File file = new File("src/main/java/TxtFiles/Buckets.txt");
-        List<String> fileLines = new ArrayList<>();
-        //get file path
-        String filePath = file.getPath();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                fileLines.add(line);
-                // Process each line here
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        }
-        System.out.println(fileLines);
+        //establish game files
+        File gameFile = new File("src/main/java/TxtFiles/Games.txt");
+        File bucketFile = new File("src/main/java/TxtFiles/Buckets.txt");
+        File wordFile = new File("src/main/java/TxtFiles/Words.txt");
 
+        //create game system
+        GameSystem gameSystem = new GameSystem(gameFile, bucketFile, wordFile);
     }
 }
