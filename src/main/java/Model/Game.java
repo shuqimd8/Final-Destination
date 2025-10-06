@@ -1,13 +1,19 @@
 package Model;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Game {
     private int gameID;
     private String gameName;
     private File bucketFile;
     private File wordFile;
-    private Bucket[] buckets = {};
+    private List<Bucket> buckets;
 
     /**
      * Constructor for the Game class. Will create bucket objects for the game on creation.
@@ -21,6 +27,7 @@ public class Game {
         this.bucketFile = bucketFile;
         this.gameName = gameName;
         this.wordFile = wordFile;
+        this.buckets = new ArrayList<>();
         createBuckets();
     }
 
@@ -60,8 +67,8 @@ public class Game {
      * Getter method for the BucketList
      * @return List of the buckets in the game
      */
-    public Bucket[] getBucketList() {
-        return null; //dummy value
+    public List<Bucket> getBuckets() {
+        return Collections.unmodifiableList(this.buckets);
     }
 
 
@@ -70,10 +77,19 @@ public class Game {
      * Will go through each line in the bucketFile and create all the buckets that belong to this game (have matching gameIDs).
      */
     private void createBuckets(){
-        //logic
-        //for each line in text file get line:
-        //is in game
-        //if yes create bucket
+        List<String> bucketFileLines = turnFileToListOfLines(bucketFile);
+        for(String textfileline:bucketFileLines){
+            //get the game ID from the file line
+            int bucketGameID = extractGameID(textfileline);
+            //check that it matches this gameID
+            if(bucketGameID == gameID){
+                //does belong to game
+                //create the bucket and add it to the game
+                Bucket bucket = createBucket(textfileline);
+                //add to the list of buckets for the game
+                buckets.add(bucket);
+            }
+        }
     }
 
     /**
@@ -85,8 +101,9 @@ public class Game {
         int bucketID = extractBucketID(textFileLine);
         String bucketName = extractBucketName(textFileLine);
         String bucketImagepath = extractBucketImagePath(textFileLine);
+        int bucketGameID = extractGameID(textFileLine);
 
-        Bucket bucket = new Bucket(bucketID, bucketName, bucketImagepath);
+        Bucket bucket = new Bucket(bucketID, bucketName, bucketGameID, bucketImagepath);
         return bucket;
     }
 
@@ -150,7 +167,7 @@ public class Game {
         int bucketId_int;
         try {
             bucketId_int = Integer.parseInt(bucketIdSegment);
-            System.out.println("Converted integer using parseInt(): " + bucketId_int);
+            //System.out.println("Converted integer using parseInt(): " + bucketId_int);
         } catch (NumberFormatException e) {
             bucketId_int = -1;
             System.out.println("Invalid number format: " + e.getMessage());
@@ -215,7 +232,7 @@ public class Game {
         int gameId_int;
         try {
             gameId_int = Integer.parseInt(gameIDSegment);
-            System.out.println("Converted integer using parseInt(): " + gameId_int);
+            //System.out.println("Converted integer using parseInt(): " + gameId_int);
         } catch (NumberFormatException e) {
             gameId_int = -1;
             System.out.println("Invalid number format: " + e.getMessage());
@@ -231,6 +248,39 @@ public class Game {
      * @return True: the bucket does belong to this game False: bucket does not belong to this game
      */
     public boolean isBucketInGame(int bucketId) {
-        return true;//dummy value
+        boolean inGame = false;
+        //go through each bucket in game
+        for(Bucket bucket:this.getBuckets()){
+            //get the bucketId
+            int listBucketID = bucket.getBucketID();
+            //if equals the given bucket id then set in game to true
+            if(listBucketID==bucketId){
+                inGame=true;
+            }
+        }
+        return inGame;//dummy value
+    }
+
+    /**
+     * Given a file it will read the file and return a list with each line of the file as a string
+     * @param file File you want to read
+     * @return list of lines from the file
+     */
+    public List<String> turnFileToListOfLines(File file){
+        List<String> fileLines = new ArrayList<>();
+        //get file path
+        String filePath = file.getPath();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileLines.add(line);
+                // Process each line here
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+        //remove the first line because it just shows the line format
+        fileLines.removeFirst();
+        return fileLines;
     }
 }

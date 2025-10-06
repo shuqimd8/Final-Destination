@@ -4,13 +4,15 @@ import Model.Bucket;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
     //define variable to create game class
-    public static final File BUCKET_FILE = new File("BucketDB.txt");
-    public static final File WORD_FILE = new File("WordDB.txt");
+    public static final File BUCKET_FILE = new File("src/main/resources/test/GameTests/BucketDB");
+    public static final File WORD_FILE = new File("src/main/resources/test/GameTests/WordDB");
     public static final int GAME_ID = 1;
     public static final String GAME_NAME = "NATURE";
 
@@ -23,12 +25,13 @@ public class GameTest {
     public static final int BUCKET_ID_NOT_IN_GAME = 21;
 
     //make buckets for the game 1 buckets in BucketDB.txt
-    public static final Bucket BUCKET_1 = new Bucket(11,"Noun","imagepath1");
-    public static final Bucket BUCKET_2 = new Bucket(12,"Noun","imagepath2");
-    public static final Bucket BUCKET_3 = new Bucket(13,"Noun","imagepath3");
+    public static final Bucket BUCKET_1 = new Bucket(11,"Noun",1, "imagepath1");
+    public static final Bucket BUCKET_2 = new Bucket(12,"Verb",1, "imagepath2");
+    public static final Bucket BUCKET_3 = new Bucket(13,"Adjective",1, "imagepath3");
 
     //make a list for the buckets
-    public static Bucket[] EXPECTED_BUCKET_LIST = {BUCKET_1, BUCKET_2, BUCKET_3};
+    public static List<Bucket> EXPECTED_BUCKET_LIST;
+
 
     private static Game game;
 
@@ -36,6 +39,12 @@ public class GameTest {
     public void setUp(){
         //create the test game using the variable defined above
         game = new Game(GAME_ID,GAME_NAME,BUCKET_FILE, WORD_FILE);
+
+        //add buckets to expected bucket list output
+        EXPECTED_BUCKET_LIST = new ArrayList<>();
+        EXPECTED_BUCKET_LIST.add(BUCKET_1);
+        EXPECTED_BUCKET_LIST.add(BUCKET_2);
+        EXPECTED_BUCKET_LIST.add(BUCKET_3);
     }
 
     @Test
@@ -61,7 +70,7 @@ public class GameTest {
 
     @Test
     public void game_getBuckets_test(){
-        assertEquals(EXPECTED_BUCKET_LIST, game.getBucketList());
+        assertEquals(EXPECTED_BUCKET_LIST, game.getBuckets());
     }
 
     @Test
@@ -88,7 +97,7 @@ public class GameTest {
     @Test
     public void game_createBucket_test(){
         Bucket bucket = game.createBucket(TEXT_FILE_LINE);
-        assertSame(BUCKET_1.toString(), game.createBucket(TEXT_FILE_LINE).toString());
+        assertEquals(BUCKET_1.toString(), game.createBucket(TEXT_FILE_LINE).toString());
     }
 
     //isBucketInGame(bucketID): boolean - true
