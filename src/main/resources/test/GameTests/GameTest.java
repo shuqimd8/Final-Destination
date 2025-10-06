@@ -4,7 +4,6 @@ import Model.Bucket;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,10 +40,9 @@ public class GameTest {
         game = new Game(GAME_ID,GAME_NAME,BUCKET_FILE, WORD_FILE);
 
         //add buckets to expected bucket list output
-        EXPECTED_BUCKET_LIST = new ArrayList<>();
-        EXPECTED_BUCKET_LIST.add(BUCKET_1);
-        EXPECTED_BUCKET_LIST.add(BUCKET_2);
-        EXPECTED_BUCKET_LIST.add(BUCKET_3);
+        //turn to umodifiable list
+        EXPECTED_BUCKET_LIST = List.of(BUCKET_1, BUCKET_2, BUCKET_3);
+
     }
 
     @Test
@@ -96,7 +94,6 @@ public class GameTest {
 
     @Test
     public void game_createBucket_test(){
-        Bucket bucket = game.createBucket(TEXT_FILE_LINE);
         assertEquals(BUCKET_1.toString(), game.createBucket(TEXT_FILE_LINE).toString());
     }
 

@@ -31,7 +31,7 @@ public class Bucket {
 
     @Override
     public String toString(){
-        return ("Bucket ID: "+this.bucketID+" Bucket Name: "+ this.bucketName+" Game ID: "+this.gameID+" ImagePath: "+this.imagePath);
+        return ("(bucketID: "+this.bucketID+", bucketName: "+ this.bucketName+", gameID: "+this.gameID+", ImagePath: "+this.imagePath+")");
     }
 
 

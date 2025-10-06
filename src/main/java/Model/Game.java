@@ -31,7 +31,9 @@ public class Game {
         this.wordFile = wordFile;
         this.buckets = new ArrayList<>();
         createBuckets();
+        System.out.println(getGameName()+" created with the following buckets: "+getBuckets());
     }
+
 
     /**
      * Getter for GameName method
@@ -261,6 +263,11 @@ public class Game {
             }
         }
         return inGame;//dummy value
+    }
+
+    @Override
+    public String toString(){
+        return "(gameName: "+this.gameName+", gameID: "+this.gameID+")";
     }
 
 
