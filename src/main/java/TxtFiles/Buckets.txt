@@ -4,7 +4,7 @@ BucketID-BucketName-GameID<<bucketImagePath>>
 13-Adjective-1<<image_path>>
 21-Plant-2<<image_path>>
 22-Animal-2<<image_path>>
-23-Non-living-2<<image_path>>
+23-Nonliving-2<<image_path>>
 31-Fruit/Veg-3<<image_path>>
 32-Grain-3<<image_path>>
 33-Meat-3<<image_path>>

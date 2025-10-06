@@ -172,7 +172,7 @@ public class Game {
             //System.out.println("Converted integer using parseInt(): " + bucketId_int);
         } catch (NumberFormatException e) {
             bucketId_int = -1;
-            System.out.println("Invalid number format: " + e.getMessage());
+            System.out.println("GAME_extractBucketID - Invalid number format: " + e.getMessage());
         }
         return bucketId_int;//dummy value
     }
@@ -237,7 +237,7 @@ public class Game {
             //System.out.println("Converted integer using parseInt(): " + gameId_int);
         } catch (NumberFormatException e) {
             gameId_int = -1;
-            System.out.println("Invalid number format: " + e.getMessage());
+            System.out.println("GAME_extractGameID Invalid number format: " + e.getMessage());
         }
         //return int
         return gameId_int;

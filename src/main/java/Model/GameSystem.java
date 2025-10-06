@@ -115,7 +115,7 @@ public class GameSystem {
             //System.out.println("Converted integer using parseInt(): " + gameId_int);
         } catch (NumberFormatException e) {
             gameId_int = -1;
-            System.out.println("Invalid number format: " + e.getMessage());
+            System.out.println("GAMESYSTEM Invalid number format: " + e.getMessage());
         }
         //return int
         return gameId_int;
