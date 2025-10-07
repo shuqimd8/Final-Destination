@@ -476,6 +476,32 @@ public class MySQL {
         return userData;
     }
 
+    public static void AddStudentToDB(Connection conn, String username, String password, String name, int teacher) throws SQLException {
+        PreparedStatement pstmt = null;
+
+        String addStudentToDB = "INSERT INTO `final_destination`.`Students`(`username`, `hashed_password`, `teacher`, `f_name`) VALUES (?, ?, ?, ?)";
+
+        pstmt = conn.prepareStatement(addStudentToDB);
+        pstmt.setString(1, username);
+        pstmt.setString(2, password);
+        pstmt.setString(3, name);
+        pstmt.setInt(4, teacher);
+
+        pstmt.executeUpdate(addStudentToDB);
+    }
+    public static void AddTeacherToDB(Connection conn, int username, String password, String fname, String lname) throws SQLException {
+        PreparedStatement pstmt = null;
+
+        String addTeacherToDB = "INSERT INTO `final_destination`.`teachers`(`username`, `hashed_password`, `teacher`, `f_name`) VALUES (?, ?, ?, ?)";
+
+        pstmt = conn.prepareStatement(addTeacherToDB);
+        pstmt.setInt(1, username);
+        pstmt.setString(2, password);
+        pstmt.setString(3, fname);
+        pstmt.setString(4, lname);
+
+        pstmt.executeUpdate(addTeacherToDB);
+    }
     // Add two test users (teacher and student)
     public static void addTest() {
         Connection conn = null;
