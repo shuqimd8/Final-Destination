@@ -286,13 +286,8 @@ public class Round{
         int bucketId = extractBucketIDForWord(textFileLine);
         //check whether the bucket is in the game
         boolean bucketIsInGame = game.isBucketInGame(bucketId);
-        if(bucketIsInGame){
-            //set word available to true
-            wordIsForGame = true;
-        }
-        else{
-            wordIsForGame = false;
-        }
+        //if the bucket allocated to the word is in this game then the word is for this game.
+        wordIsForGame = bucketIsInGame;
         return wordIsForGame;
     }
 

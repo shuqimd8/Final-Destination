@@ -83,6 +83,11 @@ public class Bucket {
         }
         return noCorrectWords;
     }
+
+    /**
+     * goes through every word in the bucket and determines how many have been incorrectly allocated
+     * @return no of incorrect words in the bucket
+     */
     public int getNoIncorrectWords(){
         //create a variable to count the number of incorrect words
         int noIncorrectWords = 0;
