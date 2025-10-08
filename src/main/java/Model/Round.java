@@ -1,4 +1,6 @@
 package Model;
+import java.util.Scanner;
+import eu.hansolo.toolbox.Helper;
 
 import java.io.File;
 import java.util.List;
@@ -35,7 +37,9 @@ public class Round{
         //set starting word to random word
         DisplayRandomWord();
 
+
     }
+
 
     /**
      * Displays a random word

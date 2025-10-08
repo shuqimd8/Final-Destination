@@ -23,4 +23,5 @@ public class Word {
     public int getBucketID() {
         return this.bucketId;
     }
+    public String getWord(){return this.WordString;};
 }

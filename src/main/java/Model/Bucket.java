@@ -115,5 +115,6 @@ public class Bucket {
      */
     public void addWordToBucket(Word word) {
         wordsInBucket.add(word);
+        System.out.println(word.getWord()+" has been placed in the "+getBucketName()+" bucket");
     }
 }
