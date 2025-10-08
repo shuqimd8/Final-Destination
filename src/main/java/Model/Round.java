@@ -40,6 +40,16 @@ public class Round{
 
     }
 
+    /**
+     * END OF ROUND: update all the information and return a list of the stats
+     * @return [score,NoCorrectWords,NoIncorrectWords,NoWordsDisplayed]
+     */
+    public int[] getStats(){
+        updateRound();
+        return new int[]{getScore(),getNoCorrectWords(),getNoIncorrectWords(),getNoWordsDisplayed()};
+    }
+
+
 
     /**
      * Displays a random word

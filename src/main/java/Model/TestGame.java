@@ -45,8 +45,18 @@ public class TestGame {
                 round.putWordInBucket(buckets.get(1), round.getCurrentWordDisplayed());
             }
         }
-        System.out.print("end game");
+        System.out.println("-------------------");
+        System.out.println("GAME OVER");
+        System.out.println("-------------------");
         scanner.close();
+
+        int[] stats = round.getStats();
+        System.out.println("Score: "+stats[0]);
+        System.out.println("Number of Correct Words: "+stats[1]);
+        System.out.println("Number of Incorrect Words: "+stats[2]);
+        System.out.println("Total Number of Words Displayed: "+stats[3]);
+        System.out.println("-------------------");
+
 
     }
 }
