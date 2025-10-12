@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<AnchorPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.learneria.controller.FoodGameController"
             prefWidth="800" prefHeight="600">
 
-    <Label text="Food Game"
-           layoutX="340" layoutY="20"
-           style="-fx-font-size: 26; -fx-font-weight: bold;"/>
+    <Label text="Food Game" layoutX="330" layoutY="20"
+           style="-fx-font-size:26; -fx-font-weight:bold;"/>
+
+    <!-- Draggable Words -->
+    <Label fx:id="word1" text="Apple" layoutX="200" layoutY="200"
+           style="-fx-font-size:20; -fx-background-color:#FFF59D; -fx-padding:5;"/>
+    <Label fx:id="word2" text="Chicken" layoutX="400" layoutY="200"
+           style="-fx-font-size:20; -fx-background-color:#FFF59D; -fx-padding:5;"/>
+    <Label fx:id="word3" text="Bread" layoutX="600" layoutY="200"
+           style="-fx-font-size:20; -fx-background-color:#FFF59D; -fx-padding:5;"/>
 
     <!-- Buckets -->
-    <Rectangle fx:id="bucketFruit" layoutX="200" layoutY="400"
-               width="120" height="100" fill="LIGHTPINK" stroke="BLACK"/>
-    <Label text="Fruit" layoutX="240" layoutY="510"/>
+    <Rectangle fx:id="bucketFruit" layoutX="100" layoutY="400" width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Fruit" layoutX="120" layoutY="510"/>
 
-    <Rectangle fx:id="bucketMeat" layoutX="500" layoutY="400"
-               width="120" height="100" fill="LIGHTBLUE" stroke="BLACK"/>
-    <Label text="Meat" layoutX="540" layoutY="510"/>
+    <Rectangle fx:id="bucketMeat" layoutX="270" layoutY="400" width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Meat" layoutX="295" layoutY="510"/>
 
-    <!-- Words -->
-    <Label fx:id="word1" text="Apple"
-           layoutX="200" layoutY="200"
-           style="-fx-font-size: 20; -fx-background-color: yellow; -fx-padding: 5;"/>
-    <Label fx:id="word2" text="Chicken"
-           layoutX="400" layoutY="200"
-           style="-fx-font-size: 20; -fx-background-color: yellow; -fx-padding: 5;"/>
+    <Rectangle fx:id="bucketGrain" layoutX="440" layoutY="400" width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Grain" layoutX="465" layoutY="510"/>
+
+    <Rectangle fx:id="bucketDairy" layoutX="610" layoutY="400" width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Dairy" layoutX="640" layoutY="510"/>
+
+    <!-- Score + Feedback -->
+    <Label fx:id="scoreLabel" text="Score: 0" layoutX="50" layoutY="60"
+           style="-fx-font-size:16; -fx-font-weight:bold;"/>
+
+    <Label fx:id="feedbackLabel"
+           text="Drag each word into the correct box!"
+           layoutX="180" layoutY="100"
+           prefWidth="440"
+           wrapText="true"
+           style="-fx-font-size: 16; -fx-text-fill: #3333FF; -fx-alignment: center;"/>
+
+
+    <!-- Timer Label -->
+    <Label fx:id="timerLabel"
+           text="Time: 120s"
+           layoutX="600" layoutY="20"
+           style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #333;" />
+
 
     <!-- Back -->
-    <Button text="Back to Menu"
-            layoutX="20" layoutY="20"
-            onAction="#handleBack"/>
+    <Button text="Back to Menu" layoutX="20" layoutY="550" prefWidth="120" onAction="#handleBack"/>
 </AnchorPane>
+

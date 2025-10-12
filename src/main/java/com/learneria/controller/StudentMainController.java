@@ -11,7 +11,7 @@ public class StudentMainController {
 
     @FXML
     public void initialize() {
-        // Show logged-in username in welcome message
+        // Show logged-in username
         String currentUser = SceneManager.getCurrentUser();
         if (currentUser != null) {
             welcomeLabel.setText("Welcome, " + currentUser + "!");
@@ -20,57 +20,36 @@ public class StudentMainController {
 
     @FXML
     private void openGrammar() {
-        SceneManager.switchSceneWithUser(
-                "/com/learneria/fxml/grammar_game.fxml",
-                "Grammar Game",
-                SceneManager.getCurrentUser()
-        );
+        SceneManager.switchScene("/com/learneria/fxml/grammar_game.fxml", "Grammar Game");
     }
 
     @FXML
     private void openFood() {
-        SceneManager.switchSceneWithUser(
-                "/com/learneria/fxml/food_game.fxml",
-                "Food Game",
-                SceneManager.getCurrentUser()
-        );
+        SceneManager.switchScene("/com/learneria/fxml/food_game.fxml", "Food Game");
     }
 
     @FXML
     private void openNature() {
-        SceneManager.switchSceneWithUser(
-                "/com/learneria/fxml/nature_game.fxml",
-                "Nature Game",
-                SceneManager.getCurrentUser()
-        );
+        SceneManager.switchScene("/com/learneria/fxml/nature_game.fxml", "Nature Game");
     }
 
     @FXML
     private void openSettings() {
-        SceneManager.switchSceneWithUser(
-                "/com/learneria/fxml/settings.fxml",
-                "Settings",
-                SceneManager.getCurrentUser()
-        );
+        SceneManager.switchScene("/com/learneria/fxml/settings.fxml", "Settings");
     }
 
     @FXML
     private void handleProfile() {
-        SceneManager.switchSceneWithUser(
-                "/com/learneria/fxml/profile.fxml",
-                "Profile",
-                SceneManager.getCurrentUser()
-        );
+        SceneManager.switchScene("/com/learneria/fxml/profile.fxml", "Profile");
     }
 
     @FXML
     private void handleLogout() {
-        SceneManager.setCurrentUser(null);
-        SceneManager.switchScene(
-                "/com/learneria/fxml/login.fxml",
-                "Login"
-        );
+        // Clear stored user and go back to login
+        SceneManager.setCurrentUser(null, null);
+        SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Login");
     }
 }
+
 
 

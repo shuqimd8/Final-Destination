@@ -7,18 +7,24 @@ import javafx.stage.Stage;
 
 public class SceneManager {
     private static Stage primaryStage;
-    private static String currentUser; // Track logged-in username
+    private static String currentUser;
+    private static String currentRole; // 👈 NEW
 
     public static void setStage(Stage stage) {
         primaryStage = stage;
     }
 
-    public static void setCurrentUser(String username) {
+    public static void setCurrentUser(String username, String role) {
         currentUser = username;
+        currentRole = role;
     }
 
     public static String getCurrentUser() {
         return currentUser;
+    }
+
+    public static String getCurrentRole() {
+        return currentRole;
     }
 
     public static void switchScene(String fxmlPath, String title) {
@@ -26,7 +32,6 @@ public class SceneManager {
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxmlPath));
             Parent root = loader.load();
 
-            // If controller is UserAware → inject username
             Object controller = loader.getController();
             if (controller instanceof com.learneria.utils.UserAware) {
                 ((com.learneria.utils.UserAware) controller).setUsername(currentUser);
@@ -40,9 +45,14 @@ public class SceneManager {
         }
     }
 
-    public static void switchSceneWithUser(String fxmlPath, String title, String username) {
-        setCurrentUser(username); // Save logged-in user
-        switchScene(fxmlPath, title);
+    // 👇 NEW helper method to go back correctly based on role
+    public static void goBackToDashboard() {
+        if ("teacher".equalsIgnoreCase(currentRole)) {
+            switchScene("/com/learneria/fxml/teacher_main.fxml", "Teacher Main Menu");
+        } else {
+            switchScene("/com/learneria/fxml/student_main.fxml", "Student Main Menu");
+        }
     }
 }
+
 

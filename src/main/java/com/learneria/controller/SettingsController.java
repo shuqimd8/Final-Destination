@@ -27,7 +27,7 @@ public class SettingsController implements UserAware {
     }
 
     /**
-     * Load user info from database
+     * Load user info from the database
      */
     private void loadUserData() {
         try {
@@ -52,35 +52,43 @@ public class SettingsController implements UserAware {
         }
     }
 
+    /**
+     * 🔙 Handle Back button
+     */
     @FXML
     private void handleBack() {
-        SceneManager.switchSceneWithUser(
-                "/com/learneria/fxml/student_main.fxml",
-                "Student Main Menu",
-                username
-        );
+        // Return to dashboard depending on role
+        SceneManager.goBackToDashboard();
     }
 
+    /**
+     * ✏️ Edit display name
+     */
     @FXML
     private void editName() {
         editField("Enter new name:", "name", nameLabel);
     }
 
+    /**
+     * ✏️ Edit username
+     */
     @FXML
     private void editUsername() {
         editField("Enter new username:", "username", usernameLabel);
-        // Update local reference
-        this.username = usernameLabel.getText();
-    }
-
-    @FXML
-    private void editPassword() {
-        editField("Enter new password:", "password", passwordLabel);
-        passwordLabel.setText("********"); // always mask
+        this.username = usernameLabel.getText(); // update reference
     }
 
     /**
-     * Prompt user and update both label + DB
+     * ✏️ Edit password
+     */
+    @FXML
+    private void editPassword() {
+        editField("Enter new password:", "password", passwordLabel);
+        passwordLabel.setText("********"); // always masked
+    }
+
+    /**
+     * Generic field editor for user info
      */
     private void editField(String prompt, String column, Label targetLabel) {
         TextInputDialog dialog = new TextInputDialog();
@@ -97,10 +105,12 @@ public class SettingsController implements UserAware {
         });
     }
 
+    /**
+     * Update database value safely
+     */
     private void updateDatabaseField(String column, String newValue) {
         try {
             Connection conn = Database.getInstance().getConnection();
-
             String sql = "UPDATE users SET " + column + " = ? WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, newValue);
@@ -108,9 +118,10 @@ public class SettingsController implements UserAware {
             stmt.executeUpdate();
             stmt.close();
 
-            // If username changed, update local reference
+            // If username changed, update local and global references
             if (column.equals("username")) {
                 username = newValue;
+                SceneManager.setCurrentUser(newValue, SceneManager.getCurrentRole());
             }
 
             System.out.println("✅ Updated " + column + " for user: " + username);
@@ -120,14 +131,10 @@ public class SettingsController implements UserAware {
         }
     }
 
-    // Theme stubs (unchanged)
-    @FXML
-    private void setDefaultTheme() { System.out.println("✅ Default theme set"); }
-
-    @FXML
-    private void setRGTheme() { System.out.println("✅ R/G theme set"); }
-
-    @FXML
-    private void setBYTheme() { System.out.println("✅ B/Y theme set"); }
+    // 🎨 Theme buttons (placeholders)
+    @FXML private void setDefaultTheme() { System.out.println("✅ Default theme set"); }
+    @FXML private void setRGTheme() { System.out.println("✅ Red/Green theme set"); }
+    @FXML private void setBYTheme() { System.out.println("✅ Blue/Yellow theme set"); }
 }
+
 

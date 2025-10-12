@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.GameOverController"
+            prefWidth="600" prefHeight="400"
+            style="-fx-background-color: #FFFDF5;">
+
+    <Label text="Papa's Learneria"
+           layoutX="200" layoutY="40"
+           style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+
+    <Label fx:id="timerLabel" text="0:00"
+           layoutX="270" layoutY="90"
+           style="-fx-font-size: 30; -fx-font-weight: bold;"/>
+
+    <Label text="Game Over!"
+           layoutX="240" layoutY="140"
+           style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #222;"/>
+
+    <VBox layoutX="150" layoutY="180" spacing="8">
+        <Label fx:id="correctLabel" text="Total Correct Answers: 0" />
+        <Label fx:id="incorrectLabel" text="Total Incorrect Answers: 0" />
+        <Label fx:id="scoreLabel" text="Score: 0" />
+        <Label fx:id="avgSpeedLabel" text="Average Answer Speed: 0s" />
+    </VBox>
+
+    <Button text="Continue"
+            layoutX="250" layoutY="320"
+            prefWidth="100"
+            onAction="#handleContinue"
+            style="-fx-font-size: 14; -fx-background-color: #C8E6C9;"/>
+</AnchorPane>

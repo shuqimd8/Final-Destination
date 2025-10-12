@@ -33,30 +33,30 @@ public class LoginController {
 
         String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
 
-        try {
-            Connection conn = Database.getInstance().getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+        try (Connection conn = Database.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
             pstmt.setString(2, password);
-
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 String role = rs.getString("role");
                 System.out.println("✅ Login successful: " + username + " (" + role + ")");
 
+                // ✅ Remember the logged-in user & role globally
+                SceneManager.setCurrentUser(username, role);
+
+                // 🚀 Navigate based on role
                 if ("student".equalsIgnoreCase(role)) {
-                    SceneManager.switchSceneWithUser(
+                    SceneManager.switchScene(
                             "/com/learneria/fxml/student_main.fxml",
-                            "Student Main Menu",
-                            username
+                            "Student Main Menu"
                     );
                 } else if ("teacher".equalsIgnoreCase(role)) {
-                    SceneManager.switchSceneWithUser(
+                    SceneManager.switchScene(
                             "/com/learneria/fxml/teacher_main.fxml",
-                            "Teacher Main Menu",
-                            username
+                            "Teacher Main Menu"
                     );
                 } else {
                     System.out.println("⚠️ Unknown role: " + role);
@@ -67,7 +67,6 @@ public class LoginController {
             }
 
             rs.close();
-            pstmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

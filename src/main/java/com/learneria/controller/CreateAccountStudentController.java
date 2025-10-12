@@ -11,18 +11,11 @@ import java.sql.PreparedStatement;
 
 public class CreateAccountStudentController {
 
-    @FXML
-    private TextField usernameField;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextField teacherCodeField;
 
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private TextField teacherCodeField;
-
-    /**
-     * Handle form submission for creating a new student account.
-     */
+    /** Handle form submission for creating a new student account. */
     @FXML
     private void handleSubmit() {
         String username = usernameField.getText().trim();
@@ -49,28 +42,20 @@ public class CreateAccountStudentController {
 
             System.out.println("✅ Student registered: " + username + " / Teacher Code: " + teacherCode);
 
-            // Go directly to student main
-            SceneManager.switchSceneWithUser(
-                    "/com/learneria/fxml/student_main.fxml",
-                    "Student Main",
-                    username
-            );
+            // ✅ Save session & open student main
+            SceneManager.setCurrentUser(username, "student");
+            SceneManager.switchScene("/com/learneria/fxml/student_main.fxml", "Student Main");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Handle back button → return to account type selection
-     */
+    /** Handle back button → return to account type selection */
     @FXML
     private void handleBack() {
-        SceneManager.switchScene(
-                "/com/learneria/fxml/createAccount_Select.fxml",
-                "Select Account Type"
-        );
+        SceneManager.switchScene("/com/learneria/fxml/createAccount_Select.fxml",
+                "Select Account Type");
     }
 }
-
 
