@@ -3,6 +3,10 @@ package com.learneria.controller;
 import com.learneria.utils.SceneManager;
 import javafx.fxml.FXML;
 
+/**
+ * TeacherMainController — Main menu for teachers.
+ * Links to Dashboard, Class Manager, Reports, and Settings.
+ */
 public class TeacherMainController {
 
     @FXML
@@ -11,8 +15,8 @@ public class TeacherMainController {
     }
 
     @FXML
-    private void openStudentList() {
-        SceneManager.switchScene("/com/learneria/fxml/teacher_students.fxml", "My Students");
+    private void openClassList() { // ✅ New button target
+        SceneManager.switchScene("/com/learneria/fxml/teacher_class_list.fxml", "Manage Classes");
     }
 
     @FXML
@@ -31,5 +35,3 @@ public class TeacherMainController {
         SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Login");
     }
 }
-
-

@@ -18,7 +18,7 @@
 
     <!-- Teacher-specific options -->
     <Button text="Dashboard" onAction="#openDashboard" prefWidth="200"/>
-    <Button text="Manage Students" onAction="#openStudentList" prefWidth="200"/>
+    <Button text="Manage Classes" onAction="#openClassList" prefWidth="200"/>
     <Button text="View Reports" onAction="#openReports" prefWidth="200"/>
     <Button text="Settings" onAction="#openSettings" prefWidth="200"/>
 

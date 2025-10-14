@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.StudentStatsController"
+            prefWidth="800" prefHeight="500"
+            style="-fx-background-color: #fefcf6;">
+
+    <Button text="← Back" layoutX="30" layoutY="30"
+            onAction="#handleBack"
+            style="-fx-background-color: #a3d6ff; -fx-font-weight: bold;"/>
+
+    <Label fx:id="studentNameLabel" layoutX="270" layoutY="40"
+           style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+    <VBox layoutX="200" layoutY="120" spacing="10"
+          style="-fx-background-color: #ffd5e5; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;"
+          alignment="TOP_LEFT">
+
+        <Label fx:id="correctLabel" text="Total Correct Answers: 0" style="-fx-font-size:16;"/>
+        <Label fx:id="incorrectLabel" text="Total Incorrect Answers: 0" style="-fx-font-size:16;"/>
+        <Label fx:id="gamesLabel" text="Games Played: 0" style="-fx-font-size:16;"/>
+        <Label fx:id="wordsLabel" text="Total Words: 0" style="-fx-font-size:16;"/>
+        <Label fx:id="speedLabel" text="Average Speed: 0s" style="-fx-font-size:16;"/>
+    </VBox>
+</AnchorPane>
