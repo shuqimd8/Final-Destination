@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 /**
  * SceneManager — central navigation and session handler for Papa Learneria.
- * Supports role-aware scene switching, controller passing, and modals.
+ * Supports role-aware scene switching, controller passing, modals, and global styling.
  */
 public class SceneManager {
 
@@ -46,15 +46,29 @@ public class SceneManager {
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxmlPath));
             Parent root = loader.load();
 
-            // if controller implements UserAware, inject username automatically
+            // Inject username if controller implements UserAware
             Object controller = loader.getController();
             if (controller instanceof com.learneria.utils.UserAware) {
                 ((com.learneria.utils.UserAware) controller).setUsername(currentUser);
             }
 
-            primaryStage.setScene(new Scene(root));
+            // Create the scene
+            Scene scene = new Scene(root);
+
+            // ✅ Apply global stylesheet if available (safe)
+            try {
+                String css = SceneManager.class
+                        .getResource("/com/learneria/styles/styles.css")
+                        .toExternalForm();
+                scene.getStylesheets().add(css);
+            } catch (Exception ignored) {
+                System.out.println("⚠️ Stylesheet not found, continuing without it.");
+            }
+
+            primaryStage.setScene(scene);
             primaryStage.setTitle(title);
             primaryStage.show();
+
         } catch (Exception e) {
             System.err.println("❌ Failed to switch scene: " + fxmlPath);
             e.printStackTrace();
@@ -76,9 +90,20 @@ public class SceneManager {
             Object controller = loader.getController();
             if (controllerConsumer != null) controllerConsumer.accept(controller);
 
-            primaryStage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+
+            // ✅ Apply stylesheet again (for consistency)
+            try {
+                String css = SceneManager.class
+                        .getResource("/com/learneria/styles/styles.css")
+                        .toExternalForm();
+                scene.getStylesheets().add(css);
+            } catch (Exception ignored) {}
+
+            primaryStage.setScene(scene);
             primaryStage.setTitle(title);
             primaryStage.show();
+
         } catch (IOException e) {
             System.err.println("❌ Failed to load controller for: " + fxmlPath);
             e.printStackTrace();
@@ -109,8 +134,20 @@ public class SceneManager {
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle(title);
-            popupStage.setScene(new Scene(root));
+
+            Scene popupScene = new Scene(root);
+
+            // ✅ Add stylesheet to popups too
+            try {
+                String css = SceneManager.class
+                        .getResource("/com/learneria/styles/styles.css")
+                        .toExternalForm();
+                popupScene.getStylesheets().add(css);
+            } catch (Exception ignored) {}
+
+            popupStage.setScene(popupScene);
             popupStage.showAndWait();
+
         } catch (IOException e) {
             System.err.println("❌ Failed to open popup: " + fxmlPath);
             e.printStackTrace();
@@ -120,5 +157,8 @@ public class SceneManager {
     /** Check if primary stage is ready */
     public static boolean isStageReady() {
         return primaryStage != null;
+    }
+
+    public static void switchScene(String s) {
     }
 }

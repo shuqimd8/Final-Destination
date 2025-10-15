@@ -1,0 +1,51 @@
+/* ===== FONT IMPORT ===== */
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("/com/learneria/assets/fonts/JosefinSans-Regular.ttf");
+}
+@font-face {
+    font-family: "Josefin Sans Bold";
+    src: url("/com/learneria/assets/fonts/JosefinSans-Bold.ttf");
+}
+
+/* ===== GLOBAL ROOT ===== */
+.root {
+    -fx-font-family: "Josefin Sans";
+}
+
+/* ===== TITLE TEXT ===== */
+.title-text {
+    -fx-font-family: "Josefin Sans Bold";
+    -fx-font-size: 38px;
+    -fx-text-fill: #2F80ED;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 3, 0, 0, 1);
+}
+
+/* ===== SUBTITLE TEXT ===== */
+.subtitle-text {
+    -fx-font-family: "Josefin Sans";
+    -fx-font-size: 20px;
+    -fx-text-fill: #2F80ED;
+    -fx-underline: true;
+}
+
+/* ===== SELECT BUTTONS ===== */
+.select-button {
+    -fx-background-color: #A0D8FF;
+    -fx-text-fill: #003366;
+    -fx-background-radius: 25;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 180;
+    -fx-pref-height: 45;
+    -fx-cursor: hand;
+    -fx-border-color: #2F80ED;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 25;
+}
+
+.select-button:hover {
+    -fx-background-color: #8CCFFF;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}

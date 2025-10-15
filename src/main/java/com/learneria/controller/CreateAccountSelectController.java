@@ -1,11 +1,8 @@
 package com.learneria.controller;
 
-import com.learneria.utils.Database;
-
 import com.learneria.utils.SceneManager;
 import javafx.fxml.FXML;
-
-
+import javafx.scene.input.MouseEvent; // ✅ Correct import
 
 public class CreateAccountSelectController {
 
@@ -18,6 +15,9 @@ public class CreateAccountSelectController {
     private void handleTeacher() {
         SceneManager.switchScene("/com/learneria/fxml/createAccount_Form.fxml", "Create Teacher Account");
     }
+
+    @FXML
+    private void handleBack(MouseEvent event) {
+        SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Log In");
+    }
 }
-
-

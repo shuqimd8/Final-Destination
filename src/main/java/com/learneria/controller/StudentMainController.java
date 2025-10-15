@@ -3,38 +3,40 @@ package com.learneria.controller;
 import com.learneria.utils.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class StudentMainController {
 
     @FXML
-    private Label welcomeLabel;
+    private Label usernameLabel;
 
     @FXML
     public void initialize() {
-        // Show logged-in username
+        // Display current user's name
         String currentUser = SceneManager.getCurrentUser();
         if (currentUser != null) {
-            welcomeLabel.setText("Welcome, " + currentUser + "!");
+            usernameLabel.setText(currentUser);
         }
     }
 
     @FXML
-    private void openGrammar() {
+    private void openGrammar(MouseEvent event) {
         SceneManager.switchScene("/com/learneria/fxml/grammar_game.fxml", "Grammar Game");
     }
 
     @FXML
-    private void openFood() {
-        SceneManager.switchScene("/com/learneria/fxml/food_game.fxml", "Food Game");
-    }
-
-    @FXML
-    private void openNature() {
+    private void openNature(MouseEvent event) {
         SceneManager.switchScene("/com/learneria/fxml/nature_game.fxml", "Nature Game");
     }
 
     @FXML
-    private void openSettings() {
+    private void openFood(MouseEvent event) {
+        SceneManager.switchScene("/com/learneria/fxml/food_game.fxml", "Food Game");
+    }
+
+    @FXML
+    private void openSettings(MouseEvent event) {
         SceneManager.switchScene("/com/learneria/fxml/settings.fxml", "Settings");
     }
 
@@ -45,11 +47,7 @@ public class StudentMainController {
 
     @FXML
     private void handleLogout() {
-        // Clear stored user and go back to login
         SceneManager.setCurrentUser(null, null);
         SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Login");
     }
 }
-
-
-

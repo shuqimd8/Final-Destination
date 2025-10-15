@@ -1,34 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.learneria.controller.StudentMainController"
-      alignment="CENTER"
-      spacing="15"
-      style="-fx-padding: 30; -fx-background-color: #f9f9f9;"
-      prefWidth="400"
-      prefHeight="300">
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.StudentMainController"
+            prefWidth="1000" prefHeight="650">
+
+    <!--  Background -->
+    <ImageView fitWidth="1000" fitHeight="650" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/Background.jpg" />
+        </image>
+    </ImageView>
+
+    <!-- Semi-transparent overlay (optional aesthetic) -->
+    <Rectangle width="1000" height="650" fill="rgba(255,255,255,0.85)"/>
+
+    <!-- Papa Mascot -->
+    <ImageView layoutX="80" layoutY="320" fitWidth="200" preserveRatio="true">
+        <image>
+            <Image url="@../assets/icons/PapaMascot.png" />
+        </image>
+    </ImageView>
 
     <!-- Title -->
-    <Label text="Student Main Menu" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
-    <Label fx:id="welcomeLabel" text="Welcome, student!" style="-fx-font-size: 14;"/>
+    <Label text="Papa’s Learnaria"
+           layoutX="100" layoutY="80"
+           style="-fx-font-family: 'Josefin Sans';
+                  -fx-font-size: 42;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #2563eb;" />
 
-    <!-- Navigation Buttons -->
-    <Button text="Play Grammar Game" onAction="#openGrammar" prefWidth="200"/>
-    <Button text="Play Food Game" onAction="#openFood" prefWidth="200"/>
-    <Button text="Play Nature Game" onAction="#openNature" prefWidth="200"/>
-    <Button text="Settings" prefWidth="200" onAction="#openSettings"/>
-    <Button text="View Profile" onAction="#handleProfile" />
+    <!--  Profile Card (Top Right) -->
+    <VBox layoutX="775" layoutY="40" alignment="CENTER"
+          spacing="5"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 15;
+                 -fx-border-color: black;
+                 -fx-border-width: 2;
+                 -fx-border-radius: 15;
+                 -fx-padding: 10;">
+        <Label fx:id="usernameLabel" text="Jake"
+               style="-fx-font-size: 18; -fx-font-weight: bold;" />
+        <Label text="Busy Bee"
+               style="-fx-font-size: 14; -fx-text-fill: #444;" />
+        <ImageView fitWidth="40" fitHeight="40" preserveRatio="true">
+            <image>
+                <Image url="@../assets/icons/FruitIcon.png" />
+            </image>
+        </ImageView>
+        <Button text="Sign Out"
+                onAction="#handleLogout"
+                style="-fx-background-color: #66CCFF;
+                       -fx-border-color: black;
+                       -fx-border-width: 1.5;
+                       -fx-border-radius: 10;
+                       -fx-background-radius: 10;
+                       -fx-font-weight: bold;" />
+    </VBox>
 
-    
-    <!-- Logout controller -->
-    <Button text="Logout"
-            onAction="#handleLogout"
-            style="-fx-background-color: red; -fx-text-fill: white;"
-            prefWidth="200"/>
-</VBox>
+    <!--  Main White Panel -->
+    <VBox layoutX="280" layoutY="230"
+          alignment="CENTER"
+          prefWidth="600" prefHeight="200"
+          spacing="0"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 25;
+                 -fx-border-radius: 25;
+                 -fx-border-color: black;
+                 -fx-border-width: 2;">
+        <HBox spacing="50" alignment="CENTER" style="-fx-padding: 20;">
+            <!--  Grammar -->
+            <VBox alignment="CENTER">
+                <StackPane alignment="CENTER">
+                    <Circle radius="60" fill="#FFE871"
+                            stroke="black" strokeWidth="1.5"/>
+                    <ImageView fitWidth="70" fitHeight="70" preserveRatio="true"
+                               onMouseClicked="#openGrammar"
+                               style="-fx-cursor: hand;">
+                        <image>
+                            <Image url="@../assets/icons/GrammarButton.png" />
+                        </image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Grammar" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+            </VBox>
+
+            <!--  Nature -->
+            <VBox alignment="CENTER">
+                <StackPane alignment="CENTER">
+                    <Circle radius="60" fill="#B6F7A5"
+                            stroke="black" strokeWidth="1.5"/>
+                    <ImageView fitWidth="70" fitHeight="70" preserveRatio="true"
+                               onMouseClicked="#openNature"
+                               style="-fx-cursor: hand;">
+                        <image>
+                            <Image url="@../assets/icons/NatureButton.png" />
+                        </image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Nature" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+            </VBox>
+
+            <!--  Food -->
+            <VBox alignment="CENTER">
+                <StackPane alignment="CENTER">
+                    <Circle radius="60" fill="#D4A4F7"
+                            stroke="black" strokeWidth="1.5"/>
+                    <ImageView fitWidth="70" fitHeight="70" preserveRatio="true"
+                               onMouseClicked="#openFood"
+                               style="-fx-cursor: hand;">
+                        <image>
+                            <Image url="@../assets/icons/FoodButton.png" />
+                        </image>
+                    </ImageView>
+                </StackPane>
+                <Label text="Food" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <!--  Settings Button -->
+    <ImageView layoutX="870" layoutY="570"
+               fitWidth="70" fitHeight="70"
+               preserveRatio="true"
+               onMouseClicked="#openSettings"
+               style="-fx-cursor: hand;">
+        <image>
+            <Image url="@../assets/icons/SettingButton.png" />
+        </image>
+    </ImageView>
+
+    <!--  STATS Button -->
+    <Button text="STATS"
+            layoutX="760" layoutY="595"
+            onAction="#handleProfile"
+            prefWidth="100" prefHeight="35"
+            style="-fx-background-color: #66CCFF;
+                   -fx-border-color: black;
+                   -fx-border-width: 1.5;
+                   -fx-background-radius: 15;
+                   -fx-border-radius: 15;
+                   -fx-font-weight: bold;"/>
+</AnchorPane>
