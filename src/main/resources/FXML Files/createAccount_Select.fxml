@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.learneria.controller.CreateAccountSelectController"
+           prefWidth="683" prefHeight="683">
+
+    <!--  Background Image -->
+    <ImageView fitWidth="683" fitHeight="683"
+               preserveRatio="false">
+        <image>
+            <Image url="@/com/learneria/assets/backgrounds/Background.jpg" />
+        </image>
+    </ImageView>
+
+    <!--  Main Layout -->
+    <BorderPane prefWidth="683" prefHeight="683">
+
+        <!--  Back Arrow (Top Left) -->
+        <top>
+            <HBox alignment="TOP_LEFT">
+                <padding>
+                    <Insets top="15" right="15" bottom="0" left="15" />
+                </padding>
+                <ImageView fx:id="backArrow"
+                           fitWidth="35" fitHeight="35"
+                           onMouseClicked="#handleBack"
+                           style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@/com/learneria/assets/icons/BackArrow.png" />
+                    </image>
+                </ImageView>
+            </HBox>
+        </top>
+
+        <!-- Centered White Card -->
+        <center>
+            <VBox alignment="CENTER" spacing="15"
+                  prefWidth="350" prefHeight="420"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 15;
+                         -fx-border-color: black;
+                         -fx-border-width: 2;
+                         -fx-border-radius: 15;
+                         -fx-padding: 20;">
+                <!-- Title -->
+                <Label text="Papa’s Learnaria"
+                       style="-fx-font-size: 30;
+                              -fx-font-family: 'Josefin Sans';
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #2563eb;" />
+
+                <!-- Subtitle -->
+                <Label text="Account Type"
+                       style="-fx-font-size: 20;
+                              -fx-font-family: 'Josefin Sans';
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #3DC6E8;
+                              -fx-padding: 5 0 15 0;" />
+
+                <!-- Buttons -->
+                <VBox spacing="15" alignment="CENTER">
+                    <Button text="Student" onAction="#handleStudent"
+                            prefWidth="200" prefHeight="35"
+                            style="-fx-background-color: #66CCFF;
+                                   -fx-border-color: black;
+                                   -fx-border-width: 1.5;
+                                   -fx-background-radius: 15;
+                                   -fx-border-radius: 15;
+                                   -fx-text-fill: black;
+                                   -fx-font-weight: bold;" />
+
+                    <Button text="Teacher" onAction="#handleTeacher"
+                            prefWidth="200" prefHeight="35"
+                            style="-fx-background-color: #66CCFF;
+                                   -fx-border-color: black;
+                                   -fx-border-width: 1.5;
+                                   -fx-background-radius: 15;
+                                   -fx-border-radius: 15;
+                                   -fx-text-fill: black;
+                                   -fx-font-weight: bold;" />
+                </VBox>
+            </VBox>
+        </center>
+    </BorderPane>
+</StackPane>

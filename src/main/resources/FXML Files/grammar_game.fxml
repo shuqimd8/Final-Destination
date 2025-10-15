@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.GrammarGameController"
+            prefWidth="800" prefHeight="600"
+            style="-fx-background-color: #FAFAFA;">
+
+    <!-- Title -->
+    <Label text="Grammar Game"
+           layoutX="310" layoutY="20"
+           style="-fx-font-size: 26; -fx-font-weight: bold;"/>
+
+    <!-- Timer + Score -->
+    <Label fx:id="scoreLabel" text="Score: 0"
+           layoutX="50" layoutY="60"
+           style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+    <Label fx:id="timerLabel" text="Time: 120s"
+           layoutX="670" layoutY="60"
+           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #009688;"/>
+
+    <!-- Feedback -->
+    <Label fx:id="feedbackLabel"
+           text="Drag each word into the correct box!"
+           layoutX="180" layoutY="100"
+           prefWidth="440"
+           wrapText="true"
+           style="-fx-font-size: 16; -fx-text-fill: #3333FF; -fx-alignment: center;"/>
+
+    <!-- Draggable words -->
+    <Label fx:id="word1" text="Word1"
+           layoutX="200" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: #FFF59D; -fx-padding: 5;"/>
+    <Label fx:id="word2" text="Word2"
+           layoutX="400" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: #FFF59D; -fx-padding: 5;"/>
+    <Label fx:id="word3" text="Word3"
+           layoutX="600" layoutY="200"
+           style="-fx-font-size: 20; -fx-background-color: #FFF59D; -fx-padding: 5;"/>
+
+    <!-- Buckets -->
+    <Rectangle fx:id="bucketNoun" layoutX="150" layoutY="400"
+               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Noun" layoutX="175" layoutY="510" style="-fx-font-size: 16;"/>
+
+    <Rectangle fx:id="bucketVerb" layoutX="350" layoutY="400"
+               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Verb" layoutX="380" layoutY="510" style="-fx-font-size: 16;"/>
+
+    <Rectangle fx:id="bucketAdjective" layoutX="550" layoutY="400"
+               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
+    <Label text="Adjective" layoutX="560" layoutY="510" style="-fx-font-size: 16;"/>
+
+    <!-- Back -->
+    <Button text="Back to Menu"
+            layoutX="20" layoutY="550"
+            prefWidth="120"
+            onAction="#handleBack"
+            style="-fx-font-size: 14; -fx-background-color: #E0E0E0;"/>
+</AnchorPane>

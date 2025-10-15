@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.learneria.controller.StudentDashboardController"
+      spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label text="🎓 Student Dashboard" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+
+    <Label text="Welcome, student!" fx:id="welcomeLabel"/>
+
+    <Button text="Logout" onAction="#handleLogout"/>
+
+</VBox>
