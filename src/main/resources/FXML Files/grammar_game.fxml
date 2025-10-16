@@ -7,7 +7,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.learneria.controller.GrammarGameController"
+            fx:controller="Controller.GrammarGameController"
             prefWidth="800" prefHeight="600"
             style="-fx-background-color: #FAFAFA;">
 
