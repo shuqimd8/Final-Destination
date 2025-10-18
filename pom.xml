@@ -19,7 +19,7 @@
 
     <dependencies>
 
-        <!-- 🪟 JavaFX modules -->
+        <!--  JavaFX modules -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -41,35 +41,35 @@
             <version>${javafx.version}</version>
         </dependency>
 
-        <!-- 🧠 SQLite JDBC driver -->
+        <!--  SQLite JDBC driver -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.46.0.1</version>
         </dependency>
 
-        <!-- 🪵 Logging -->
+        <!--  Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.36</version>
         </dependency>
 
-        <!-- ✅ HTTP Client (for API connections like Datamuse, Edamam, etc.) -->
+        <!--  HTTP Client (for API connections like Datamuse, Edamam, etc.) -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.12.0</version>
         </dependency>
 
-        <!-- ✅ JSON Parser (for API responses) -->
+        <!--  JSON Parser (for API responses) -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
 
-        <!-- 🧪 JUnit 5 (Testing) -->
+        <!--  JUnit 5  -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -83,17 +83,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- ✅ JUnit 5 (for unit testing) -->
+        <!--  JUnit 5 (for unit testing) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
@@ -119,7 +112,7 @@
     <build>
         <plugins>
 
-            <!-- ⚙️ Compiler plugin -->
+            <!-- Compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -129,7 +122,7 @@
                 </configuration>
             </plugin>
 
-            <!-- 🧪 Surefire (JUnit 5 support) -->
+            <!-- Surefire (JUnit 5 support) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -139,7 +132,7 @@
                 </configuration>
             </plugin>
 
-            <!-- 🚀 JavaFX Maven Plugin (to run app easily) -->
+            <!-- JavaFX Maven Plugin (to run app easily) -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>

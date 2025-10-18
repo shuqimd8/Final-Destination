@@ -9,10 +9,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         SceneManager.setStage(stage);
-        // Must include the correct resource path:
         SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Papa’s Learneria - Sign In");
     }
-
 
     public static void main(String[] args) {
         launch(args);
