@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.learneria"},{"l":"com.learneria.controller"},{"l":"com.learneria.utils"}];updateSearchResults();

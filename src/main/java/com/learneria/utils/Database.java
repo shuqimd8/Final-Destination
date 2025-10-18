@@ -6,8 +6,8 @@ import java.util.*;
 /**
  * Handles all SQLite database logic for Papa's Learneria.
  * Includes user management, score tracking, and word retrieval.
- * Supports manual & automatic API sync (Datamuse + Food + Nature)
- * ✅ Now extended to support Teacher-Class system
+ * Supports manual &amp; automatic API sync (Datamuse + Food + Nature)
+ *  Now extended to support Teacher-Class system
  */
 public class Database {
     private static Database instance;
