@@ -10,8 +10,8 @@ import java.util.*;
 
 public class TeacherDashboardController {
 
-    @FXML private ListView<String> classListView;
-    @FXML private Label teacherNameLabel;
+    @FXML public ListView<String> classListView;
+    @FXML public Label teacherNameLabel;
 
     private String teacherUsername;
 
@@ -117,6 +117,11 @@ public class TeacherDashboardController {
     @FXML
     private void handleBack() {
         SceneManager.switchScene("/com/learneria/fxml/teacher_main.fxml", "Teacher Main Menu");
+    }
+
+    void setTestingLabels(Label teacherLabel, ListView<String> listView) {
+        this.teacherNameLabel = teacherLabel;
+        this.classListView = listView;
     }
 
 }

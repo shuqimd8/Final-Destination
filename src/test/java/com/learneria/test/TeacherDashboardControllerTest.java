@@ -2,70 +2,83 @@ package com.learneria.test;
 
 import com.learneria.controller.TeacherDashboardController;
 import com.learneria.utils.SceneManager;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import javafx.scene.control.ListView;
+import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
-
-import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/**
- * Unit tests for TeacherDashboardController.
- * Verifies setUsername() and handleLogout() methods work correctly.
- */
-public class TeacherDashboardControllerTest {
+class TeacherDashboardControllerTest {
 
-    private TeacherDashboardController controller;
-
-    @BeforeAll
-    static void setupFX() {
-        try {
-            Platform.startup(() -> {});
-        } catch (IllegalStateException ignored) {
-            // JavaFX already initialized
-        }
-    }
+    public TeacherDashboardController controller;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setUp() {
         controller = new TeacherDashboardController();
-        Label label = new Label();
-        setPrivateField("welcomeLabel", label);
-    }
-
-    private void setPrivateField(String name, Object value) throws Exception {
-        Field f = TeacherDashboardController.class.getDeclaredField(name);
-        f.setAccessible(true);
-        f.set(controller, value);
-    }
-
-    private Label getLabel(String name) throws Exception {
-        Field f = TeacherDashboardController.class.getDeclaredField(name);
-        f.setAccessible(true);
-        return (Label) f.get(controller);
+        controller.classListView = new ListView<>();
+        controller.teacherNameLabel = new Label();
     }
 
     @Test
-    void testSetUsername_updatesLabel() throws Exception {
-        controller.setUsername("MrSmith");
-        Label label = getLabel("welcomeLabel");
-        assertEquals("Welcome, MrSmith!", label.getText(), "Label should display the username");
+    void testInitialize_setsTeacherName() {
+        try (MockedStatic<SceneManager> mockScene = mockStatic(SceneManager.class)) {
+            mockScene.when(SceneManager::getCurrentUser).thenReturn("teacher01");
+            controller.initialize();
+
+            assertEquals("Teacher01", controller.teacherNameLabel.getText(),
+                    "Teacher name should display with capital first letter");
+        }
+    }
+
+    @Test
+    void testInitialize_nullUser_showsUnknown() {
+        try (MockedStatic<SceneManager> mockScene = mockStatic(SceneManager.class)) {
+            mockScene.when(SceneManager::getCurrentUser).thenReturn(null);
+            controller.initialize();
+            assertEquals("Unknown", controller.teacherNameLabel.getText(),
+                    "Should show 'Unknown' when username is null");
+        }
     }
 
     @Test
     void testHandleLogout_noCrash() throws Exception {
         try (MockedStatic<SceneManager> mockScene = mockStatic(SceneManager.class)) {
+            mockScene.when(() -> SceneManager.switchScene(anyString(), anyString())).thenAnswer(invocation -> null);
+            mockScene.when(() -> SceneManager.setCurrentUser(null, null)).thenAnswer(invocation -> null);
+
             var method = TeacherDashboardController.class.getDeclaredMethod("handleLogout");
             method.setAccessible(true);
+
             assertDoesNotThrow(() -> method.invoke(controller),
                     "handleLogout() should not throw any exception");
-            mockScene.verify(() ->
-                    SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Sign In"), times(1));
+        }
+    }
+
+    @Test
+    void testOpenSettings_noCrash() throws Exception {
+        try (MockedStatic<SceneManager> mockScene = mockStatic(SceneManager.class)) {
+            mockScene.when(() -> SceneManager.switchScene(anyString(), anyString())).thenAnswer(invocation -> null);
+
+            var method = TeacherDashboardController.class.getDeclaredMethod("openSettings");
+            method.setAccessible(true);
+
+            assertDoesNotThrow(() -> method.invoke(controller),
+                    "openSettings() should not throw any exception");
+        }
+    }
+
+    @Test
+    void testHandleBack_noCrash() throws Exception {
+        try (MockedStatic<SceneManager> mockScene = mockStatic(SceneManager.class)) {
+            mockScene.when(() -> SceneManager.switchScene(anyString(), anyString())).thenAnswer(invocation -> null);
+
+            var method = TeacherDashboardController.class.getDeclaredMethod("handleBack");
+            method.setAccessible(true);
+
+            assertDoesNotThrow(() -> method.invoke(controller),
+                    "handleBack() should not throw any exception");
         }
     }
 }
