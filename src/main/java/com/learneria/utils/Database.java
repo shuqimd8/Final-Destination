@@ -535,4 +535,77 @@ public class Database {
             e.printStackTrace();
         }
     }
+    /** Rename a class (by teacher + old name) */
+    public static void renameClass(String teacherUsername, String oldName, String newName) {
+        String sql = "UPDATE classes SET class_name = ? WHERE teacher_username = ? AND class_name = ?";
+        try (PreparedStatement ps = connect().prepareStatement(sql)) {
+            ps.setString(1, newName);
+            ps.setString(2, teacherUsername);
+            ps.setString(3, oldName);
+            ps.executeUpdate();
+            System.out.println("✏️ Renamed class from " + oldName + " → " + newName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** Delete a class (and optionally detach its students) */
+    public static void deleteClass(String teacherUsername, String className) {
+        String code = null;
+        try (PreparedStatement ps = connect().prepareStatement(
+                "SELECT class_code FROM classes WHERE teacher_username = ? AND class_name = ?")) {
+            ps.setString(1, teacherUsername);
+            ps.setString(2, className);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) code = rs.getString("class_code");
+        } catch (SQLException e) { e.printStackTrace(); }
+
+        if (code == null) return;
+
+        // Unlink students from class first
+        try (PreparedStatement ps1 = connect().prepareStatement(
+                "UPDATE users SET class_code = NULL WHERE class_code = ?")) {
+            ps1.setString(1, code);
+            ps1.executeUpdate();
+        } catch (SQLException e) { e.printStackTrace(); }
+
+        // Delete class entry
+        try (PreparedStatement ps2 = connect().prepareStatement(
+                "DELETE FROM classes WHERE class_code = ?")) {
+            ps2.setString(1, code);
+            ps2.executeUpdate();
+            System.out.println("🗑️ Deleted class " + className + " (" + code + ")");
+        } catch (SQLException e) { e.printStackTrace(); }
+    }
+
+    /** Simple helper: returns only class names for this teacher */
+    public static List<String> getClassNamesByTeacher(String teacherUsername) {
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT class_name FROM classes WHERE teacher_username = ?";
+        try (PreparedStatement ps = connect().prepareStatement(sql)) {
+            ps.setString(1, teacherUsername);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) list.add(rs.getString("class_name"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    /** Get the player's highest Grammar score (already stored in 'scores' table). */
+    public static int getHighScore(String username, String game) {
+        String sql = "SELECT MAX(score) AS max_score FROM scores WHERE username = ? AND game = ?";
+        try (Connection conn = connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, game);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("max_score");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // default if no record found
+    }
+
 }

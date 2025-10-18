@@ -2,31 +2,59 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.learneria.controller.TeacherReportsController"
-            prefWidth="1000" prefHeight="650"
-            style="-fx-background-color: #fefcf6;">
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: white;">
 
-    <!-- Title -->
-    <Label text="Class Performance Overview"
-           layoutX="320" layoutY="30"
-           style="-fx-font-size: 30; -fx-font-family: 'Comic Sans MS'; -fx-text-fill: #2b2b2b;"/>
+    <!--  Background -->
+    <ImageView fitWidth="1000" fitHeight="700" opacity="0.15" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/Background.jpg" />
+        </image>
+    </ImageView>
 
-    <!-- Back Button -->
-    <Button text="← Back"
-            layoutX="40" layoutY="40"
-            onAction="#handleBack"
-            style="-fx-background-color: #c3f1ff; -fx-font-weight: bold;"/>
+    <!--  Top Bar -->
+    <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 20;">
+        <!-- Back Button -->
+        <Button onAction="#handleBack" style="-fx-background-color: transparent; -fx-cursor: hand;">
+            <graphic>
+                <ImageView fitWidth="40" fitHeight="40">
+                    <image>
+                        <Image url="@../assets/icons/BackArrow.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
 
-    <!-- Class Overview Table -->
-    <VBox layoutX="60" layoutY="100" spacing="10" alignment="CENTER">
-        <Label text="📘 Class Overview"
-               style="-fx-font-size: 20; -fx-font-weight: bold; -fx-background-color: #fff59d; -fx-padding: 5;"/>
+        <!-- Title -->
+        <Label text="Class Performance Overview"
+               style="-fx-font-family: 'Josefin Sans';
+                      -fx-font-size: 30;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #0047AB;"/>
+
+        <Pane HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!--  Class Overview Section -->
+    <VBox layoutX="60" layoutY="120" spacing="12" alignment="CENTER">
+        <Label text=" Class Overview"
+               style="-fx-font-family: 'Jost'; -fx-font-weight: bold;
+                      -fx-font-size: 20; -fx-background-color: #FFEB70;
+                      -fx-border-color: black; -fx-padding: 6 12;
+                      -fx-background-radius: 12; -fx-border-radius: 12;"/>
+
         <TableView fx:id="classTable"
-                   prefWidth="880" prefHeight="220"
-                   style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;">
+                   prefWidth="880" prefHeight="250"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 15;
+                          -fx-background-color: white; -fx-border-color: black;
+                          -fx-border-radius: 15; -fx-background-radius: 15;
+                          -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 4);">
             <columns>
                 <TableColumn fx:id="colClassName" text="Class Name" prefWidth="220"/>
                 <TableColumn fx:id="colClassCode" text="Class Code" prefWidth="200"/>
@@ -36,18 +64,30 @@
         </TableView>
     </VBox>
 
-    <!-- Right Side Panels -->
-    <HBox layoutX="60" layoutY="370" spacing="30">
-        <!-- Top Students -->
-        <VBox spacing="8" prefWidth="420" style="-fx-background-color: #fff9c4; -fx-padding: 10; -fx-border-radius: 10; -fx-background-radius: 10;">
-            <Label text="⭐ Top Students" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
-            <ListView fx:id="topStudentsList" prefHeight="180"/>
+    <!-- Performance Panels -->
+    <HBox layoutX="60" layoutY="410" spacing="40" alignment="CENTER">
+        <!-- ⭐ Top Students -->
+        <VBox spacing="10" prefWidth="420"
+              style="-fx-background-color: #FFF9C4; -fx-border-color: black;
+                     -fx-background-radius: 20; -fx-border-radius: 20;
+                     -fx-padding: 12; -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 4);">
+            <Label text=" Top Students"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <ListView fx:id="topStudentsList" prefHeight="180"
+                      style="-fx-font-family: 'Jost'; -fx-font-size: 15;
+                             -fx-background-radius: 15; -fx-border-radius: 15;"/>
         </VBox>
 
-        <!-- Game Stats -->
-        <VBox spacing="8" prefWidth="420" style="-fx-background-color: #c8e6c9; -fx-padding: 10; -fx-border-radius: 10; -fx-background-radius: 10;">
-            <Label text="🎮 Game Averages" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
-            <ListView fx:id="gameStatsList" prefHeight="180"/>
+        <!--  Game Averages -->
+        <VBox spacing="10" prefWidth="420"
+              style="-fx-background-color: #C8E6C9; -fx-border-color: black;
+                     -fx-background-radius: 20; -fx-border-radius: 20;
+                     -fx-padding: 12; -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 4);">
+            <Label text=" Game Averages"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <ListView fx:id="gameStatsList" prefHeight="180"
+                      style="-fx-font-family: 'Jost'; -fx-font-size: 15;
+                             -fx-background-radius: 15; -fx-border-radius: 15;"/>
         </VBox>
     </HBox>
 

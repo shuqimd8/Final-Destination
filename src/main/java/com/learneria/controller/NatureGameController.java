@@ -8,28 +8,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
 
-/**
- * NatureGameController — drag-and-drop Nature sorting game.
- * Categories: Animal, Plant, Non-Living, Weather.
- * Duration: 2 minutes. Tracks score, correct/incorrect, and average speed.
- */
 public class NatureGameController {
 
-    // ====== FXML UI ======
-    @FXML private Label word1, word2, word3;
-    @FXML private Label feedbackLabel, scoreLabel, timerLabel;
-    @FXML private Rectangle bucketAnimal, bucketPlant, bucketNonLiving, bucketWeather;
+    @FXML private Label word1;
+    @FXML private ImageView bucketAnimal, bucketPlant, bucketNonLiving, bucketWeather;
+    @FXML private Label feedbackLabel, scoreLabel, timerLabel, highScoreLabel, usernameLabel;
 
-    // ====== Game Logic ======
     private final String[] categories = {"Animal", "Plant", "Non-Living", "Weather"};
     private final Map<Label, String> wordCategoryMap = new HashMap<>();
     private final Map<String, List<String>> wordPools = new HashMap<>();
@@ -41,26 +32,31 @@ public class NatureGameController {
 
     private long startTime;
     private AnimationTimer timer;
-    private long timeRemaining = 120; // seconds
+    private long timeRemaining = 120;
     private final Random random = new Random();
+    private String username;
 
-    // ============================
-    // INITIALISE
-    // ============================
     @FXML
     public void initialize() {
-        System.out.println("🌿 Nature Game starting...");
+        username = SceneManager.getCurrentUser();
+
+        if (usernameLabel != null && username != null)
+            usernameLabel.setText(username);
+
+        if (highScoreLabel != null) {
+            int highScore = Database.getHighScore(username, "Nature");
+            highScoreLabel.setText(String.valueOf(highScore));
+        }
+
+        scoreLabel.setText("0");
+        feedbackLabel.setText("Drag the word into the correct bucket!");
+
         setupWordPools();
-        setupWords();
+        loadWord(word1);
         setupDragAndDrop();
         startTimer();
-        updateScoreDisplay();
-        feedbackLabel.setText("Drag nature words into the correct category!");
     }
 
-    // ============================
-    // TIMER (2 minutes)
-    // ============================
     private void startTimer() {
         startTime = System.nanoTime();
         timer = new AnimationTimer() {
@@ -81,20 +77,16 @@ public class NatureGameController {
         timer.start();
     }
 
-    // ============================
-    // WORD POOL MANAGEMENT
-    // ============================
     private void setupWordPools() {
         for (String cat : categories) {
             List<String> pool = new ArrayList<>(Database.getAllWords(cat));
 
-            // ✅ fallback defaults if database empty
             if (pool.isEmpty()) {
                 switch (cat) {
-                    case "Animal" -> pool.addAll(List.of("Dog", "Cat", "Bird", "Fish"));
+                    case "Animal" -> pool.addAll(List.of("Lion", "Tiger", "Elephant", "Monkey"));
                     case "Plant" -> pool.addAll(List.of("Tree", "Flower", "Grass", "Leaf"));
-                    case "Non-Living" -> pool.addAll(List.of("Rock", "Water", "Air", "Fire"));
-                    case "Weather" -> pool.addAll(List.of("Rain", "Sun", "Cloud", "Wind"));
+                    case "Non-Living" -> pool.addAll(List.of("Rock", "Fire", "Water", "Wind"));
+                    case "Weather" -> pool.addAll(List.of("Rain", "Snow", "Sun", "Cloud"));
                 }
             }
 
@@ -110,56 +102,27 @@ public class NatureGameController {
             pool = new ArrayList<>(Database.getAllWords(category));
             if (pool.isEmpty()) {
                 switch (category) {
-                    case "Animal" -> pool.addAll(List.of("Dog", "Cat", "Bird", "Fish"));
+                    case "Animal" -> pool.addAll(List.of("Lion", "Tiger", "Elephant", "Monkey"));
                     case "Plant" -> pool.addAll(List.of("Tree", "Flower", "Grass", "Leaf"));
-                    case "Non-Living" -> pool.addAll(List.of("Rock", "Water", "Air", "Fire"));
-                    case "Weather" -> pool.addAll(List.of("Rain", "Sun", "Cloud", "Wind"));
+                    case "Non-Living" -> pool.addAll(List.of("Rock", "Fire", "Water", "Wind"));
+                    case "Weather" -> pool.addAll(List.of("Rain", "Snow", "Sun", "Cloud"));
                 }
             }
             Collections.shuffle(pool);
             wordPools.put(category, pool);
         }
-
         return pool.remove(0);
-    }
-
-    // ============================
-    // INITIAL WORD SETUP
-    // ============================
-    private void setupWords() {
-        loadWord(word1);
-        loadWord(word2);
-        loadWord(word3);
     }
 
     private void loadWord(Label label) {
         String category = categories[random.nextInt(categories.length)];
         String word = getNextWord(category);
-
-        int safetyCounter = 0;
-        while (isWordAlreadyVisible(word) && safetyCounter++ < 5) {
-            category = categories[random.nextInt(categories.length)];
-            word = getNextWord(category);
-        }
-
         label.setText(word);
         wordCategoryMap.put(label, category);
     }
 
-    private boolean isWordAlreadyVisible(String word) {
-        return word.equals(word1.getText()) ||
-                word.equals(word2.getText()) ||
-                word.equals(word3.getText());
-    }
-
-    // ============================
-    // DRAG & DROP LOGIC
-    // ============================
     private void setupDragAndDrop() {
         setupDrag(word1);
-        setupDrag(word2);
-        setupDrag(word3);
-
         setupBucket(bucketAnimal, "Animal");
         setupBucket(bucketPlant, "Plant");
         setupBucket(bucketNonLiving, "Non-Living");
@@ -176,13 +139,16 @@ public class NatureGameController {
         });
     }
 
-    private void setupBucket(Rectangle bucket, String category) {
+    private void setupBucket(javafx.scene.Node bucket, String category) {
         bucket.setOnDragOver(event -> {
             if (event.getGestureSource() instanceof Label && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.MOVE);
+                bucket.setStyle("-fx-effect: dropshadow(gaussian, #40FFE2, 25, 0.5, 0, 0);");
             }
             event.consume();
         });
+
+        bucket.setOnDragExited(event -> bucket.setStyle(""));
 
         bucket.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
@@ -197,38 +163,31 @@ public class NatureGameController {
                 if (correctCategory.equalsIgnoreCase(category)) {
                     score += 10;
                     correctCount++;
-                    feedbackLabel.setText("✅ Correct! " + word + " → " + category);
+                    feedbackLabel.setText("Correct! " + word + " → " + category);
                 } else {
                     incorrectCount++;
-                    feedbackLabel.setText("❌ Incorrect! " + word + " is a " + correctCategory);
+                    feedbackLabel.setText("Incorrect! " + word + " is a " + correctCategory);
                 }
 
-                updateScoreDisplay();
+                scoreLabel.setText(String.valueOf(score));
                 loadWord(source);
                 success = true;
             }
 
+            bucket.setStyle("");
             event.setDropCompleted(success);
             event.consume();
         });
     }
 
-    private void updateScoreDisplay() {
-        scoreLabel.setText("Score: " + score);
-    }
-
-    // ============================
-    // GAME OVER — show GameOverController
-    // ============================
     private void handleGameOver() {
-        if (timer != null) timer.stop();
         double avgSpeed = totalAnswers > 0 ? (120.0 / totalAnswers) : 0;
+        Database.updateScore(SceneManager.getCurrentUser(), "Nature", score, correctCount, incorrectCount, avgSpeed);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/learneria/fxml/game_over.fxml"));
             Parent root = loader.load();
 
-            // ✅ Pass stats to GameOverController
             GameOverController controller = loader.getController();
             controller.setStats(correctCount, incorrectCount, score, avgSpeed);
 
@@ -237,25 +196,11 @@ public class NatureGameController {
             stage.setScene(scene);
             stage.setTitle("Game Over");
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // ✅ Save to database
-        Database.updateScore(
-                SceneManager.getCurrentUser(),
-                "Nature",
-                score,
-                correctCount,
-                incorrectCount,
-                avgSpeed
-        );
     }
 
-    // ============================
-    // BACK TO MENU
-    // ============================
     @FXML
     private void handleBack() {
         if (timer != null) timer.stop();

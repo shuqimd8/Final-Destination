@@ -27,7 +27,7 @@
                       -fx-text-fill: #2563eb;
                       -fx-padding: 30 0 0 0;" />
 
-        <!-- 💗 Stats Card -->
+        <!--  Stats Card -->
         <VBox prefWidth="800"
               style="-fx-background-color: white;
                      -fx-border-color: black;

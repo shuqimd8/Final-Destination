@@ -8,25 +8,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
 
-/**
- * GrammarGameController — drag-and-drop Grammar sorting game.
- * Duration: 2 minutes. Tracks score, correct/incorrect, average speed.
- */
 public class GrammarGameController {
 
-    // ====== FXML UI ======
-    @FXML private Label word1, word2, word3;
-    @FXML private Rectangle bucketNoun, bucketVerb, bucketAdjective;
-    @FXML private Label feedbackLabel, scoreLabel, timerLabel;
+    @FXML private Label word1;
+    @FXML private ImageView bucketNoun, bucketVerb, bucketAdjective;
+    @FXML private Label feedbackLabel, scoreLabel, timerLabel, highScoreLabel, usernameLabel;
 
-    // ====== Game Logic ======
     private final String[] categories = {"Noun", "Verb", "Adjective"};
     private final Map<Label, String> wordCategoryMap = new HashMap<>();
     private final Map<String, List<String>> wordPools = new HashMap<>();
@@ -40,22 +34,32 @@ public class GrammarGameController {
     private AnimationTimer timer;
     private long timeRemaining = 120; // seconds
     private final Random random = new Random();
+    private String username;
 
-    // ============================
-    // INITIALIZE
-    // ============================
     @FXML
     public void initialize() {
-        System.out.println("🎮 Grammar Game starting...");
+        username = SceneManager.getCurrentUser();
+
+        // 🐝 Display logged in user's name
+        if (usernameLabel != null && username != null)
+            usernameLabel.setText(username);
+
+        // 🏆 Fetch real high score from DB
+        if (highScoreLabel != null) {
+            int highScore = Database.getHighScore(username, "Grammar");
+            highScoreLabel.setText(String.valueOf(highScore));
+        }
+
+        // Reset score display
+        scoreLabel.setText("0");
+
+        System.out.println("🎮 Grammar Game starting for: " + username);
         setupWordPools();
-        setupWords();
+        loadWord(word1);
         setupDragAndDrop();
         startTimer();
     }
 
-    // ============================
-    // TIMER (2 minutes)
-    // ============================
     private void startTimer() {
         startTime = System.nanoTime();
         timer = new AnimationTimer() {
@@ -76,14 +80,13 @@ public class GrammarGameController {
         timer.start();
     }
 
-    // ============================
-    // WORD POOL MANAGEMENT
-    // ============================
     private void setupWordPools() {
         for (String cat : categories) {
             List<String> pool = Database.getAllWords(cat);
-            Collections.shuffle(pool);
-            wordPools.put(cat, new ArrayList<>(pool));
+            if (pool != null) {
+                Collections.shuffle(pool);
+                wordPools.put(cat, new ArrayList<>(pool));
+            }
         }
     }
 
@@ -97,39 +100,15 @@ public class GrammarGameController {
         return pool.remove(0);
     }
 
-    // ============================
-    // INITIAL WORD SETUP
-    // ============================
-    private void setupWords() {
-        loadWord(word1);
-        loadWord(word2);
-        loadWord(word3);
-    }
-
     private void loadWord(Label label) {
         String category = categories[random.nextInt(categories.length)];
         String word = getNextWord(category);
-
-        while (isWordAlreadyVisible(word)) {
-            word = getNextWord(category);
-        }
-
         label.setText(word);
         wordCategoryMap.put(label, category);
     }
 
-    private boolean isWordAlreadyVisible(String word) {
-        return word.equals(word1.getText()) || word.equals(word2.getText()) || word.equals(word3.getText());
-    }
-
-    // ============================
-    // DRAG & DROP LOGIC
-    // ============================
     private void setupDragAndDrop() {
         setupDrag(word1);
-        setupDrag(word2);
-        setupDrag(word3);
-
         setupBucket(bucketNoun, "Noun");
         setupBucket(bucketVerb, "Verb");
         setupBucket(bucketAdjective, "Adjective");
@@ -145,13 +124,16 @@ public class GrammarGameController {
         });
     }
 
-    private void setupBucket(Rectangle bucket, String category) {
+    private void setupBucket(javafx.scene.Node bucket, String category) {
         bucket.setOnDragOver(event -> {
             if (event.getGestureSource() instanceof Label && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.MOVE);
+                bucket.setStyle("-fx-effect: dropshadow(gaussian, #40FFE2, 25, 0.5, 0, 0);");
             }
             event.consume();
         });
+
+        bucket.setOnDragExited(event -> bucket.setStyle(""));
 
         bucket.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
@@ -172,27 +154,27 @@ public class GrammarGameController {
                     feedbackLabel.setText("❌ " + word + " is not a " + category + "!");
                 }
 
-                scoreLabel.setText("Score: " + score);
+                scoreLabel.setText(String.valueOf(score));
                 loadWord(source);
                 success = true;
             }
 
+            bucket.setStyle(""); // reset glow
             event.setDropCompleted(success);
             event.consume();
         });
     }
 
-    // ============================
-    // GAME OVER (Pass stats to next scene)
-    // ============================
     private void handleGameOver() {
         double avgSpeed = totalAnswers > 0 ? (120.0 / totalAnswers) : 0;
+
+        Database.updateScore(SceneManager.getCurrentUser(),
+                "Grammar", score, correctCount, incorrectCount, avgSpeed);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/learneria/fxml/game_over.fxml"));
             Parent root = loader.load();
 
-            // ✅ Pass stats to GameOverController
             GameOverController controller = loader.getController();
             controller.setStats(correctCount, incorrectCount, score, avgSpeed);
 
@@ -201,23 +183,14 @@ public class GrammarGameController {
             stage.setScene(scene);
             stage.setTitle("Game Over");
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Save to database
-        Database.updateScore(SceneManager.getCurrentUser(), "Grammar", score, correctCount, incorrectCount, avgSpeed);
     }
 
-    // ============================
-    // BACK TO MENU
-    // ============================
     @FXML
     private void handleBack() {
         if (timer != null) timer.stop();
         SceneManager.goBackToDashboard();
     }
 }
-
-

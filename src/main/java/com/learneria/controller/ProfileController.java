@@ -33,7 +33,7 @@ public class ProfileController {
                 stmt1.setString(1, username);
                 ResultSet rs1 = stmt1.executeQuery();
                 if (rs1.next()) {
-                    totalGamesLabel.setText("🎮 Total Games: " + rs1.getInt("total"));
+                    totalGamesLabel.setText(String.valueOf(rs1.getInt("total")));
                 }
             }
 
@@ -43,11 +43,11 @@ public class ProfileController {
                 stmt2.setString(1, username);
                 ResultSet rs2 = stmt2.executeQuery();
                 if (rs2.next()) {
-                    avgScoreLabel.setText("📊 Average Score: " + rs2.getInt("avgScore"));
+                    avgScoreLabel.setText(String.valueOf(rs2.getInt("avgScore")));
                 }
             }
 
-            // Highest score per game
+            // High scores
             setHighScore(conn, username, "Food", foodHighLabel);
             setHighScore(conn, username, "Nature", natureHighLabel);
             setHighScore(conn, username, "Grammar", grammarHighLabel);
@@ -64,22 +64,17 @@ public class ProfileController {
             stmt.setString(2, game);
             ResultSet rs = stmt.executeQuery();
             if (rs.next() && rs.getInt("high") > 0) {
-                label.setText(game + " High: " + rs.getInt("high"));
+                label.setText(String.valueOf(rs.getInt("high")));
             } else {
-                label.setText(game + " High: -");
+                label.setText("-");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Handle Back button → Return to the correct dashboard (teacher/student)
-     */
     @FXML
     private void handleBack() {
         SceneManager.goBackToDashboard();
     }
 }
-
-

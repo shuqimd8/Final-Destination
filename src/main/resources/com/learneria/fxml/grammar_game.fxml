@@ -1,65 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.geometry.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21"
+<AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.learneria.controller.GrammarGameController"
-            prefWidth="800" prefHeight="600"
-            style="-fx-background-color: #FAFAFA;">
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: #FFFFFF;">
 
-    <!-- Title -->
-    <Label text="Grammar Game"
-           layoutX="310" layoutY="20"
-           style="-fx-font-size: 26; -fx-font-weight: bold;"/>
+    <!--  Background pattern -->
+    <ImageView fitWidth="1000" fitHeight="700" opacity="0.15" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/background.jpg" />
+        </image>
+    </ImageView>
 
-    <!-- Timer + Score -->
-    <Label fx:id="scoreLabel" text="Score: 0"
-           layoutX="50" layoutY="60"
-           style="-fx-font-size: 16; -fx-font-weight: bold;"/>
-    <Label fx:id="timerLabel" text="Time: 120s"
-           layoutX="670" layoutY="60"
-           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #009688;"/>
+    <!--  Back arrow -->
+    <Button fx:id="backButton"
+            layoutX="40" layoutY="40"
+            prefWidth="60" prefHeight="60"
+            onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-cursor: hand;">
+        <graphic>
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@../assets/icons/BackArrow.png"/>
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
 
-    <!-- Feedback -->
+    <!--  Title -->
+    <Label text="Papa’s Learneria"
+           layoutX="380" layoutY="45"
+           style="-fx-font-family: 'Josefin Sans';
+                  -fx-font-size: 34;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #0047AB;"/>
+
+    <!--  Profile Card (top-right) -->
+    <VBox layoutX="785" layoutY="40" alignment="CENTER"
+          spacing="4"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 15;
+                 -fx-border-color: black;
+                 -fx-border-radius: 15;
+                 -fx-padding: 8;">
+        <Label fx:id="usernameLabel" text="Jake"
+               style="-fx-font-family: 'Jost';
+                      -fx-font-size: 16;
+                      -fx-font-weight: bold;"/>
+        <Label text="Busy Bee"
+               style="-fx-font-family: 'Jost';
+                      -fx-font-size: 14;
+                      -fx-text-fill: #333;"/>
+        <ImageView fitWidth="36" fitHeight="36" preserveRatio="true">
+            <image>
+                <Image url="@../assets/icons/BeeIcon.png"/>
+            </image>
+        </ImageView>
+    </VBox>
+
+    <!--  High score -->
+    <Label text="HIGH SCORE:" layoutX="70" layoutY="150"
+           style="-fx-font-family: 'Jost';
+                  -fx-font-size: 20;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #0047AB;"/>
+    <Label fx:id="highScoreLabel" text="230" layoutX="220" layoutY="150"
+           style="-fx-font-family: 'Jost';
+                  -fx-font-size: 22;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #0047AB;"/>
+
+    <!-- Timer -->
+    <Label fx:id="timerLabel" text="2.39s"
+           layoutX="460" layoutY="130"
+           style="-fx-font-family: 'Jost';
+                  -fx-font-size: 42;
+                  -fx-font-weight: bold;"/>
+
+    <!--  Score -->
+    <Label text="Score:" layoutX="850" layoutY="150"
+           style="-fx-font-family: 'Jost';
+                  -fx-font-size: 20;
+                  -fx-font-weight: bold;"/>
+    <Label fx:id="scoreLabel" text="50" layoutX="920" layoutY="148"
+           style="-fx-font-family: 'Jost';
+                  -fx-font-size: 24;
+                  -fx-font-weight: bold;"/>
+
+    <!--  Word card -->
+    <Pane layoutX="250" layoutY="230" prefWidth="500" prefHeight="160"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 20;
+                 -fx-border-color: #C0C0C0;
+                 -fx-border-radius: 20;
+                 -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 3);">
+        <Line startX="20" startY="75" endX="480" endY="75"
+              stroke="#FF8888" strokeWidth="1.5"/>
+        <Line startX="20" startY="105" endX="480" endY="105"
+              stroke="#6699FF" strokeWidth="1.5"/>
+
+        <Label fx:id="word1" text="Jump"
+               layoutX="165" layoutY="45"
+               style="-fx-font-family: 'Josefin Sans';
+                      -fx-font-size: 64;
+                      -fx-text-fill: #000000;"/>
+    </Pane>
+
+    <!--  Feedback -->
     <Label fx:id="feedbackLabel"
-           text="Drag each word into the correct box!"
-           layoutX="180" layoutY="100"
-           prefWidth="440"
-           wrapText="true"
-           style="-fx-font-size: 16; -fx-text-fill: #3333FF; -fx-alignment: center;"/>
-
-    <!-- Draggable words -->
-    <Label fx:id="word1" text="Word1"
-           layoutX="200" layoutY="200"
-           style="-fx-font-size: 20; -fx-background-color: #FFF59D; -fx-padding: 5;"/>
-    <Label fx:id="word2" text="Word2"
-           layoutX="400" layoutY="200"
-           style="-fx-font-size: 20; -fx-background-color: #FFF59D; -fx-padding: 5;"/>
-    <Label fx:id="word3" text="Word3"
-           layoutX="600" layoutY="200"
-           style="-fx-font-size: 20; -fx-background-color: #FFF59D; -fx-padding: 5;"/>
+           text="Drag the word into the correct bucket!"
+           layoutX="270" layoutY="420" prefWidth="460"
+           style="-fx-font-family: 'Jost';
+                  -fx-font-size: 18;
+                  -fx-text-fill: #3333FF;
+                  -fx-alignment: center;"/>
 
     <!-- Buckets -->
-    <Rectangle fx:id="bucketNoun" layoutX="150" layoutY="400"
-               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
-    <Label text="Noun" layoutX="175" layoutY="510" style="-fx-font-size: 16;"/>
+    <HBox layoutY="520" prefWidth="1000" alignment="CENTER" spacing="120">
 
-    <Rectangle fx:id="bucketVerb" layoutX="350" layoutY="400"
-               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
-    <Label text="Verb" layoutX="380" layoutY="510" style="-fx-font-size: 16;"/>
+        <!-- Noun -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="bucketNoun" fitWidth="130" fitHeight="130" preserveRatio="true">
+                <image>
+                    <Image url="@../assets/icons/Bucket.png"/>
+                </image>
+            </ImageView>
+            <Label text="Noun"
+                   style="-fx-font-family: 'Jost';
+                          -fx-font-size: 22;
+                          -fx-font-weight: bold;"/>
+        </VBox>
 
-    <Rectangle fx:id="bucketAdjective" layoutX="550" layoutY="400"
-               width="100" height="100" fill="LIGHTGRAY" stroke="BLACK"/>
-    <Label text="Adjective" layoutX="560" layoutY="510" style="-fx-font-size: 16;"/>
+        <!-- Verb -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="bucketVerb" fitWidth="130" fitHeight="130" preserveRatio="true">
+                <image>
+                    <Image url="@../assets/icons/Bucket.png"/>
+                </image>
+            </ImageView>
+            <Label text="Verb"
+                   style="-fx-font-family: 'Jost';
+                          -fx-font-size: 22;
+                          -fx-font-weight: bold;"/>
+        </VBox>
 
-    <!-- Back -->
-    <Button text="Back to Menu"
-            layoutX="20" layoutY="550"
-            prefWidth="120"
-            onAction="#handleBack"
-            style="-fx-font-size: 14; -fx-background-color: #E0E0E0;"/>
+        <!--  Adjective -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="bucketAdjective" fitWidth="130" fitHeight="130" preserveRatio="true">
+                <image>
+                    <Image url="@../assets/icons/Bucket.png"/>
+                </image>
+            </ImageView>
+            <Label text="Adjective"
+                   style="-fx-font-family: 'Jost';
+                          -fx-font-size: 22;
+                          -fx-font-weight: bold;"/>
+        </VBox>
+    </HBox>
+
 </AnchorPane>

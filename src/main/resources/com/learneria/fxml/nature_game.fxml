@@ -2,59 +2,156 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.geometry.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21"
+<AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.learneria.controller.NatureGameController"
-            prefWidth="800" prefHeight="600"
-            style="-fx-background-color: #fffef7;">
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: #FFFFFF;">
+
+    <!-- Background -->
+    <ImageView fitWidth="1000" fitHeight="700" opacity="0.15" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/background.jpg"/>
+        </image>
+    </ImageView>
+
+    <!-- Back button -->
+    <Button fx:id="backButton"
+            layoutX="40" layoutY="40"
+            prefWidth="60" prefHeight="60"
+            onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-cursor: hand;">
+        <graphic>
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@../assets/icons/BackArrow.png"/>
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
 
     <!-- Title -->
-    <Label text="Nature Game" layoutX="320" layoutY="20"
-           style="-fx-font-size:26; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+    <Label text="Papa’s Learneria"
+           layoutX="380" layoutY="45"
+           style="-fx-font-family: 'Josefin Sans';
+                  -fx-font-size: 34;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #0047AB;"/>
 
-    <!-- Draggable Words -->
-    <Label fx:id="word1" text="Dog" layoutX="150" layoutY="200"
-           style="-fx-font-size:20; -fx-background-color:#FFF59D; -fx-padding:5; -fx-border-color:#f0d000; -fx-border-radius:4;"/>
-    <Label fx:id="word2" text="Tree" layoutX="350" layoutY="200"
-           style="-fx-font-size:20; -fx-background-color:#FFF59D; -fx-padding:5; -fx-border-color:#f0d000; -fx-border-radius:4;"/>
-    <Label fx:id="word3" text="Rock" layoutX="550" layoutY="200"
-           style="-fx-font-size:20; -fx-background-color:#FFF59D; -fx-padding:5; -fx-border-color:#f0d000; -fx-border-radius:4;"/>
+    <!-- Profile Card -->
+    <VBox layoutX="785" layoutY="40" alignment="CENTER" spacing="4"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 15;
+                 -fx-border-color: black;
+                 -fx-border-radius: 15;
+                 -fx-padding: 8;">
+        <Label fx:id="usernameLabel" text="User"
+               style="-fx-font-family: 'Jost';
+                      -fx-font-size: 16;
+                      -fx-font-weight: bold;"/>
+        <Label text="Nature Explorer"
+               style="-fx-font-family: 'Jost';
+                      -fx-font-size: 14;
+                      -fx-text-fill: #333;"/>
+        <ImageView fitWidth="36" fitHeight="36" preserveRatio="true">
+            <image>
+                <Image url="@../assets/icons/LeafIcon.png"/>
+            </image>
+        </ImageView>
+    </VBox>
 
-    <!-- Buckets -->
-    <Rectangle fx:id="bucketAnimal" layoutX="100" layoutY="400" width="120" height="100" fill="LIGHTGRAY" stroke="BLACK" arcWidth="12" arcHeight="12"/>
-    <Label text="Animal" layoutX="130" layoutY="510" style="-fx-font-size:14;"/>
+    <!-- High score -->
+    <Label text="HIGH SCORE:" layoutX="70" layoutY="150"
+           style="-fx-font-family: 'Jost'; -fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #0047AB;"/>
+    <Label fx:id="highScoreLabel" text="0" layoutX="220" layoutY="150"
+           style="-fx-font-family: 'Jost'; -fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #0047AB;"/>
 
-    <Rectangle fx:id="bucketPlant" layoutX="270" layoutY="400" width="120" height="100" fill="LIGHTGRAY" stroke="BLACK" arcWidth="12" arcHeight="12"/>
-    <Label text="Plant" layoutX="310" layoutY="510" style="-fx-font-size:14;"/>
+    <!-- Timer -->
+    <Label fx:id="timerLabel" text="120s"
+           layoutX="460" layoutY="130"
+           style="-fx-font-family: 'Jost'; -fx-font-size: 42; -fx-font-weight: bold;"/>
 
-    <Rectangle fx:id="bucketNonLiving" layoutX="440" layoutY="400" width="120" height="100" fill="LIGHTGRAY" stroke="BLACK" arcWidth="12" arcHeight="12"/>
-    <Label text="Non-Living" layoutX="455" layoutY="510" style="-fx-font-size:14;"/>
+    <!-- Score -->
+    <Label text="Score:" layoutX="850" layoutY="150"
+           style="-fx-font-family: 'Jost'; -fx-font-size: 20; -fx-font-weight: bold;"/>
+    <Label fx:id="scoreLabel" text="0" layoutX="920" layoutY="148"
+           style="-fx-font-family: 'Jost'; -fx-font-size: 24; -fx-font-weight: bold;"/>
 
-    <Rectangle fx:id="bucketWeather" layoutX="610" layoutY="400" width="120" height="100" fill="LIGHTGRAY" stroke="BLACK" arcWidth="12" arcHeight="12"/>
-    <Label text="Weather" layoutX="635" layoutY="510" style="-fx-font-size:14;"/>
+    <!-- Word Card -->
+    <Pane layoutX="250" layoutY="230" prefWidth="500" prefHeight="160"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 20;
+                 -fx-border-color: #C0C0C0;
+                 -fx-border-radius: 20;
+                 -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 3);">
+        <Line startX="20" startY="75" endX="480" endY="75" stroke="#FF8888" strokeWidth="1.5"/>
+        <Line startX="20" startY="105" endX="480" endY="105" stroke="#6699FF" strokeWidth="1.5"/>
 
-    <!-- Score + Feedback -->
-    <Label fx:id="scoreLabel" text="Score: 0" layoutX="40" layoutY="70"
-           style="-fx-font-size:16; -fx-font-weight:bold; -fx-text-fill:#000;"/>
+        <Label fx:id="word1" text="Tree"
+               layoutX="165" layoutY="45"
+               style="-fx-font-family: 'Josefin Sans';
+                      -fx-font-size: 64;
+                      -fx-text-fill: #000000;"/>
+    </Pane>
 
+    <!-- Feedback -->
     <Label fx:id="feedbackLabel"
-           text="Drag each word into the correct box!"
-           layoutX="180" layoutY="100"
-           prefWidth="440"
-           wrapText="true"
-           style="-fx-font-size: 16; -fx-text-fill: #3333FF; -fx-alignment: center;"/>
+           text="Drag the word into the correct bucket!"
+           layoutX="270" layoutY="420" prefWidth="460"
+           style="-fx-font-family: 'Jost';
+                  -fx-font-size: 18;
+                  -fx-text-fill: #3333FF;
+                  -fx-alignment: center;"/>
 
-    <!-- Timer Label -->
-    <Label fx:id="timerLabel" text="Time: 120s"
-           layoutX="650" layoutY="30"
-           style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+    <!-- Buckets (4 total) -->
+    <HBox layoutY="520" prefWidth="1000" alignment="CENTER" spacing="70">
 
-    <!-- Back -->
-    <Button text="Back to Menu"
-            layoutX="20" layoutY="550" prefWidth="120"
-            onAction="#handleBack"
-            style="-fx-background-color:#e0e0e0; -fx-font-weight:bold;"/>
+        <!-- Animal -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="bucketAnimal" fitWidth="110" fitHeight="110" preserveRatio="true">
+                <image>
+                    <Image url="@../assets/icons/Bucket.png"/>
+                </image>
+            </ImageView>
+            <Label text="Animal"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 20; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Plant -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="bucketPlant" fitWidth="110" fitHeight="110" preserveRatio="true">
+                <image>
+                    <Image url="@../assets/icons/Bucket.png"/>
+                </image>
+            </ImageView>
+            <Label text="Plant"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 20; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Non-Living -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="bucketNonLiving" fitWidth="110" fitHeight="110" preserveRatio="true">
+                <image>
+                    <Image url="@../assets/icons/Bucket.png"/>
+                </image>
+            </ImageView>
+            <Label text="Non-Living"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 20; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Weather -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="bucketWeather" fitWidth="110" fitHeight="110" preserveRatio="true">
+                <image>
+                    <Image url="@../assets/icons/Bucket.png"/>
+                </image>
+            </ImageView>
+            <Label text="Weather"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 20; -fx-font-weight: bold;"/>
+        </VBox>
+    </HBox>
 </AnchorPane>
-

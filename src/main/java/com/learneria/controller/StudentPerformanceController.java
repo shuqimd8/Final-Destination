@@ -35,9 +35,9 @@ public class StudentPerformanceController {
     private void loadStudentInfo() {
         Map<String, String> info = Database.getStudentInfo(studentUsername);
         if (info != null) {
-            studentNameLabel.setText("👩‍🎓 " + info.getOrDefault("name", studentUsername));
-            classCodeLabel.setText("🏫 Class: " + info.getOrDefault("class_code", "-"));
-            lastPlayedLabel.setText("🕒 Last Played: " + info.getOrDefault("last_played", "-"));
+            studentNameLabel.setText("Student:" + info.getOrDefault("name", studentUsername));
+            classCodeLabel.setText(" Class: " + info.getOrDefault("class_code", "-"));
+            lastPlayedLabel.setText(" Last Played: " + info.getOrDefault("last_played", "-"));
         }
     }
 

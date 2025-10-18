@@ -8,26 +8,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
 
 /**
- * FoodGameController — drag-and-drop food sorting game.
- * Categories: Fruit, Meat, Grain, Dairy.
- * Duration: 2 minutes.
+ *  FoodGameController
+ * Drag-and-drop sorting game for categories:
+ * Fruit, Meat, Grain, Dairy.
+ * Duration: 120 s, +10 points per correct answer.
  */
 public class FoodGameController {
 
-    // ====== FXML UI ======
-    @FXML public Label word1, word2, word3;
-    @FXML public Label scoreLabel, feedbackLabel, timerLabel;
-    @FXML public Rectangle bucketFruit, bucketMeat, bucketGrain, bucketDairy;
+    // ============================
+    //  FXML UI Elements
+    // ============================
+    @FXML private Label word1;
+    @FXML private Label scoreLabel, feedbackLabel, timerLabel, highScoreLabel, usernameLabel;
+    @FXML private ImageView bucketFruit, bucketMeat, bucketGrain, bucketDairy;
 
-    // ====== Game Logic ======
+    // ============================
+    //  Game State
+    // ============================
     private final String[] categories = {"Fruit", "Meat", "Grain", "Dairy"};
     private final Map<Label, String> wordCategoryMap = new HashMap<>();
     private final Map<String, List<String>> wordPools = new HashMap<>();
@@ -41,23 +46,36 @@ public class FoodGameController {
     private AnimationTimer timer;
     private long timeRemaining = 120; // seconds
     private final Random random = new Random();
+    private String username;
 
     // ============================
-    // INITIALISE
+    //  INITIALISE
     // ============================
     @FXML
     public void initialize() {
-        System.out.println("🍎 Food Game starting...");
+        username = SceneManager.getCurrentUser();
+
+        if (usernameLabel != null && username != null)
+            usernameLabel.setText(username);
+
+        if (highScoreLabel != null) {
+            int highScore = Database.getHighScore(username, "Food");
+            highScoreLabel.setText(String.valueOf(highScore));
+        }
+
+        scoreLabel.setText("0");
+        feedbackLabel.setText(" Drag the food into the correct bucket!");
+
+        System.out.println(" Food Game starting for: " + username);
+
         setupWordPools();
-        setupWords();
+        loadWord(word1);
         setupDragAndDrop();
         startTimer();
-        updateScoreDisplay();
-        feedbackLabel.setText("Drag each food to its correct category!");
     }
 
     // ============================
-    // TIMER
+    //  TIMER
     // ============================
     private void startTimer() {
         startTime = System.nanoTime();
@@ -80,18 +98,17 @@ public class FoodGameController {
     }
 
     // ============================
-    // WORD POOLS
+    //  WORD POOLS
     // ============================
     private void setupWordPools() {
         for (String cat : categories) {
             List<String> pool = new ArrayList<>(Database.getAllWords(cat));
             if (pool.isEmpty()) {
-                // fallback
                 switch (cat) {
-                    case "Fruit" -> pool.addAll(List.of("Apple", "Banana", "Orange"));
-                    case "Meat" -> pool.addAll(List.of("Chicken", "Beef", "Fish"));
-                    case "Grain" -> pool.addAll(List.of("Rice", "Bread", "Cereal"));
-                    case "Dairy" -> pool.addAll(List.of("Milk", "Cheese", "Yogurt"));
+                    case "Fruit" -> pool.addAll(List.of("Apple", "Banana", "Orange", "Mango"));
+                    case "Meat"  -> pool.addAll(List.of("Chicken", "Beef", "Fish", "Lamb"));
+                    case "Grain" -> pool.addAll(List.of("Rice", "Bread", "Pasta", "Cereal"));
+                    case "Dairy" -> pool.addAll(List.of("Milk", "Cheese", "Yogurt", "Butter"));
                 }
             }
             Collections.shuffle(pool);
@@ -103,6 +120,14 @@ public class FoodGameController {
         List<String> pool = wordPools.get(category);
         if (pool == null || pool.isEmpty()) {
             pool = new ArrayList<>(Database.getAllWords(category));
+            if (pool.isEmpty()) {
+                switch (category) {
+                    case "Fruit" -> pool.addAll(List.of("Apple", "Banana", "Orange", "Mango"));
+                    case "Meat"  -> pool.addAll(List.of("Chicken", "Beef", "Fish", "Lamb"));
+                    case "Grain" -> pool.addAll(List.of("Rice", "Bread", "Pasta", "Cereal"));
+                    case "Dairy" -> pool.addAll(List.of("Milk", "Cheese", "Yogurt", "Butter"));
+                }
+            }
             Collections.shuffle(pool);
             wordPools.put(category, pool);
         }
@@ -110,40 +135,20 @@ public class FoodGameController {
     }
 
     // ============================
-    // INITIAL WORDS
+    //  WORD GENERATION
     // ============================
-    private void setupWords() {
-        loadWord(word1);
-        loadWord(word2);
-        loadWord(word3);
-    }
-
     private void loadWord(Label label) {
         String category = categories[random.nextInt(categories.length)];
         String word = getNextWord(category);
-
-        while (isWordAlreadyVisible(word)) {
-            word = getNextWord(category);
-        }
-
         label.setText(word);
         wordCategoryMap.put(label, category);
     }
 
-    private boolean isWordAlreadyVisible(String word) {
-        return word.equals(word1.getText()) ||
-                word.equals(word2.getText()) ||
-                word.equals(word3.getText());
-    }
-
     // ============================
-    // DRAG & DROP
+    //  DRAG & DROP
     // ============================
     private void setupDragAndDrop() {
         setupDrag(word1);
-        setupDrag(word2);
-        setupDrag(word3);
-
         setupBucket(bucketFruit, "Fruit");
         setupBucket(bucketMeat, "Meat");
         setupBucket(bucketGrain, "Grain");
@@ -160,13 +165,16 @@ public class FoodGameController {
         });
     }
 
-    private void setupBucket(Rectangle bucket, String category) {
+    private void setupBucket(ImageView bucket, String category) {
         bucket.setOnDragOver(event -> {
             if (event.getGestureSource() instanceof Label && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.MOVE);
+                bucket.setStyle("-fx-effect: dropshadow(gaussian, #40FFE2, 25, 0.5, 0, 0);");
             }
             event.consume();
         });
+
+        bucket.setOnDragExited(event -> bucket.setStyle(""));
 
         bucket.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
@@ -181,52 +189,30 @@ public class FoodGameController {
                 if (correctCategory.equalsIgnoreCase(category)) {
                     score += 10;
                     correctCount++;
-                    feedbackLabel.setText("✅ Correct! " + word + " → " + category);
+                    feedbackLabel.setText("Correct! " + word + " is a " + category + "!");
                 } else {
                     incorrectCount++;
-                    feedbackLabel.setText("❌ " + word + " is a " + correctCategory);
+                    feedbackLabel.setText("Wrong! " + word + " is actually a " + correctCategory + "!");
                 }
 
-                updateScoreDisplay();
+                scoreLabel.setText(String.valueOf(score));
                 loadWord(source);
                 success = true;
             }
 
+            bucket.setStyle("");
             event.setDropCompleted(success);
             event.consume();
         });
     }
 
-    private void updateScoreDisplay() {
-        scoreLabel.setText("Score: " + score);
-    }
-
     // ============================
-    // GAME OVER — show GameOverController
+    //  GAME OVER
     // ============================
     private void handleGameOver() {
         if (timer != null) timer.stop();
         double avgSpeed = totalAnswers > 0 ? (120.0 / totalAnswers) : 0;
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/learneria/fxml/game_over.fxml"));
-            Parent root = loader.load();
-
-            // ✅ Pass stats
-            GameOverController controller = loader.getController();
-            controller.setStats(correctCount, incorrectCount, score, avgSpeed);
-
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) scoreLabel.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Game Over");
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // ✅ Save score
         Database.updateScore(
                 SceneManager.getCurrentUser(),
                 "Food",
@@ -235,10 +221,26 @@ public class FoodGameController {
                 incorrectCount,
                 avgSpeed
         );
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/learneria/fxml/game_over.fxml"));
+            Parent root = loader.load();
+
+            GameOverController controller = loader.getController();
+            controller.setStats(correctCount, incorrectCount, score, avgSpeed);
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) scoreLabel.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Game Over");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // ============================
-    // BACK BUTTON
+    //  BACK BUTTON
     // ============================
     @FXML
     private void handleBack() {

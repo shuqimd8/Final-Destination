@@ -30,7 +30,7 @@ public class TeacherClassListController {
     @FXML
     public void initialize() {
         teacherUsername = SceneManager.getCurrentUser();
-        teacherNameLabel.setText("👩‍🏫 " + teacherUsername);
+        teacherNameLabel.setText("Teacher " + teacherUsername);
 
         loadClasses();
 
@@ -113,4 +113,9 @@ public class TeacherClassListController {
         SceneManager.setCurrentUser(null, null);
         SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Login");
     }
+    @FXML
+    private void openSettings() {
+        SceneManager.switchScene("/com/learneria/fxml/settings.fxml", "Settings");
+    }
+
 }
