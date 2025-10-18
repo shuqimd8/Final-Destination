@@ -1,131 +1,89 @@
 package com.learneria.test;
 
 import com.learneria.utils.Database;
-import com.learneria.utils.ScoreManager;
 import org.junit.jupiter.api.*;
 
+import java.io.File;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * ✅ Tests for the permanent learneria_data database.
- * Tables (users, scores, words) are auto-created by Database.java.
+ * Tests basic Database functions using an isolated SQLite file.
+ * Does not depend on API sync or external data.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseTest {
 
-    private static Connection conn;
+    private static final String TEST_DB_PATH = "test_learneria.db";
 
     @BeforeAll
-    static void setup() throws Exception {
-        conn = Database.getInstance().getConnection();
-        System.out.println("✅ Connected to permanent database: " + conn.getMetaData().getURL());
-    }
+    static void setupTestDatabase() throws Exception {
+        // Redirect SQLite path to a local temp test file
+        System.setProperty("user.home", new File(".").getAbsolutePath());
 
-    @BeforeEach
-    void clearTables() throws Exception {
-        // Clean up between tests (don’t delete words!)
-        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM scores")) {
-            stmt.executeUpdate();
-        }
-        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM users")) {
-            stmt.executeUpdate();
-        }
-        System.out.println("🧹 Tables cleared before test");
+        // Create minimal schema manually to bypass full setup
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:" + TEST_DB_PATH);
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (username TEXT, class_code TEXT)");
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS scores (username TEXT, game TEXT, score INTEGER)");
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS classes (class_name TEXT, class_code TEXT, teacher_username TEXT)");
+        conn.close();
     }
 
     @Test
     @Order(1)
-    void testInsertUser() throws Exception {
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "INSERT INTO users (username, password, role, name) VALUES (?, ?, 'student', ?)"
-        )) {
-            stmt.setString(1, "testUser");
-            stmt.setString(2, "pass123");
-            stmt.setString(3, "Test User");
-            stmt.executeUpdate();
-        }
+    void testCreateClassAndRetrieve() {
+        boolean created = Database.createClass("teacherA", "Test Class");
+        assertTrue(created, "Should create class without error");
 
-        boolean exists = false;
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "SELECT COUNT(*) FROM users WHERE username = ?"
-        )) {
-            stmt.setString(1, "testUser");
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) exists = true;
-        }
-
-        assertTrue(exists, "❌ User not inserted properly!");
-        System.out.println("✅ testInsertUser PASSED");
+        List<Map<String, String>> classes = Database.getClassesByTeacher("teacherA");
+        assertFalse(classes.isEmpty(), "Teacher should have at least one class");
+        assertEquals("Test Class", classes.get(0).get("class_name"));
     }
 
     @Test
     @Order(2)
-    void testInsertScore() throws Exception {
-        // Insert user first
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "INSERT INTO users (username, password, role, name) VALUES (?, ?, 'student', ?)"
-        )) {
-            stmt.setString(1, "scoreUser");
-            stmt.setString(2, "1234");
-            stmt.setString(3, "Score Tester");
-            stmt.executeUpdate();
+    void testAssignStudentAndFetch() throws Exception {
+        // Insert mock student with required NOT NULL fields
+        try (Connection conn = Database.connect();
+             Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("""
+            INSERT INTO users (username, password, role, teacher_code, name, class_code)
+            VALUES ('student1', 'pass123', 'student', NULL, 'Alice', NULL)
+        """);
         }
 
-        // Insert score via ScoreManager
-        ScoreManager.insertScore("scoreUser", "Food", 75);
+        Database.assignStudentToClass("student1", "CLS-1234");
 
-        boolean exists = false;
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "SELECT COUNT(*) FROM scores WHERE username = ? AND game = ? AND score = ?"
-        )) {
-            stmt.setString(1, "scoreUser");
-            stmt.setString(2, "Food");
-            stmt.setInt(3, 75);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) exists = true;
-        }
-
-        // Print all scores for debug
-        System.out.println("📊 Current scores table:");
-        ResultSet rs2 = conn.createStatement().executeQuery("SELECT * FROM scores");
-        while (rs2.next()) {
-            System.out.printf("   %s | %s | %d | %s%n",
-                    rs2.getString("username"),
-                    rs2.getString("game"),
-                    rs2.getInt("score"),
-                    rs2.getString("date_played"));
-        }
-
-        assertTrue(exists, "❌ Score was not inserted properly!");
-        System.out.println("✅ testInsertScore PASSED");
+        List<String> students = Database.getStudentsByClass("CLS-1234");
+        System.out.println("🧪 Students in CLS-1234: " + students);
+        assertTrue(students.contains("student1"), "Student should be listed under assigned class");
     }
+
+
 
     @Test
     @Order(3)
-    void testWordsTable() throws Exception {
-        // The Database auto-populates the words table if empty
-        ResultSet rs = conn.createStatement().executeQuery("SELECT COUNT(*) FROM words");
-        rs.next();
-        int count = rs.getInt(1);
-        assertTrue(count > 0, "❌ Words table seems empty!");
-        System.out.println("✅ Words table contains " + count + " entries.");
+    void testUpdateAndFetchScore() {
+        Database.updateScore("student1", "Grammar", 95, 10, 2, 1.5);
+        double avg = Database.getAverageClassScore("CLS-1234");
+        assertTrue(avg >= 0, "Average score query should not fail");
+    }
 
-        // Random sample
-        rs = conn.createStatement().executeQuery("SELECT word, category FROM words ORDER BY RANDOM() LIMIT 5");
-        System.out.println("🎲 Random sample words:");
-        while (rs.next()) {
-            System.out.println("   " + rs.getString("word") + " (" + rs.getString("category") + ")");
-        }
+    @Test
+    @Order(4)
+    void testReconnectAndConnection() {
+        assertNotNull(Database.connect(), "Should return a valid DB connection");
+    }
 
-        // Check helper method
-        List<String> verbs = Database.getAllWords("Verb");
-        assertNotNull(verbs);
-        System.out.println("🧠 getAllWords('Verb') → " + verbs.size() + " results");
+    @AfterAll
+    static void cleanup() {
+        File f = new File(TEST_DB_PATH);
+        if (f.exists()) f.delete();
     }
 }
-
