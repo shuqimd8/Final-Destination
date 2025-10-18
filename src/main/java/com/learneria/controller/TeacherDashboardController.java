@@ -110,7 +110,7 @@ public class TeacherDashboardController {
 
     /** Log out to login page */
     @FXML
-    private void handleLogout() {
+    public void handleLogout() {
         SceneManager.setCurrentUser(null, null);
         SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Login");
     }
@@ -119,7 +119,7 @@ public class TeacherDashboardController {
         SceneManager.switchScene("/com/learneria/fxml/teacher_main.fxml", "Teacher Main Menu");
     }
 
-    void setTestingLabels(Label teacherLabel, ListView<String> listView) {
+    public void setTestingLabels(Label teacherLabel, ListView<String> listView) {
         this.teacherNameLabel = teacherLabel;
         this.classListView = listView;
     }
