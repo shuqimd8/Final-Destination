@@ -7,17 +7,17 @@ import javafx.scene.input.MouseEvent; // ✅ Correct import
 public class CreateAccountSelectController {
 
     @FXML
-    private void handleStudent() {
+    public void handleStudent() {
         SceneManager.switchScene("/com/learneria/fxml/createAccount_Student.fxml", "Create Student Account");
     }
 
     @FXML
-    private void handleTeacher() {
+    public void handleTeacher() {
         SceneManager.switchScene("/com/learneria/fxml/createAccount_Form.fxml", "Create Teacher Account");
     }
 
     @FXML
-    private void handleBack(MouseEvent event) {
+    public void handleBack(MouseEvent event) {
         SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Log In");
     }
 }

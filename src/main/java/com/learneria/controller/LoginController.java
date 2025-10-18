@@ -13,16 +13,16 @@ import java.sql.ResultSet;
 public class LoginController {
 
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
 
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
 
     /**
      * Handle Sign In button
      */
     @FXML
-    private void handleLogin() {
+    public void handleLogin() {
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
 

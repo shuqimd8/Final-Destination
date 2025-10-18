@@ -23,9 +23,9 @@ import java.util.*;
 public class FoodGameController {
 
     // ====== FXML UI ======
-    @FXML private Label word1, word2, word3;
-    @FXML private Label scoreLabel, feedbackLabel, timerLabel;
-    @FXML private Rectangle bucketFruit, bucketMeat, bucketGrain, bucketDairy;
+    @FXML public Label word1, word2, word3;
+    @FXML public Label scoreLabel, feedbackLabel, timerLabel;
+    @FXML public Rectangle bucketFruit, bucketMeat, bucketGrain, bucketDairy;
 
     // ====== Game Logic ======
     private final String[] categories = {"Fruit", "Meat", "Grain", "Dairy"};
