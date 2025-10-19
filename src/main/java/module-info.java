@@ -11,7 +11,8 @@ module com.learneria.controller {
     exports com.learneria;
     exports com.learneria.controller;
     exports com.learneria.utils;
-    opens com.learneria.controller to javafx.fxml;
+    opens com.learneria.controller;
+    opens com.learneria.utils;
 
 
 }
