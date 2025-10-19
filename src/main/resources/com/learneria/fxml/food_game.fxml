@@ -16,7 +16,7 @@
     <!-- Background -->
     <ImageView fitWidth="1000" fitHeight="700" opacity="0.15">
         <image>
-            <Image url="@../assets/backgrounds/background.jpg"/>
+            <Image url="@../assets/backgrounds/Background.jpg"/>
         </image>
     </ImageView>
 
@@ -60,7 +60,7 @@
                       -fx-text-fill: #333;"/>
         <ImageView fitWidth="36" fitHeight="36">
             <image>
-                <Image url="@../assets/icons/FoodIcon.png"/>
+                <Image url="@../assets/icons/FoodButton.png"/>
             </image>
         </ImageView>
     </VBox>
