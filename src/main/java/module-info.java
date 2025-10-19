@@ -5,8 +5,13 @@ module com.learneria.controller {
     requires java.sql;
 
 
+
+
     opens com.learneria to javafx.fxml;
     exports com.learneria;
     exports com.learneria.controller;
+    exports com.learneria.utils;
     opens com.learneria.controller to javafx.fxml;
+
+
 }
