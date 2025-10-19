@@ -166,7 +166,6 @@ public class Database {
             System.out.println("🧩 Inserting default words...");
             insertDefaultWords(conn);
 
-            runFullAPISync();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -256,29 +255,6 @@ public class Database {
         return list;
     }
 
-    // ============================
-    // 🌐 API SYNC
-    // ============================
-    public static void runFullAPISync() {
-        try {
-            System.out.println("🌐 Fetching Grammar words from Datamuse...");
-            WordAPI.syncPOSWords(200);
-
-            System.out.println("🍎 Fetching Food words...");
-            try {
-                FoodAPI.syncFoodWords();
-            } catch (Exception e) {
-                System.out.println("⚠️ Food API unavailable, skipping.");
-            }
-
-            System.out.println("🌳 Fetching Nature words...");
-            NatureAPI.syncNatureWords();
-
-            System.out.println("✅ All API sync complete!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     // ============================
     // 🧑‍🏫 TEACHER CLASS SYSTEM

@@ -15,7 +15,7 @@
     <!--  Background pattern -->
     <ImageView fitHeight="700" fitWidth="1000" opacity="0.15" preserveRatio="false">
         <image>
-            <Image url="@../assets/backgrounds/background.jpg" />
+            <Image url="@../assets/backgrounds/Background.jpg" />
         </image>
     </ImageView>
 

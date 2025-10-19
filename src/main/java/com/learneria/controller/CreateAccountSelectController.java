@@ -2,9 +2,12 @@ package com.learneria.controller;
 
 import com.learneria.utils.SceneManager;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent; // ✅ Correct import
 
 public class CreateAccountSelectController {
+
+    public ImageView backArrow;
 
     @FXML
     public void handleStudent() {

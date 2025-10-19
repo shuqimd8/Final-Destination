@@ -12,11 +12,8 @@
            prefWidth="683" prefHeight="683">
 
     <!--  Background image (behind everything) -->
-    <ImageView fitWidth="683" fitHeight="683"
-               preserveRatio="false">
-        <image>
-            <Image url="@/com/learneria/assets/backgrounds/Background.jpg" />
-        </image>
+    <ImageView fitWidth="683" fitHeight="683">
+        <Image url="@../assets/backgrounds/Background.jpg"/>
     </ImageView>
 
     <!-- Semi-transparent overlay for readability -->
@@ -105,3 +102,4 @@
         </VBox>
     </VBox>
 </StackPane>
+

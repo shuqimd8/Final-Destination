@@ -13,7 +13,7 @@
     <!--  Background -->
     <ImageView fitWidth="683" fitHeight="683" preserveRatio="false">
         <image>
-            <Image url="@/com/learneria/assets/backgrounds/Background.jpg" />
+            <Image url="@../assets/backgrounds/Background.jpg" />
         </image>
     </ImageView>
 

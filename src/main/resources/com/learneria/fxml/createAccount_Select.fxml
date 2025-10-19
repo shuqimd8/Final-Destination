@@ -12,10 +12,8 @@
 
     <!--  Background Image -->
     <ImageView fitWidth="683" fitHeight="683"
-               preserveRatio="false">
-        <image>
-            <Image url="@/com/learneria/assets/backgrounds/Background.jpg" />
-        </image>
+    >
+        <Image url="@../assets/backgrounds/Background.jpg"/>
     </ImageView>
 
     <!--  Main Layout -->
@@ -23,17 +21,15 @@
 
         <!--  Back Arrow (Top Left) -->
         <top>
-            <HBox alignment="TOP_LEFT">
+            <HBox>
                 <padding>
-                    <Insets top="15" right="15" bottom="0" left="15" />
+                    <Insets top="15" right="15" left="15" />
                 </padding>
                 <ImageView fx:id="backArrow"
                            fitWidth="35" fitHeight="35"
                            onMouseClicked="#handleBack"
                            style="-fx-cursor: hand;">
-                    <image>
-                        <Image url="@/com/learneria/assets/icons/BackArrow.png" />
-                    </image>
+                    <Image url="@../assets/icons/BackArrow.png"/>
                 </ImageView>
             </HBox>
         </top>
