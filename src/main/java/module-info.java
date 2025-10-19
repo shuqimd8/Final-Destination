@@ -7,4 +7,6 @@ module com.learneria.controller {
 
     opens com.learneria to javafx.fxml;
     exports com.learneria;
+    exports com.learneria.controller;
+    opens com.learneria.controller to javafx.fxml;
 }

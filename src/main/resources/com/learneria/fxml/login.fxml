@@ -1,107 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<StackPane xmlns="http://javafx.com/javafx"
-           xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.learneria.controller.LoginController"
-           prefWidth="683" prefHeight="683">
+<StackPane prefHeight="683" prefWidth="683" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.learneria.controller.LoginController">
 
     <!--  Background image (behind everything) -->
-    <ImageView fitWidth="683" fitHeight="683"
-               preserveRatio="false">
-        <image>
-            <Image url="@/com/learneria/assets/backgrounds/Background.jpg" />
-        </image>
+    <ImageView fitHeight="683" fitWidth="683">
+        <Image url="@../assets/backgrounds/Background.jpg" />
     </ImageView>
 
     <!-- Semi-transparent overlay for readability -->
-    <Rectangle width="683" height="683" fill="rgba(255,255,255,0.85)" />
+    <Rectangle fill="rgba(255,255,255,0.85)" height="683" width="683" />
 
     <!--  Centered login card -->
-    <VBox alignment="CENTER" spacing="10"
-          prefWidth="350" prefHeight="420"
-          style="-fx-background-color: white;
-                 -fx-background-radius: 15;
-                 -fx-border-color: black;
-                 -fx-border-radius: 15;
-                 -fx-border-width: 2;
-                 -fx-padding: 20;">
+    <VBox alignment="CENTER" prefHeight="420" prefWidth="350" spacing="10" style="-fx-background-color: white;                  -fx-background-radius: 15;                  -fx-border-color: black;                  -fx-border-radius: 15;                  -fx-border-width: 2;                  -fx-padding: 20;">
 
         <!-- Title -->
-        <Label text="Papa’s Learnaria"
-               style="-fx-font-size: 30;
-                      -fx-font-family: 'Josefin Sans';
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #2563eb;" />
+        <Label style="-fx-font-size: 30;                       -fx-font-family: 'Josefin Sans';                       -fx-font-weight: bold;                       -fx-text-fill: #2563eb;" text="Papa’s Learnaria" />
 
         <!-- Subtitle -->
-        <Label text="Log In"
-               style="-fx-font-size: 20;
-                      -fx-font-family: 'Josefin Sans';
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #3DC6E8;
-                      -fx-padding: 5 0 15 0;" />
+        <Label style="-fx-font-size: 20;                       -fx-font-family: 'Josefin Sans';                       -fx-font-weight: bold;                       -fx-text-fill: #3DC6E8;                       -fx-padding: 5 0 15 0;" text="Log In" />
 
         <!-- Username -->
-        <VBox spacing="3" alignment="CENTER_LEFT">
-            <Label text="Username:"
-                   style="-fx-font-size: 15;
-                          -fx-font-family: 'Josefin Sans';
-                          -fx-font-weight: bold;" />
-            <TextField fx:id="usernameField"
-                       promptText="Enter your username"
-                       prefWidth="220"
-                       style="-fx-background-radius: 10;
-                              -fx-border-radius: 10;
-                              -fx-border-color: black;
-                              -fx-background-color: white;
-                              -fx-border-width: 1.5;
-                              -fx-padding: 6;" />
+        <VBox alignment="CENTER_LEFT" spacing="3">
+            <Label style="-fx-font-size: 15;                           -fx-font-family: 'Josefin Sans';                           -fx-font-weight: bold;" text="Username:" />
+            <TextField fx:id="usernameField" prefWidth="220" promptText="Enter your username" style="-fx-background-radius: 10;                               -fx-border-radius: 10;                               -fx-border-color: black;                               -fx-background-color: white;                               -fx-border-width: 1.5;                               -fx-padding: 6;" />
         </VBox>
 
         <!-- Password -->
-        <VBox spacing="3" alignment="CENTER_LEFT">
-            <Label text="Password:"
-                   style="-fx-font-size: 15;
-                          -fx-font-family: 'Josefin Sans';
-                          -fx-font-weight: bold;" />
-            <PasswordField fx:id="passwordField"
-                           promptText="Enter your password"
-                           prefWidth="220"
-                           style="-fx-background-radius: 10;
-                                  -fx-border-radius: 10;
-                                  -fx-border-color: black;
-                                  -fx-background-color: white;
-                                  -fx-border-width: 1.5;
-                                  -fx-padding: 6;" />
+        <VBox alignment="CENTER_LEFT" spacing="3">
+            <Label style="-fx-font-size: 15;                           -fx-font-family: 'Josefin Sans';                           -fx-font-weight: bold;" text="Password:" />
+            <PasswordField fx:id="passwordField" prefWidth="220" promptText="Enter your password" style="-fx-background-radius: 10;                                   -fx-border-radius: 10;                                   -fx-border-color: black;                                   -fx-background-color: white;                                   -fx-border-width: 1.5;                                   -fx-padding: 6;" />
         </VBox>
 
         <!-- Buttons -->
-        <VBox spacing="12" alignment="CENTER" style="-fx-padding: 20 0 0 0;">
-            <Button text="Sign In" onAction="#handleLogin"
-                    prefWidth="200" prefHeight="35"
-                    style="-fx-background-color: #66CCFF;
-                           -fx-border-color: black;
-                           -fx-border-width: 1.5;
-                           -fx-background-radius: 15;
-                           -fx-border-radius: 15;
-                           -fx-text-fill: black;
-                           -fx-font-weight: bold;" />
+        <VBox alignment="CENTER" spacing="12" style="-fx-padding: 20 0 0 0;">
+            <Button onAction="#handleLogin" prefHeight="35" prefWidth="200" style="-fx-background-color: #66CCFF;                            -fx-border-color: black;                            -fx-border-width: 1.5;                            -fx-background-radius: 15;                            -fx-border-radius: 15;                            -fx-text-fill: black;                            -fx-font-weight: bold;" text="Sign In" />
 
-            <Button text="Create Account" onAction="#handleCreateAccount"
-                    prefWidth="200" prefHeight="35"
-                    style="-fx-background-color: #FFEE77;
-                           -fx-border-color: black;
-                           -fx-border-width: 1.5;
-                           -fx-background-radius: 15;
-                           -fx-border-radius: 15;
-                           -fx-text-fill: black;
-                           -fx-font-weight: bold;" />
+            <Button onAction="#handleCreateAccount" prefHeight="35" prefWidth="200" style="-fx-background-color: #FFEE77;                            -fx-border-color: black;                            -fx-border-width: 1.5;                            -fx-background-radius: 15;                            -fx-border-radius: 15;                            -fx-text-fill: black;                            -fx-font-weight: bold;" text="Create Account" />
         </VBox>
     </VBox>
+    <Accordion />
+    <AmbientLight color="CHARTREUSE"/>
 </StackPane>
