@@ -27,7 +27,7 @@ public class LoginController {
         String password = passwordField.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            System.out.println("⚠️ Please enter username and password");
+            System.out.println("Please enter username and password");
             return;
         }
 
@@ -42,12 +42,12 @@ public class LoginController {
 
             if (rs.next()) {
                 String role = rs.getString("role");
-                System.out.println("✅ Login successful: " + username + " (" + role + ")");
+                System.out.println(" Login successful: " + username + " (" + role + ")");
 
-                // ✅ Remember the logged-in user & role globally
+                // Remember the logged-in user & role globally
                 SceneManager.setCurrentUser(username, role);
 
-                // 🚀 Navigate based on role
+                //  Navigate based on role
                 if ("student".equalsIgnoreCase(role)) {
                     SceneManager.switchScene(
                             "/com/learneria/fxml/student_main.fxml",
@@ -59,11 +59,11 @@ public class LoginController {
                             "Teacher Main Menu"
                     );
                 } else {
-                    System.out.println("⚠️ Unknown role: " + role);
+                    System.out.println("️ Unknown role: " + role);
                 }
 
             } else {
-                System.out.println("❌ Invalid credentials!");
+                System.out.println(" Invalid credentials!");
             }
 
             rs.close();

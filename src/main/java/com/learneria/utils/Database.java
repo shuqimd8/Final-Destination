@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Handles all SQLite database logic for Papa's Learneria.
  * Includes user management, score tracking, and word retrieval.
- * Supports manual &amp; automatic API sync (Datamuse + Food + Nature)
+ * Supports manual & automatic API sync (Datamuse + Food + Nature)
  *  Now extended to support Teacher-Class system
  */
 public class Database {
@@ -27,7 +27,7 @@ public class Database {
             connection = DriverManager.getConnection(url);
 
             if (!connectionLogged) {
-                System.out.println("✅ Connected to database: " + url);
+                System.out.println("Connected to database: " + url);
                 connectionLogged = true;
             }
 
@@ -53,7 +53,7 @@ public class Database {
         try {
             String homePath = System.getProperty("user.home") + "/learneria_data";
             connection = DriverManager.getConnection("jdbc:sqlite:" + homePath + "/learneria.db");
-            System.out.println("🔁 Reconnected to database.");
+            System.out.println(" Reconnected to database.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class Database {
                     """);
         } catch (SQLException e) { e.printStackTrace(); }
 
-        // ✅ new: teacher classes and quizzes
+        //  new: teacher classes and quizzes
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("""
                     CREATE TABLE IF NOT EXISTS classes (
@@ -146,7 +146,7 @@ public class Database {
     }
 
     // ============================
-    // 🧩 AUTO-POPULATE DEFAULT WORDS
+    //  AUTO-POPULATE DEFAULT WORDS
     // ============================
     private void ensureDefaultWords() {
         try {

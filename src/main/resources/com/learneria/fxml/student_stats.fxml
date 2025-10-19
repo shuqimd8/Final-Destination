@@ -10,16 +10,16 @@
            fx:controller="com.learneria.controller.StudentPerformanceController"
            prefWidth="1000" prefHeight="650">
 
-    <!-- 🌈 Background -->
+    <!-- Background -->
     <ImageView fitWidth="1000" fitHeight="650" preserveRatio="false">
         <image>
             <Image url="@../assets/backgrounds/Background.jpg" />
         </image>
     </ImageView>
 
-    <!-- 💾 Main Content -->
+    <!-- Main Content -->
     <VBox alignment="TOP_CENTER" spacing="15">
-        <!-- 🩵 Title -->
+        <!--  Title -->
         <Label text="Papa’s Learnaria"
                style="-fx-font-family: 'Josefin Sans';
                       -fx-font-size: 36;

@@ -53,7 +53,7 @@ public class SettingsController implements UserAware {
     }
 
     /**
-     * 🔙 Handle Back button
+     *  Handle Back button
      */
     @FXML
     private void handleBack() {
@@ -62,7 +62,7 @@ public class SettingsController implements UserAware {
     }
 
     /**
-     * ✏️ Edit display name
+     * Edit display name
      */
     @FXML
     private void editName() {
@@ -70,7 +70,7 @@ public class SettingsController implements UserAware {
     }
 
     /**
-     * ✏️ Edit username
+     * ️ Edit username
      */
     @FXML
     private void editUsername() {
@@ -79,7 +79,7 @@ public class SettingsController implements UserAware {
     }
 
     /**
-     * ✏️ Edit password
+     * ️ Edit password
      */
     @FXML
     private void editPassword() {
@@ -124,17 +124,17 @@ public class SettingsController implements UserAware {
                 SceneManager.setCurrentUser(newValue, SceneManager.getCurrentRole());
             }
 
-            System.out.println("✅ Updated " + column + " for user: " + username);
+            System.out.println(" Updated " + column + " for user: " + username);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // 🎨 Theme buttons (placeholders)
-    @FXML private void setDefaultTheme() { System.out.println("✅ Default theme set"); }
-    @FXML private void setRGTheme() { System.out.println("✅ Red/Green theme set"); }
-    @FXML private void setBYTheme() { System.out.println("✅ Blue/Yellow theme set"); }
+    //  Theme buttons (placeholders)
+    @FXML private void setDefaultTheme() { System.out.println(" Default theme set"); }
+    @FXML private void setRGTheme() { System.out.println(" Red/Green theme set"); }
+    @FXML private void setBYTheme() { System.out.println(" Blue/Yellow theme set"); }
 }
 
 
