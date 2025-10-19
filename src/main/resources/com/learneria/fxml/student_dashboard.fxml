@@ -7,7 +7,7 @@
       fx:controller="com.learneria.controller.StudentDashboardController"
       spacing="15" alignment="CENTER" style="-fx-padding: 20;">
 
-    <Label text="🎓 Student Dashboard" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+    <Label text=" Student Dashboard" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
 
     <Label text="Welcome, student!" fx:id="welcomeLabel"/>
 

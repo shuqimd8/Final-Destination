@@ -34,7 +34,7 @@ public class TeacherStudentsController {
     @FXML
     public void initialize() {
         currentTeacher = SceneManager.getCurrentUser();
-        teacherNameLabel.setText("👩‍🏫 " + currentTeacher);
+        teacherNameLabel.setText("Teacher " + currentTeacher);
 
         loadClasses();
         setupStudentClick();

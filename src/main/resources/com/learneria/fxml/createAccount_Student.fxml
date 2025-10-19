@@ -10,14 +10,14 @@
            fx:controller="com.learneria.controller.CreateAccountStudentController"
            prefWidth="683" prefHeight="683">
 
-    <!-- 🌈 Background -->
+    <!--  Background -->
     <ImageView fitWidth="683" fitHeight="683" preserveRatio="false">
         <image>
             <Image url="@../assets/backgrounds/Background.jpg" />
         </image>
     </ImageView>
 
-    <!-- 💾 Centered White Card -->
+    <!--  Centered White Card -->
     <VBox alignment="CENTER" spacing="10"
           prefWidth="350" prefHeight="500"
           style="-fx-background-color: white;

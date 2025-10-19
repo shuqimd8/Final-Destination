@@ -15,7 +15,7 @@ public class TeacherMainController {
     }
 
     @FXML
-    private void openClassList() { // ✅ New button target
+    private void openClassList() { //  New button target
         SceneManager.switchScene("/com/learneria/fxml/teacher_class_list.fxml", "Manage Classes");
     }
 

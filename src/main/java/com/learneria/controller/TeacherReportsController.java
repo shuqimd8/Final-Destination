@@ -53,7 +53,7 @@ public class TeacherReportsController {
     private void loadTopStudents() {
         List<Map<String, Object>> top = Database.getTopStudents(teacherUsername);
         for (Map<String, Object> s : top) {
-            topStudentsList.getItems().add("⭐ " + s.get("username") + " — " + s.get("avg_score"));
+            topStudentsList.getItems().add("Top! " + s.get("username") + " — " + s.get("avg_score"));
         }
     }
 

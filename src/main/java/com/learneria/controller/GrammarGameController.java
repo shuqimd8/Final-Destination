@@ -40,11 +40,11 @@ public class GrammarGameController {
     public void initialize() {
         username = SceneManager.getCurrentUser();
 
-        // 🐝 Display logged in user's name
+        //  Display logged in user's name
         if (usernameLabel != null && username != null)
             usernameLabel.setText(username);
 
-        // 🏆 Fetch real high score from DB
+        // Fetch real high score from DB
         if (highScoreLabel != null) {
             int highScore = Database.getHighScore(username, "Grammar");
             highScoreLabel.setText(String.valueOf(highScore));
@@ -148,10 +148,10 @@ public class GrammarGameController {
                 if (correctCategory.equalsIgnoreCase(category)) {
                     score += 10;
                     correctCount++;
-                    feedbackLabel.setText("✅ " + word + " is a " + category + "!");
+                    feedbackLabel.setText("Correct! " + word + " is a " + category + "!");
                 } else {
                     incorrectCount++;
-                    feedbackLabel.setText("❌ " + word + " is not a " + category + "!");
+                    feedbackLabel.setText("Wrong! " + word + " is not a " + category + "!");
                 }
 
                 scoreLabel.setText(String.valueOf(score));

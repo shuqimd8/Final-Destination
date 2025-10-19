@@ -7,7 +7,7 @@ import java.util.*;
  * Handles all SQLite database logic for Papa's Learneria.
  * Includes user management, score tracking, and word retrieval.
  * Supports manual & automatic API sync (Datamuse + Food + Nature)
- * ✅ Now extended to support Teacher-Class system
+ *  Now extended to support Teacher-Class system
  */
 public class Database {
     private static Database instance;
@@ -27,7 +27,7 @@ public class Database {
             connection = DriverManager.getConnection(url);
 
             if (!connectionLogged) {
-                System.out.println("✅ Connected to database: " + url);
+                System.out.println(" Connected to database: " + url);
                 connectionLogged = true;
             }
 
@@ -53,7 +53,7 @@ public class Database {
         try {
             String homePath = System.getProperty("user.home") + "/learneria_data";
             connection = DriverManager.getConnection("jdbc:sqlite:" + homePath + "/learneria.db");
-            System.out.println("🔁 Reconnected to database.");
+            System.out.println(" Reconnected to database.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class Database {
                     """);
         } catch (SQLException e) { e.printStackTrace(); }
 
-        // ✅ new: teacher classes and quizzes
+        //  new for teacher classes and quizzes
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("""
                     CREATE TABLE IF NOT EXISTS classes (
@@ -143,10 +143,22 @@ public class Database {
                     )
                     """);
         } catch (SQLException e) { e.printStackTrace(); }
+
+// ============================
+//  AUTO-MIGRATION  SECTION
+// ============================
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute("ALTER TABLE users ADD COLUMN subject_taught TEXT;");
+            System.out.println(" Added missing column: subject_taught");
+        } catch (SQLException ignore) {
+            // Column already exists – ignore safely
+        }
+
     }
 
+
     // ============================
-    // 🧩 AUTO-POPULATE DEFAULT WORDS
+    //  AUTO-POPULATE DEFAULT WORDS
     // ============================
     private void ensureDefaultWords() {
         try {
@@ -159,17 +171,17 @@ public class Database {
             stmt.close();
 
             if (count > 0) {
-                System.out.println("✅ Words table already has " + count + " entries. Skipping API sync.");
+                System.out.println(" Words table already has " + count + " entries. Skipping API sync.");
                 return;
             }
 
-            System.out.println("🧩 Inserting default words...");
+            System.out.println(" Inserting default words...");
             insertDefaultWords(conn);
 
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Failed to auto-populate words!");
+            System.out.println(" Failed to auto-populate words!");
         }
     }
 
@@ -203,11 +215,11 @@ public class Database {
             }
             ps.executeBatch();
         }
-        System.out.println("✅ Inserted " + defaultWords.length + " default words successfully.");
+        System.out.println(" Inserted " + defaultWords.length + " default words successfully.");
     }
 
     // ============================
-    // 🧠 SCORE MANAGEMENT
+    //  SCORE MANAGEMENT
     // ============================
     public static void updateScore(String username, String category,
                                    int score, int correct, int incorrect, double avgSpeed) {
@@ -221,14 +233,14 @@ public class Database {
             ps.setInt(5, incorrect);
             ps.setDouble(6, avgSpeed);
             ps.executeUpdate();
-            System.out.println("💾 Saved score for " + username + " (" + category + "): " + score);
+            System.out.println(" Saved score for " + username + " (" + category + "): " + score);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     // ============================
-    // 🔤 WORD RETRIEVAL METHODS
+    //  WORD RETRIEVAL METHODS
     // ============================
     public static String getRandomWord(String category) {
         String query = "SELECT word FROM words WHERE category = ? ORDER BY RANDOM() LIMIT 1";
@@ -257,7 +269,7 @@ public class Database {
 
 
     // ============================
-    // 🧑‍🏫 TEACHER CLASS SYSTEM
+    //  TEACHER CLASS SYSTEM
     // ============================
     public static boolean createClass(String teacher, String className) {
         String classCode = "CLS-" + (1000 + new Random().nextInt(9000));
@@ -326,7 +338,7 @@ public class Database {
         return students;
     }
 
-    /** 计算指定班级的平均分 */
+    /** Calculate class average score */
     public static double getAverageClassScore(String classCode) {
         String sql = """
         SELECT AVG(score) as avg_score
@@ -365,7 +377,7 @@ public class Database {
         return list;
     }
 
-    /** 班级总览 */
+    /** Class Overview */
     public static List<Map<String, Object>> getClassOverview(String teacherUsername) {
         List<Map<String, Object>> list = new ArrayList<>();
         String sql = """
@@ -395,7 +407,7 @@ public class Database {
         return list;
     }
 
-    /** 老师名下前5名学生（平均分） */
+    /** Top 5 student */
     public static List<Map<String, Object>> getTopStudents(String teacherUsername) {
         List<Map<String, Object>> top = new ArrayList<>();
         String sql = """
@@ -421,7 +433,7 @@ public class Database {
         return top;
     }
 
-    /** 各游戏平均分 */
+    /** Average Mark by Game */
     public static Map<String, Double> getAverageByGame(String teacherUsername) {
         Map<String, Double> map = new LinkedHashMap<>();
         String sql = """
@@ -441,7 +453,7 @@ public class Database {
         } catch (SQLException e) { e.printStackTrace(); }
         return map;
     }
-    /** 获取学生基本信息 + 最近游戏时间 */
+    /** Student Info + Last Played */
     public static Map<String, String> getStudentInfo(String username) {
         String sql = """
         SELECT name, class_code,
@@ -464,7 +476,7 @@ public class Database {
         return null;
     }
 
-    /** 获取学生所有游戏记录 */
+    /** Get All Score by student */
     public static List<Map<String, Object>> getScoresByStudent(String username) {
         List<Map<String, Object>> list = new ArrayList<>();
         String sql = """
@@ -488,7 +500,7 @@ public class Database {
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
-    /** 检查用户是否存在 */
+    /** Check User Valid */
     public static boolean userExists(String username) {
         String sql = "SELECT 1 FROM users WHERE username = ?";
         try (PreparedStatement ps = connect().prepareStatement(sql)) {
@@ -500,7 +512,7 @@ public class Database {
         }
         return false;
     }
-    /** 从班级移除学生（解除 class_code） */
+    /** Remove Student */
     public static void removeStudentFromClass(String username) {
         String sql = "UPDATE users SET class_code = NULL WHERE username = ?";
         try (PreparedStatement ps = connect().prepareStatement(sql)) {
@@ -511,7 +523,7 @@ public class Database {
             e.printStackTrace();
         }
     }
-    /** Rename a class (by teacher + old name) */
+    /**Rename Class */
     public static void renameClass(String teacherUsername, String oldName, String newName) {
         String sql = "UPDATE classes SET class_name = ? WHERE teacher_username = ? AND class_name = ?";
         try (PreparedStatement ps = connect().prepareStatement(sql)) {
@@ -519,7 +531,7 @@ public class Database {
             ps.setString(2, teacherUsername);
             ps.setString(3, oldName);
             ps.executeUpdate();
-            System.out.println("✏️ Renamed class from " + oldName + " → " + newName);
+            System.out.println("✏ Renamed class from " + oldName + " → " + newName);
         } catch (SQLException e) {
             e.printStackTrace();
         }
