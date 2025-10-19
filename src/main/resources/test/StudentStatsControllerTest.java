@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.StudentStatsController;
 import com.learneria.utils.Database;
 import com.learneria.utils.SceneManager;
@@ -15,7 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**

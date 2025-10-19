@@ -1,11 +1,11 @@
-package com.learneria.test;
-
 import com.learneria.controller.TeacherReportsController;
 import com.learneria.utils.Database;
 import com.learneria.utils.SceneManager;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 /**
  * Unit tests for TeacherReportsController.

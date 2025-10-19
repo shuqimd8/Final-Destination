@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.TeacherStudentsController;
 import com.learneria.utils.Database;
 import com.learneria.utils.SceneManager;
@@ -18,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 /**
  * Unit tests for TeacherStudentsController.

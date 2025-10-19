@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.GrammarGameController;
 import javafx.application.Platform;
 import javafx.scene.control.Label;

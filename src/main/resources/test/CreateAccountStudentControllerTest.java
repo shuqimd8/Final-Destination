@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.CreateAccountStudentController;
 import javafx.application.Platform;
 import javafx.scene.control.PasswordField;

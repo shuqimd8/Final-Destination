@@ -1,7 +1,4 @@
-package com.learneria.test;
-
 import com.learneria.controller.StudentDashboardController;
-import com.learneria.utils.SceneManager;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,7 +10,6 @@ import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for StudentDashboardController.

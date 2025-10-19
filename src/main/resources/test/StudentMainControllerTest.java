@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.StudentMainController;
 import com.learneria.utils.SceneManager;
 import javafx.application.Platform;
@@ -14,7 +12,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 /**
  * Unit tests for StudentMainController.

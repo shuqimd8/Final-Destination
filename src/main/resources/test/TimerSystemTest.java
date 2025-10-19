@@ -1,9 +1,9 @@
-package com.learneria.test;
-
 import com.learneria.utils.TimerSystem;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.CountDownLatch;

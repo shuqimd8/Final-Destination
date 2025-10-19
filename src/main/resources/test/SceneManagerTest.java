@@ -1,9 +1,9 @@
-package com.learneria.test;
-
 import com.learneria.utils.SceneManager;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 

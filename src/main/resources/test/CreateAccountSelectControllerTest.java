@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.CreateAccountSelectController;
 import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;

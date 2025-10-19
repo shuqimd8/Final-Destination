@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.SettingsController;
 import com.learneria.utils.Database;
 import com.learneria.utils.SceneManager;

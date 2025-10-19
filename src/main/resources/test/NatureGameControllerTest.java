@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.NatureGameController;
 import javafx.application.Platform;
 import javafx.scene.control.Label;

@@ -1,11 +1,11 @@
-package com.learneria.test;
-
 import com.learneria.controller.TeacherClassListController;
 import com.learneria.utils.Database;
 import com.learneria.utils.SceneManager;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,13 +1,13 @@
+import com.learneria.controller.LoginController;
+import javafx.application.Platform;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-import javafx.application.Platform;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-
-import com.learneria.controller.LoginController;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LoginControllerTest {
 

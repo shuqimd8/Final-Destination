@@ -83,20 +83,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--  JUnit 5 (for unit testing) -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-swing</artifactId>
-            <version>${javafx.version}</version>
-            <scope>test</scope>
-        </dependency>
 
         <!-- Mockito for mocking database dependencies in unit tests -->
         <dependency>

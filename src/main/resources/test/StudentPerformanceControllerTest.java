@@ -1,12 +1,11 @@
-package com.learneria.test;
-
 import com.learneria.controller.StudentPerformanceController;
 import com.learneria.utils.Database;
 import com.learneria.utils.SceneManager;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mockStatic;
 
 /**
  * Unit tests for StudentPerformanceController.

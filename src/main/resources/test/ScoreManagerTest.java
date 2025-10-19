@@ -1,10 +1,7 @@
-package com.learneria.test;
-
 import com.learneria.utils.Database;
 import com.learneria.utils.ScoreManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.utils.Database;
 import org.junit.jupiter.api.*;
 

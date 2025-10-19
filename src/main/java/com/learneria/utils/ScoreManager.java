@@ -1,6 +1,4 @@
-package com.learneria.controller;
-
-import com.learneria.utils.Database;
+package com.learneria.utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

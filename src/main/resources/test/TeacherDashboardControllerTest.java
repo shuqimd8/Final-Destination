@@ -1,14 +1,15 @@
-package com.learneria.test;
-
 import com.learneria.controller.TeacherDashboardController;
 import com.learneria.utils.SceneManager;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mockStatic;
 
 class TeacherDashboardControllerTest {
 

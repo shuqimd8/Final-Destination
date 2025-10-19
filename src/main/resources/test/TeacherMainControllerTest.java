@@ -1,5 +1,3 @@
-package com.learneria.test;
-
 import com.learneria.controller.TeacherMainController;
 import com.learneria.utils.SceneManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +7,8 @@ import org.mockito.MockedStatic;
 import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 /**
  * Unit tests for TeacherMainController.
