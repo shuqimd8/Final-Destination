@@ -10,12 +10,12 @@ import java.sql.ResultSet;
 
 public class ProfileController {
 
-    @FXML private Label usernameLabel;
-    @FXML private Label totalGamesLabel;
-    @FXML private Label avgScoreLabel;
-    @FXML private Label foodHighLabel;
-    @FXML private Label natureHighLabel;
-    @FXML private Label grammarHighLabel;
+    @FXML public Label usernameLabel;
+    @FXML public Label totalGamesLabel;
+    @FXML public Label avgScoreLabel;
+    @FXML public Label foodHighLabel;
+    @FXML public Label natureHighLabel;
+    @FXML public Label grammarHighLabel;
 
     @FXML
     public void initialize() {
@@ -74,7 +74,7 @@ public class ProfileController {
     }
 
     @FXML
-    private void handleBack() {
+    public void handleBack() {
         SceneManager.goBackToDashboard();
     }
 }

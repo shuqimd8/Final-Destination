@@ -41,6 +41,13 @@
             <version>${javafx.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>21.0.4</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--  SQLite JDBC driver -->
         <dependency>
             <groupId>org.xerial</groupId>
@@ -99,6 +106,9 @@
                 <version>3.2.5</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
+                    <argLine>-Xmx1024m -XX:+UseG1GC</argLine>
+                    <reuseForks>false</reuseForks>
+                    <parallel>none</parallel>
                 </configuration>
             </plugin>
 

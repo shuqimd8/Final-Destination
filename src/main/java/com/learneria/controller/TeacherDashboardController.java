@@ -53,7 +53,7 @@ public class TeacherDashboardController {
 
     /** Add a new class */
     @FXML
-    private void handleAddClass() {
+    public void handleAddClass() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Add Class");
         dialog.setHeaderText("Create a new class");
@@ -68,7 +68,7 @@ public class TeacherDashboardController {
 
     /** Edit the selected class */
     @FXML
-    private void handleEditClass() {
+    public void handleEditClass() {
         String selected = classListView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
 
@@ -85,7 +85,7 @@ public class TeacherDashboardController {
 
     /** Delete the selected class */
     @FXML
-    private void handleDeleteClass() {
+    public void handleDeleteClass() {
         String selected = classListView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
 
@@ -104,18 +104,18 @@ public class TeacherDashboardController {
 
     /** Open Settings page */
     @FXML
-    private void openSettings() {
+    public void openSettings() {
         SceneManager.switchScene("/com/learneria/fxml/settings.fxml", "Settings");
     }
 
     /** Log out to login page */
     @FXML
-    private void handleLogout() {
+    public void handleLogout() {
         SceneManager.setCurrentUser(null, null);
         SceneManager.switchScene("/com/learneria/fxml/login.fxml", "Login");
     }
     @FXML
-    private void handleBack() {
+    public void handleBack() {
         SceneManager.switchScene("/com/learneria/fxml/teacher_main.fxml", "Teacher Main Menu");
     }
 

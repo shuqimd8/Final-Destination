@@ -17,9 +17,9 @@ import java.util.*;
 
 public class GrammarGameController {
 
-    @FXML private Label word1;
-    @FXML private ImageView bucketNoun, bucketVerb, bucketAdjective;
-    @FXML private Label feedbackLabel, scoreLabel, timerLabel, highScoreLabel, usernameLabel;
+    @FXML public Label word1;
+    @FXML public ImageView bucketNoun, bucketVerb, bucketAdjective;
+    @FXML public Label feedbackLabel, scoreLabel, timerLabel, highScoreLabel, usernameLabel;
 
     private final String[] categories = {"Noun", "Verb", "Adjective"};
     private final Map<Label, String> wordCategoryMap = new HashMap<>();
@@ -189,7 +189,7 @@ public class GrammarGameController {
     }
 
     @FXML
-    private void handleBack() {
+    public void handleBack() {
         if (timer != null) timer.stop();
         SceneManager.goBackToDashboard();
     }

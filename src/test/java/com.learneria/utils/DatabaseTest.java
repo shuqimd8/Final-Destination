@@ -47,9 +47,10 @@ public class DatabaseTest {
     @Test
     @Order(2)
     void testAssignStudentAndFetch() throws Exception {
-        // Insert mock student with required NOT NULL fields
+        // Clean up if already exists
         try (Connection conn = Database.connect();
              Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("DELETE FROM users WHERE username = 'student1'");
             stmt.executeUpdate("""
             INSERT INTO users (username, password, role, teacher_code, name, class_code)
             VALUES ('student1', 'pass123', 'student', NULL, 'Alice', NULL)
@@ -62,8 +63,6 @@ public class DatabaseTest {
         System.out.println("🧪 Students in CLS-1234: " + students);
         assertTrue(students.contains("student1"), "Student should be listed under assigned class");
     }
-
-
 
     @Test
     @Order(3)

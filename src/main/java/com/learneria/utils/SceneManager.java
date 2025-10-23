@@ -55,7 +55,7 @@ public class SceneManager {
             // Create the scene
             Scene scene = new Scene(root);
 
-            // ✅ Apply global stylesheet if available (safe)
+            //  Apply global stylesheet if available (safe)
             try {
                 String css = SceneManager.class
                         .getResource("/com/learneria/styles/styles.css")

@@ -26,9 +26,9 @@ public class FoodGameController {
     // ============================
     //  FXML UI Elements
     // ============================
-    @FXML private Label word1;
-    @FXML private Label scoreLabel, feedbackLabel, timerLabel, highScoreLabel, usernameLabel;
-    @FXML private ImageView bucketFruit, bucketMeat, bucketGrain, bucketDairy;
+    @FXML public Label word1;
+    @FXML public Label scoreLabel, feedbackLabel, timerLabel, highScoreLabel, usernameLabel;
+    @FXML public ImageView bucketFruit, bucketMeat, bucketGrain, bucketDairy;
 
     // ============================
     //  Game State
@@ -243,7 +243,7 @@ public class FoodGameController {
     //  BACK BUTTON
     // ============================
     @FXML
-    private void handleBack() {
+    public void handleBack() {
         if (timer != null) timer.stop();
         SceneManager.goBackToDashboard();
     }
