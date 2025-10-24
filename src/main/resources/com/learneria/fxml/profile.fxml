@@ -17,11 +17,13 @@
         </image>
     </ImageView>
 
-    <!--  Title -->
-    <Label text="Papa’s Learneria"
-           layoutX="370" layoutY="45"
-           style="-fx-font-family: 'Josefin Sans'; -fx-font-size: 36;
-                  -fx-font-weight: bold; -fx-text-fill: #0047AB; -fx-rotate: -5;"/>
+    <!-- Centered Title Logo -->
+    <ImageView layoutX="190" layoutY="30" fitWidth="300" preserveRatio="true">
+        <image>
+            <Image url="@../assets/fonts/GameTitle.png" />
+        </image>
+    </ImageView>
+
 
     <!--  Stats Box -->
     <VBox layoutX="240" layoutY="160" prefWidth="520" prefHeight="380"

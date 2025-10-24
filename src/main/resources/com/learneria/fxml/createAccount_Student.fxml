@@ -27,12 +27,13 @@
                  -fx-border-radius: 15;
                  -fx-padding: 20;">
 
-        <!-- Title -->
-        <Label text="Papa’s Learnaria"
-               style="-fx-font-size: 30;
-                      -fx-font-family: 'Josefin Sans';
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #2563eb;" />
+        <!-- Title Logo -->
+        <ImageView fitWidth="250" preserveRatio="true">
+            <image>
+                <Image url="@../assets/fonts/PapaLogo.png" />
+            </image>
+        </ImageView>
+
 
         <!-- Subtitle -->
         <Label text="Create Student Account"

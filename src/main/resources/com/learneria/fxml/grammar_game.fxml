@@ -30,8 +30,12 @@
         </graphic>
     </Button>
 
-    <!--  Title -->
-    <Label layoutX="380" layoutY="45" style="-fx-font-family: 'Josefin Sans';                   -fx-font-size: 34;                   -fx-font-weight: bold;                   -fx-text-fill: #0047AB;" text="Papa’s Learneria" />
+    <!-- Centered Title Logo -->
+    <ImageView layoutX="190" layoutY="30" fitWidth="300" preserveRatio="true">
+        <image>
+            <Image url="@../assets/fonts/GameTitle.png" />
+        </image>
+    </ImageView>
 
     <!--  Profile Card (top-right) -->
     <VBox alignment="CENTER" layoutX="785" layoutY="40" spacing="4" style="-fx-background-color: white;                  -fx-background-radius: 15;                  -fx-border-color: black;                  -fx-border-radius: 15;                  -fx-padding: 8;">

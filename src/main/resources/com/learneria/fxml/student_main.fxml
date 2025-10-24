@@ -28,13 +28,14 @@
         </image>
     </ImageView>
 
-    <!-- Title -->
-    <Label text="Papa’s Learnaria"
-           layoutX="100" layoutY="80"
-           style="-fx-font-family: 'Josefin Sans';
-                  -fx-font-size: 42;
-                  -fx-font-weight: bold;
-                  -fx-text-fill: #2563eb;" />
+    <!-- Centered Title Logo -->
+    <ImageView layoutX="190" layoutY="30" fitWidth="300" preserveRatio="true">
+        <image>
+            <Image url="@../assets/fonts/GameTitle.png" />
+        </image>
+    </ImageView>
+
+
 
     <!--  Profile Card (Top Right) -->
     <VBox layoutX="775" layoutY="40" alignment="CENTER"

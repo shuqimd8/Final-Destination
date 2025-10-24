@@ -25,13 +25,13 @@
 
     <!--  Main Layout -->
     <VBox alignment="TOP_CENTER" spacing="25">
-        <!--  Title -->
-        <Label text="Papa’s Learnaria"
-               style="-fx-font-family: 'Josefin Sans';
-                      -fx-font-size: 40;
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #2563eb;
-                      -fx-padding: 30 0 10 0;"/>
+        <!-- Title Logo -->
+        <ImageView fitWidth="250" preserveRatio="true">
+            <image>
+                <Image url="@../assets/fonts/PapaLogo.png" />
+            </image>
+        </ImageView>
+
 
         <!-- White Card -->
         <VBox prefWidth="800"

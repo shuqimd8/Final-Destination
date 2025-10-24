@@ -32,11 +32,13 @@
         </ImageView>
     </HBox>
 
-    <!-- 🏷 Title -->
-    <Label text="Papa’s Learneria"
-           layoutX="375" layoutY="60"
-           style="-fx-font-family: 'Josefin Sans'; -fx-font-size: 34;
-                  -fx-font-weight: bold; -fx-text-fill: #0047AB; -fx-rotate: -5;"/>
+    <!-- Title Logo -->
+    <ImageView fitWidth="250" preserveRatio="true">
+        <image>
+            <Image url="@../assets/fonts/PapaLogo.png" />
+        </image>
+    </ImageView>
+
 
     <!--  Timer -->
     <Label fx:id="timerLabel" text="0:00"
