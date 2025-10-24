@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.ProfileController"
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: #FFFFFF;">
+
+    <!--  Background -->
+    <ImageView fitWidth="1000" fitHeight="700" opacity="0.15" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/Background.jpg" />
+        </image>
+    </ImageView>
+
+    <!--  Title -->
+    <Label text="Papa’s Learneria"
+           layoutX="370" layoutY="45"
+           style="-fx-font-family: 'Josefin Sans'; -fx-font-size: 36;
+                  -fx-font-weight: bold; -fx-text-fill: #0047AB; -fx-rotate: -5;"/>
+
+    <!--  Stats Box -->
+    <VBox layoutX="240" layoutY="160" prefWidth="520" prefHeight="380"
+          style="-fx-background-color: white; -fx-border-color: black;
+                 -fx-border-radius: 20; -fx-background-radius: 20;
+                 -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 4);">
+
+        <!-- Header -->
+        <Label text="Stats" alignment="CENTER"
+               prefHeight="60" prefWidth="520"
+               style="-fx-background-color: #FF5BC3; -fx-text-fill: black;
+                      -fx-font-family: 'Jost'; -fx-font-size: 26; -fx-font-weight: bold;
+                      -fx-background-radius: 20 20 0 0; -fx-border-color: black;
+                      -fx-border-width: 0 0 1 0;"/>
+
+        <!-- Grid layout for stats -->
+        <GridPane alignment="CENTER_LEFT" hgap="80" vgap="12"
+                  style="-fx-padding: 30 70;">
+
+            <Label text="Username" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="usernameLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18;"/>
+
+            <Label text="Total Games" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="totalGamesLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18;"/>
+
+            <Label text="Average Score" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="avgScoreLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18;"/>
+
+            <Label text="Food High" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="foodHighLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18;"/>
+
+            <Label text="Nature High" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="natureHighLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18;"/>
+
+            <Label text="Grammar High" GridPane.rowIndex="5" GridPane.columnIndex="0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="grammarHighLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18;"/>
+        </GridPane>
+    </VBox>
+
+    <!--  Back button -->
+    <Button text="← Back"
+            layoutX="450" layoutY="560"
+            prefWidth="100" prefHeight="45"
+            onAction="#handleBack"
+            style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;
+                   -fx-background-color: #A6E4FF; -fx-background-radius: 25;
+                   -fx-border-radius: 25; -fx-border-color: black;"/>
+</AnchorPane>

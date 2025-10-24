@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.learneria.controller.StudentPerformanceController"
+           prefWidth="1000" prefHeight="650">
+
+    <!-- Background -->
+    <ImageView fitWidth="1000" fitHeight="650" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/Background.jpg" />
+        </image>
+    </ImageView>
+
+    <!-- Main Content -->
+    <VBox alignment="TOP_CENTER" spacing="15">
+        <!--  Title -->
+        <Label text="Papa’s Learnaria"
+               style="-fx-font-family: 'Josefin Sans';
+                      -fx-font-size: 36;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #2563eb;
+                      -fx-padding: 30 0 0 0;" />
+
+        <!--  Stats Card -->
+        <VBox prefWidth="800"
+              style="-fx-background-color: white;
+                     -fx-border-color: black;
+                     -fx-border-width: 2;
+                     -fx-background-radius: 25;
+                     -fx-border-radius: 25;">
+
+            <!-- Pink Header -->
+            <HBox alignment="CENTER_LEFT" spacing="10"
+                  style="-fx-background-color: #f58ed9;
+                         -fx-background-radius: 25 25 0 0;
+                         -fx-border-color: black;
+                         -fx-border-width: 0 0 2 0;
+                         -fx-border-radius: 25 25 0 0;
+                         -fx-padding: 10 20 10 20;">
+                <!-- Back Arrow -->
+                <ImageView fitWidth="35" fitHeight="35"
+                           onMouseClicked="#handleBack"
+                           style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@../assets/icons/BackArrow.png"/>
+                    </image>
+                </ImageView>
+                <Label text="Stats"
+                       style="-fx-font-family: 'Josefin Sans';
+                              -fx-font-size: 22;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: black;
+                              -fx-padding: 0 0 0 10;" />
+            </HBox>
+
+            <!-- Stats Section -->
+            <GridPane alignment="CENTER_LEFT"
+                      hgap="40" vgap="20"
+                      style="-fx-padding: 40;">
+                <columnConstraints>
+                    <ColumnConstraints halignment="LEFT" prefWidth="400"/>
+                    <ColumnConstraints halignment="RIGHT" prefWidth="200"/>
+                </columnConstraints>
+
+                <!-- Labels -->
+                <Label text="Total Correct Answers" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Label fx:id="totalCorrectLabel" text="300" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                       style="-fx-font-size: 16;" />
+
+                <Label text="Average Correct Answers" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Label fx:id="avgCorrectLabel" text="15" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                       style="-fx-font-size: 16;" />
+
+                <Label text="Total Incorrect Answers" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Label fx:id="totalIncorrectLabel" text="152" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                       style="-fx-font-size: 16;" />
+
+                <Label text="Average Incorrect Answers" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Label fx:id="avgIncorrectLabel" text="5" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                       style="-fx-font-size: 16;" />
+
+                <Label text="Games Played" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Label fx:id="gamesPlayedLabel" text="20" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                       style="-fx-font-size: 16;" />
+
+                <Label text="Total Words" GridPane.rowIndex="5" GridPane.columnIndex="0"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Label fx:id="totalWordsLabel" text="452" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                       style="-fx-font-size: 16;" />
+
+                <Label text="Average Answer Speed" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Label fx:id="avgSpeedLabel" text="2 words per second" GridPane.rowIndex="6" GridPane.columnIndex="1"
+                       style="-fx-font-size: 16;" />
+            </GridPane>
+        </VBox>
+    </VBox>
+</StackPane>

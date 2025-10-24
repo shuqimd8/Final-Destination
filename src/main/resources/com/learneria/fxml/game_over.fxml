@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learneria.controller.GameOverController"
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: #FFFFFF;">
+
+    <!--  Background -->
+    <ImageView fitWidth="1000" fitHeight="700" opacity="0.15" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/Background.jpg" />
+        </image>
+    </ImageView>
+
+    <!--  Profile box -->
+    <HBox layoutX="780" layoutY="40" spacing="10" alignment="CENTER_LEFT"
+          style="-fx-background-color: white; -fx-border-color: black;
+                 -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 8 16;">
+        <VBox alignment="CENTER_LEFT" spacing="2">
+            <Label text="Jake" style="-fx-font-family: 'Jost'; -fx-font-weight: bold; -fx-font-size: 16;"/>
+            <Label text="Busy Bee" style="-fx-font-family: 'Jost'; -fx-font-size: 14;"/>
+        </VBox>
+        <ImageView fitWidth="35" fitHeight="35" preserveRatio="true">
+            <image>
+                <Image url="@../assets/icons/BeeIcon.png"/>
+            </image>
+        </ImageView>
+    </HBox>
+
+    <!-- 🏷 Title -->
+    <Label text="Papa’s Learneria"
+           layoutX="375" layoutY="60"
+           style="-fx-font-family: 'Josefin Sans'; -fx-font-size: 34;
+                  -fx-font-weight: bold; -fx-text-fill: #0047AB; -fx-rotate: -5;"/>
+
+    <!--  Timer -->
+    <Label fx:id="timerLabel" text="0:00"
+           layoutX="465" layoutY="140"
+           style="-fx-font-family: 'Jost'; -fx-font-size: 48; -fx-font-weight: bold;"/>
+
+    <!--  Game Over Stats Box -->
+    <VBox layoutX="250" layoutY="220" prefWidth="500" prefHeight="270"
+          alignment="CENTER" spacing="10"
+          style="-fx-background-color: white; -fx-border-color: black;
+                 -fx-border-radius: 15; -fx-background-radius: 15;
+                 -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 4);">
+
+        <!-- Yellow Header -->
+        <Label text="Game Over!"
+               alignment="CENTER" prefWidth="500" prefHeight="45"
+               style="-fx-background-color: #FFEB70; -fx-font-family: 'Jost';
+                      -fx-font-size: 26; -fx-font-weight: bold;
+                      -fx-border-color: black; -fx-border-width: 0 0 1 0;
+                      -fx-border-radius: 15 15 0 0; -fx-background-radius: 15 15 0 0;"/>
+
+        <!-- Dynamic Text (linked to Controller) -->
+        <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 20 60;">
+            <Label fx:id="correctLabel" text="Total Correct Answers: 0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="incorrectLabel" text="Total Incorrect Answers: 0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="scoreLabel" text="Score: 0"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="avgSpeedLabel" text="Average Answer Speed: 0s"
+                   style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;"/>
+        </VBox>
+    </VBox>
+
+    <!--  Continue Button -->
+    <Button text="Continue"
+            layoutX="450" layoutY="530"
+            prefWidth="120" prefHeight="50"
+            onAction="#handleContinue"
+            style="-fx-font-family: 'Jost'; -fx-font-size: 18; -fx-font-weight: bold;
+                   -fx-background-color: #A6E4FF; -fx-background-radius: 30;
+                   -fx-border-radius: 30; -fx-border-color: black;"/>
+</AnchorPane>
