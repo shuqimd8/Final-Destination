@@ -44,5 +44,5 @@ jobs:
       - name: Publish Javadoc to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: target/docs/javadoc   # 👈 change if your Javadoc path differs
+          folder: javadoc   # 👈 change if your Javadoc path differs
           clean: true
