@@ -12,34 +12,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout project repository
+      # 1️⃣ Checkout project
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Set up Java 21 environment (Temurin = official OpenJDK)
+      # 2️⃣ Set up Java 21 environment
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
 
-      # 3️⃣ Install X virtual framebuffer to allow JavaFX tests (headless mode)
+      # 3️⃣ Install virtual display (required for JavaFX in headless mode)
       - name: Install virtual display for JavaFX
         run: sudo apt-get update && sudo apt-get install -y xvfb
 
-      # 4️⃣ Compile source code
-      - name: Build project
-        run: mvn -B clean compile
+      # 4️⃣ Compile and test (Test-Driven Development verification)
+      - name: Build and run JUnit tests
+        run: xvfb-run --auto-servernum mvn -B clean test -Djava.awt.headless=true
 
-      # 5️⃣ Run all JUnit tests (with JavaFX GUI support)
-      - name: Run automated tests (TDD verification)
-        run: xvfb-run --auto-servernum mvn -B test
+      # 5️⃣ Package application (skip tests to avoid re-running)
+      - name: Package final application
+        run: xvfb-run --auto-servernum mvn -B package -DskipTests -Djava.awt.headless=true
 
-      # 6️⃣ Package project into JAR file
-      - name: Package application
-        run: mvn -B package
-
-      # 7️⃣ Upload compiled JAR artifact for verification (HD-level CI evidence)
+      # 6️⃣ Upload JAR artifact (evidence for CI/CD in CAB302 video)
       - name: Upload built JAR
         uses: actions/upload-artifact@v4
         with:
