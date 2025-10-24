@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       # ------------------------------
-      # 2️⃣ Set up JDK environment
+      #  Set up JDK environment
       # ------------------------------
       - name: Set up JDK 21
         uses: actions/setup-java@v3
@@ -27,22 +27,22 @@ jobs:
           java-version: '21'
 
       # ------------------------------
-      # 3️⃣ Build and test project
+      #  Build and test project
       # ------------------------------
       - name: Build with Maven
         run: mvn -B clean package --file pom.xml
 
       # ------------------------------
-      # 4️⃣ Generate Javadoc
+      #  Generate Javadoc
       # ------------------------------
       - name: Generate Javadoc
         run: mvn javadoc:javadoc
 
       # ------------------------------
-      # 5️⃣ Publish documentation to GitHub Pages
+      # 5️ Publish documentation to GitHub Pages
       # ------------------------------
       - name: Publish Javadoc to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: javadoc   # 👈 change if your Javadoc path differs
+          folder: javadoc   #  change if your Javadoc path differs
           clean: true
