@@ -29,5 +29,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: target/site/apidocs   # ✅ includes ALL files (HTML + CSS + resources)
+          folder: javadoc   # includes ALL files (HTML + CSS + resources)
           clean: true
