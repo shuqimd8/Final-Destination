@@ -1,1 +1,0 @@
-moduleSearchIndex = [{"l":"com.learneria.controller"}];updateSearchResults();
