@@ -1,9 +1,10 @@
-name: Maven Build and Deploy Javadoc
+name: Build and Deploy Javadoc
 
 on:
   push:
-    branches:
-      - main  # or your default branch
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -13,21 +14,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
 
-      - name: Build project
-        run: mvn clean install
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
 
       - name: Generate Javadoc
         run: mvn javadoc:javadoc
 
-      - name: Publish Javadoc to GitHub Pages
+      # 👇 This is the most important part
+      - name: Deploy only /javadoc folder to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: javadoc   # includes ALL files (HTML + CSS + resources)
+          folder: javadoc      # ✅ deploy this exact folder
           clean: true
