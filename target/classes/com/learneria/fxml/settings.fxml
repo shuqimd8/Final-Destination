@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.learneria.controller.SettingsController"
+           prefWidth="1000" prefHeight="650">
+
+    <!--  Background -->
+    <ImageView fitWidth="1000" fitHeight="650" preserveRatio="false">
+        <image>
+            <Image url="@../assets/backgrounds/Background.jpg"/>
+        </image>
+    </ImageView>
+
+    <!-- Semi-transparent overlay (optional aesthetic) -->
+    <Rectangle width="1000" height="650" fill="rgba(255,255,255,0.85)"/>
+
+    <!--  Main Layout -->
+    <VBox alignment="TOP_CENTER" spacing="25">
+        <!--  Title -->
+        <Label text="Papa’s Learnaria"
+               style="-fx-font-family: 'Josefin Sans';
+                      -fx-font-size: 40;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #2563eb;
+                      -fx-padding: 30 0 10 0;"/>
+
+        <!-- White Card -->
+        <VBox prefWidth="800"
+              style="-fx-background-color: white;
+                     -fx-border-color: black;
+                     -fx-border-width: 2;
+                     -fx-border-radius: 25;
+                     -fx-background-radius: 25;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5,0,0,2);">
+
+            <!-- Pink Header -->
+            <HBox alignment="CENTER_LEFT" spacing="10"
+                  style="-fx-background-color: #f58ed9;
+                         -fx-background-radius: 25 25 0 0;
+                         -fx-border-color: black;
+                         -fx-border-width: 0 0 2 0;
+                         -fx-border-radius: 25 25 0 0;
+                         -fx-padding: 10 20 10 20;">
+                <ImageView fitWidth="35" fitHeight="35"
+                           onMouseClicked="#handleBack"
+                           style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@../assets/icons/BackArrow.png"/>
+                    </image>
+                </ImageView>
+                <Label text="Settings"
+                       style="-fx-font-family: 'Josefin Sans';
+                              -fx-font-size: 22;
+                              -fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- Settings Content -->
+            <VBox alignment="CENTER_LEFT" spacing="25"
+                  style="-fx-padding: 40 60 40 60;">
+                <!-- Name -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Name:" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                    <Label fx:id="nameLabel" text="shuqiq" style="-fx-font-size: 18;"/>
+                    <ImageView fitWidth="25" fitHeight="25" onMouseClicked="#editName" style="-fx-cursor: hand;">
+                        <image>
+                            <Image url="@../assets/icons/Pencil-icon.png"/>
+                        </image>
+                    </ImageView>
+                </HBox>
+
+                <!-- Username -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Username:" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                    <Label fx:id="usernameLabel" text="shuqiq" style="-fx-font-size: 18;"/>
+                    <ImageView fitWidth="25" fitHeight="25" onMouseClicked="#editUsername" style="-fx-cursor: hand;">
+                        <image>
+                            <Image url="@../assets/icons/Pencil-icon.png"/>
+                        </image>
+                    </ImageView>
+                </HBox>
+
+                <!-- Password -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Password:" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                    <Label fx:id="passwordLabel" text="********" style="-fx-font-size: 18;"/>
+                    <ImageView fitWidth="25" fitHeight="25" onMouseClicked="#editPassword" style="-fx-cursor: hand;">
+                        <image>
+                            <Image url="@../assets/icons/Pencil-icon.png"/>
+                        </image>
+                    </ImageView>
+                </HBox>
+
+                <!-- Colour Options -->
+                <Label text="Colour Options:" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                <HBox spacing="70" alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 20;">
+                    <VBox alignment="CENTER">
+                        <Circle radius="35" fill="#d9d9d9" stroke="black" strokeWidth="1"
+                                onMouseClicked="#setDefaultTheme" style="-fx-cursor: hand;"/>
+                        <Label text="Default" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER">
+                        <Circle radius="35" fill="#ffc8c8" stroke="black" strokeWidth="1"
+                                onMouseClicked="#setRGTheme" style="-fx-cursor: hand;"/>
+                        <Label text="R/G Colour Blind" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER">
+                        <Circle radius="35" fill="#fff1a6" stroke="black" strokeWidth="1"
+                                onMouseClicked="#setBYTheme" style="-fx-cursor: hand;"/>
+                        <Label text="B/Y Colour Blind" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+    </VBox>
+</StackPane>

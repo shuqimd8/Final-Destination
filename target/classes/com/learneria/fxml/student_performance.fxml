@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.learneria.controller.StudentPerformanceController"
+      spacing="12" style="-fx-padding: 18; -fx-background-color: #fefcf6;" prefWidth="900" prefHeight="600">
+
+    <HBox spacing="16" alignment="CENTER_LEFT">
+        <Button text="← Back" onAction="#handleBack"
+                style="-fx-background-color: #c3f1ff; -fx-font-weight: bold;"/>
+        <Label text="Student Performance" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <HBox spacing="24">
+        <Label fx:id="studentNameLabel" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <Label fx:id="classCodeLabel" style="-fx-font-size: 16;"/>
+        <Label fx:id="lastPlayedLabel" style="-fx-font-size: 16;"/>
+    </HBox>
+
+    <TableView fx:id="scoreTable" prefHeight="500">
+        <columns>
+            <TableColumn fx:id="colGame" text="Game" prefWidth="160"/>
+            <TableColumn fx:id="colScore" text="Score" prefWidth="120"/>
+            <TableColumn fx:id="colCorrect" text="Correct" prefWidth="120"/>
+            <TableColumn fx:id="colIncorrect" text="Incorrect" prefWidth="120"/>
+            <TableColumn fx:id="colAvgSpeed" text="Avg Speed (s/word)" prefWidth="180"/>
+        </columns>
+    </TableView>
+</VBox>

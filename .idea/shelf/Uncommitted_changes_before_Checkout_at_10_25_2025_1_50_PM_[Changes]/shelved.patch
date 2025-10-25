@@ -1,0 +1,15 @@
+Index: config.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Fri Oct 24 23:14:22 AEST 2025\r\napp.name=Papa Learneria\r\ndb.url=jdbc\\:sqlite\\:test.db\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/config.properties b/config.properties
+--- a/config.properties	(revision f3787659dd79caac0c4edb4084ad39ff7723a205)
++++ b/config.properties	(date 1761314870643)
+@@ -1,3 +1,3 @@
+-#Fri Oct 24 23:14:22 AEST 2025
++#Sat Oct 25 00:07:50 AEST 2025
+ app.name=Papa Learneria
+ db.url=jdbc\:sqlite\:test.db
